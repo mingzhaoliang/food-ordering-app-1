@@ -13,7 +13,7 @@ export default function MobileNavigation() {
   }
 
   return (
-    <div className="md:hidden px-6 py-6 flex flex-col gap-4 w-full mx-auto transition-all" style={{ backgroundColor: isMenuOpen ? "hsla(0, 0%, 100%, 0.6)" : "transparent" }}>
+    <div className="md:hidden px-6 py-6 lg:px-8 xl:px-10 flex flex-col gap-4 w-full mx-auto transition-all" style={{ backgroundColor: isMenuOpen ? "hsla(0, 0%, 100%, 0.6)" : "transparent" }}>
       <div className="w-full flex justify-between items-center text-white">
         <Link
           href="/"

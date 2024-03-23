@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function MainNavigation() {
   return (
-    <div className="max-md:hidden px-6 py-6 mx-auto flex justify-between items-center text-white">
+    <div className="max-md:hidden px-6 py-6 lg:px-8 xl:px-10 mx-auto flex justify-between items-center text-white">
       <Link
         href="/"
         className="text-3xl lg:text-4xl font-black tracking-wider font-Pattaya transition-all"
