@@ -26,6 +26,19 @@ const getTranslation2 = (index: number, currentIndex: number, imagesNumber: numb
 export default function ImageCarousel({ images }: { images: any[] }) {
     const concatImages = [...images, ...images];
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [isHovered, setIsHovered] = useState(false);
+
+    const mouseOverHandler = () => {
+        setIsHovered(true);
+    };
+    const mouseOutHandler = () => {
+        setIsHovered(false);
+    };
+
+
+    const jumpToImage = (index: number) => {
+        setCurrentImageIndex(index);
+    }
 
     useEffect(() => {
         const intervel = setInterval(() => {
@@ -35,7 +48,7 @@ export default function ImageCarousel({ images }: { images: any[] }) {
         }, 1000 * 5);
 
         return () => clearInterval(intervel);
-    }, []);
+    }, [currentImageIndex]);
 
     return (
         <>
@@ -49,6 +62,8 @@ export default function ImageCarousel({ images }: { images: any[] }) {
                             currentImageIndex < concatImages.length * 2 - 1
                         }
                         translationX={getTranslation1(index, currentImageIndex, concatImages.length)}
+                        mouseOverHandler={mouseOverHandler}
+                        mouseOutHandler={mouseOutHandler}
                     />
                 );
             })}
@@ -61,9 +76,38 @@ export default function ImageCarousel({ images }: { images: any[] }) {
                             currentImageIndex > 1 && currentImageIndex < concatImages.length - 1
                         }
                         translationX={getTranslation2(index, currentImageIndex, concatImages.length)}
+                        mouseOverHandler={mouseOverHandler}
+                        mouseOutHandler={mouseOutHandler}
                     />
                 );
             })}
+            <p
+                className="absolute left-0 bottom-0 px-4 bg-white/50 text-sm"
+                style={{ display: isHovered ? "block" : "none", }}
+                onMouseOver={mouseOverHandler}
+                onMouseOut={mouseOutHandler}
+            >
+                {concatImages[currentImageIndex] ? concatImages[currentImageIndex].ref : ""}
+            </p>
+
+            <div className="absolute w-full bottom-[10%] flex justify-center transition-all">
+                <div className="mx-auto flex gap-4 md:gap-6 lg:gap-8">
+                    {images.map((_, index) => {
+                        return (
+                            <div
+                                key={index}
+                                className={"w-[0.35rem] h-[0.35rem] md:w-2 md:h-2 rounded-full bg-white cursor-pointer"}
+                                style={
+                                    currentImageIndex % images.length === index
+                                        ? { backgroundColor: "#fca5a5", boxShadow: "0 0 0 1.25px #fca5a5" }
+                                        : {}
+                                }
+                                onClick={() => jumpToImage(index)}
+                            ></div>
+                        );
+                    })}
+                </div>
+            </div>
         </>
     );
 }
