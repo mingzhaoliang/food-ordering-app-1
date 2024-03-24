@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import ImageCarouselItem from "./image-carousel-item";
+import { StaticImageData } from "next/image";
 
 
 const getTranslation1 = (index: number, currentIndex: number, imagesNumber: number) => {
@@ -23,7 +24,7 @@ const getTranslation2 = (index: number, currentIndex: number, imagesNumber: numb
     );
 };
 
-export default function ImageCarousel({ images }: { images: any[] }) {
+export default function ImageCarousel({ images }: { images: { src: StaticImageData, alt: string, ref: JSX.Element }[] }) {
     const concatImages = [...images, ...images];
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
@@ -37,7 +38,8 @@ export default function ImageCarousel({ images }: { images: any[] }) {
 
 
     const jumpToImage = (index: number) => {
-        setCurrentImageIndex(index);
+        if (index === currentImageIndex % images.length) return;
+        setCurrentImageIndex(index + Math.floor(currentImageIndex / images.length) * images.length);
     }
 
     useEffect(() => {
@@ -96,10 +98,10 @@ export default function ImageCarousel({ images }: { images: any[] }) {
                         return (
                             <div
                                 key={index}
-                                className={"w-[0.35rem] h-[0.35rem] md:w-2 md:h-2 rounded-full bg-white cursor-pointer"}
+                                className={"w-[0.35rem] h-[0.35rem] md:w-2 md:h-2 rounded-full bg-white cursor-pointer transition-all duration-300"}
                                 style={
                                     currentImageIndex % images.length === index
-                                        ? { backgroundColor: "#fca5a5", boxShadow: "0 0 0 1.25px #fca5a5" }
+                                        ? { backgroundColor: "#fca5a5", transform: "scale(1.5)" }
                                         : {}
                                 }
                                 onClick={() => jumpToImage(index)}
