@@ -1,11 +1,10 @@
 "use client";
 
-import hamburger from "@/assets/hamburger.svg";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import NavigationList from "./navigation-list";
 
-export default function MobileNavigation() {
+export default function MobileNavigation({ isActive }: { isActive: boolean }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -13,13 +12,27 @@ export default function MobileNavigation() {
   }
 
   return (
-    <div className="md:hidden px-6 py-6 lg:px-8 xl:px-10 flex flex-col gap-4 w-full mx-auto transition-all" style={{ backgroundColor: isMenuOpen ? "hsla(0, 0%, 100%, 0.6)" : "transparent" }}>
-      <div className="w-full flex justify-between items-center text-white">
+    <div
+      className="md:hidden flex flex-col w-full mx-auto transition-all"
+      style={{
+        backgroundColor: isMenuOpen ? "hsla(0, 0%, 100%, 0.6)" : "transparent",
+        backdropFilter: isMenuOpen ? "blur(4px)" : "none",
+        boxShadow: isMenuOpen ? "0 4px 6px rgba(0, 0, 0, 0.1)" : "none",
+      }}
+    >
+      <div
+        className="px-6 py-4 lg:px-8 xl:px-10 w-full flex justify-between items-center text-white"
+        style={{
+          backgroundColor: isActive && !isMenuOpen ? "hsla(0, 0%, 100%, 0.6)" : "transparent",
+          backdropFilter: isActive && !isMenuOpen ? "blur(4px)" : "none",
+          boxShadow: isActive && !isMenuOpen ? "0 4px 6px rgba(0, 0, 0, 0.1)" : "none",
+        }}
+      >
         <Link
           href="/"
-          className="text-2xl sm:text-3xl font-black tracking-wider font-Pattaya"
+          className="text-2xl sm:text-3xl font-black tracking-wider font-cursive"
           style={{
-            color: isMenuOpen ? "#1e293b" : "#ffffff",
+            color: isMenuOpen || isActive ? "#1e293b" : "#ffffff",
             transition: "all 0.25s ease-in-out",
           }}
         >
@@ -29,7 +42,7 @@ export default function MobileNavigation() {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24" height="24"
-            fill={isMenuOpen ? "#1e293b" : "#ffffff"}
+            fill={isMenuOpen || isActive ? "#1e293b" : "#ffffff"}
             viewBox="0 0 16 16"
             className="absolute right-0 cursor-pointer transition-transform"
             style={{
@@ -44,7 +57,7 @@ export default function MobileNavigation() {
             xmlns="http://www.w3.org/2000/svg"
             width="20"
             height="20"
-            fill={isMenuOpen ? "#1e293b" : "#ffffff"}
+            fill={isMenuOpen || isActive ? "#1e293b" : "#ffffff"}
             viewBox="0 0 16 16"
             className="absolute right-[0.125rem] cursor-pointer transition-transform"
             style={{
@@ -58,17 +71,14 @@ export default function MobileNavigation() {
         </div>
       </div>
       <div
-        className="flex flex-col gap-[1.5rem] justify-around items-center text-[1.06rem] text-slate-800 lg:text-lg lg:gap-6 xl:gap-8 transition-all"
+        className="px-6 py-6 lg:px-8 xl:px-10 flex flex-col gap-[1.5rem] justify-around items-center text-[1.06rem] text-slate-800 lg:text-lg lg:gap-6 xl:gap-8 transition-all"
         style={{
           opacity: isMenuOpen ? 1 : 0,
           transform: `translateY(${isMenuOpen ? "0" : "-10%"})`,
+          pointerEvents: isMenuOpen ? "auto" : "none",
         }}
       >
-        <Link href="/">Home</Link>
-        <Link href="/menu">Menu</Link>
-        <Link href="/about">About</Link>
-        <Link href="/contact">Contact</Link>
-        <button className="">Log in</button>
+        <NavigationList isActive={isActive} isMenuOpen={isMenuOpen} />
       </div>
     </div>
   );
