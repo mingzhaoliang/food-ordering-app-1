@@ -15,11 +15,11 @@ export default function MainNavigation({ isActive }: { isActive: boolean }) {
     >
       <Link
         href="/"
-        className="text-3xl lg:text-4xl xl:text-5xl font-black tracking-wider font-cursive transition-all"
+        className="text-3xl lg:text-4xl xl:text-5xl font-black tracking-wider font-cursive"
       >
         Cucina Felice
       </Link>
-      <div className="flex gap-3 justify-around items-center text-[1.06rem] lg:text-lg lg:gap-6 xl:gap-8 transition-all">
+      <div className="flex gap-3 justify-around items-center text-[1.06rem] lg:text-lg lg:gap-6 xl:gap-8">
         <NavigationList isActive={isActive} />
       </div>
     </div>

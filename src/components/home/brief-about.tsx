@@ -4,6 +4,7 @@ import DisplayImage from "../ui/display-image";
 import Card from "../ui/card";
 
 export default function BriefAbout() {
+
     return (
         <div id="brief-about" className="p-10 md:p-20 flex flex-col gap-8 sm:gap-12 md:gap-20 justify-center items-center transition-all duration-300">
             <div className="p-4 text-4xl sm:text-5xl md:text-6xl font-cursive text-pretty flex flex-wrap gap-4 justify-center items-center transition-all duration-300">
@@ -29,7 +30,7 @@ export default function BriefAbout() {
                         imageRef={images.restaurantEnvironment.ref}
                         height={720}
                         width={1080}
-                        imageClasses="max-md:max-h-[20rem] max-lg:max-h-[30rem] max-lg:w-full p-2 border-4 border-dashed border-slate-800 overflow-hidden object-cover object-center transition-all duration-300"
+                        imageClasses="max-md:max-h-[20rem] max-lg:max-h-[30rem] max-lg:w-full lg:h-full p-2 border-4 border-dashed border-slate-800 overflow-hidden object-cover object-center transition-all duration-300"
                         textClasses="left-3 bottom-3"
                     />
                 </div>

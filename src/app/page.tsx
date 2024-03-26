@@ -6,10 +6,10 @@ const heroImages = [images.hero0, images.hero1, images.hero2, images.hero3, imag
 
 export default function Home() {
 
-    return (
-        <main>
-            <Hero images={heroImages} />
-            <BriefAbout />
-        </main>
-    );
+	return (
+		<main>
+			<Hero images={heroImages} />
+			<BriefAbout />
+		</main>
+	);
 }

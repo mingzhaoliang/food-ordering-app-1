@@ -3,6 +3,7 @@ import { Inter, Lato, Port_Lligat_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/navigation/header";
 import { UserProvider } from '@auth0/nextjs-auth0/client';
+import Providers from "@/utils/providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,12 +33,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`scroll-smooth ${portLligatSans.variable} ${lato.variable}`}>
-      <UserProvider>
-        <body className={`${inter.className} overscroll-none`}>
-          <Header />
-          {children}
-        </body>
-      </UserProvider>
-    </html>
+      <Providers>
+        <UserProvider>
+          <body className={`${inter.className} overscroll-none`}>
+            <Header />
+            {children}
+          </body>
+        </UserProvider>
+      </Providers>
+    </html >
   );
 }
