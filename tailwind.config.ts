@@ -32,6 +32,7 @@ const config: Config = {
       },
       animation: {
         "bounce-light": "bounce-light 1s infinite",
+        "spin-slow": "spin 30s linear infinite",
       },
       gridTemplateColumns: {
         "auto-fit": "minmax(auto, 0.8fr) 1fr",

@@ -1,15 +1,43 @@
+import Link from "next/link";
+import authBackground from "@/assets/images/auth-background.jpg";
 import restaurantEnvironment from "@/assets/images/restaurant-environment.jpg";
 import hero0 from "@/assets/images/hero-0.jpg";
 import hero1 from "@/assets/images/hero-1.jpg";
 import hero2 from "@/assets/images/hero-2.jpg";
 import hero3 from "@/assets/images/hero-3.jpg";
 import hero4 from "@/assets/images/hero-4.jpg";
-import Link from "next/link";
+
+import signin from "@/assets/icons/signin.svg";
+import googleG from "@/assets/icons/google-g.svg";
+
+import pizza from "@/assets/images/pizza.png";
+
+export const restaurantName = "Cucina Felice";
+
+export const logos: any = {
+    default: {
+        src: signin,
+        alt: "Sign In Logo"
+    },
+    google: {
+        src: googleG,
+        alt: "Google Logo"
+    }
+};
 
 export const images = {
+    pizza: {
+        src: pizza,
+        alt: "Pizza Emoji",
+    },
+    authBackground: {
+        src: authBackground,
+        alt: "Vegetable Salad in Bowls",
+        ref: <>Photo by <Link href="https://www.pexels.com/photo/photo-of-vegetable-salad-in-bowls-1640770">Ella Olsson</Link></>
+    },
     restaurantEnvironment: {
         src: restaurantEnvironment,
-        alt: "Restaurant environment",
+        alt: "Round white ceramic plate and bowl",
         ref: <>Photo by <Link href="https://unsplash.com/@heftiba?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Toa Heftiba</Link> on <Link href="https://unsplash.com/photos/round-white-ceramic-plate-and-bowl-loS68zG8P38?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</Link></>
     },
     hero0: {

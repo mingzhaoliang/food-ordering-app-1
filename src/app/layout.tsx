@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Lato, Port_Lligat_Sans } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/navigation/header";
-import Providers from "@/utils/providers";
+// import Header from "@/components/navigation/header";
+// import Providers from "@/utils/providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,12 +32,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`scroll-smooth ${portLligatSans.variable} ${lato.variable}`}>
-      <Providers>
-        <body className={`${inter.className} overscroll-none`}>
-          <Header />
-          {children}
-        </body>
-      </Providers>
+      <body className={`${inter.className} overscroll-none`}>
+        {children}
+      </body>
     </html >
   );
 }
