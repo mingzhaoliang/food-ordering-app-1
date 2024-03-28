@@ -71,7 +71,7 @@ export default function MobileNavigation({ isActive }: { isActive: boolean }) {
         </div>
       </div>
       <div
-        className="px-6 py-6 lg:px-8 xl:px-10 flex flex-col gap-[1.5rem] justify-around items-center text-[1.06rem] text-slate-800 lg:text-lg lg:gap-6 xl:gap-8 transition-all"
+        className="font-lato px-6 py-6 lg:px-8 xl:px-10 flex flex-col gap-[1.5rem] justify-around items-center text-[1.06rem] text-slate-800 lg:text-lg lg:gap-6 xl:gap-8 transition-all"
         style={{
           opacity: isMenuOpen ? 1 : 0,
           transform: `translateY(${isMenuOpen ? "0" : "-10%"})`,
