@@ -18,8 +18,8 @@ export default function BriefAbout() {
                     <div className="p-1 border-4 border-slate-200">
                         <div className="p-4 lg:p-6 border-2 border-slate-100 flex flex-col gap-4">
                             <h2 className="pb-4 text-2xl lg:text-2xl xl:text-3xl font-portLligatSans text-center transition-all duration-300">Ready to Savour the Taste of Italy?</h2>
-                            <Link href="/" className="text-center mx-8 px-2 py-3 rounded text-lg lg:text-xl xl:text-2xl font-lato font-bold text-slate-800 hover:text-white border border-slate-800 hover:bg-slate-800 transition-all duration-300">Reserve a Table</Link>
-                            <Link href="/" className="text-center mx-8 px-2 py-3 rounded text-lg lg:text-xl xl:text-2xl font-lato font-bold text-slate-800 hover:text-white border border-slate-800 hover:bg-slate-800 transition-all duration-300">Order Now</Link>
+                            <Link href="/" className="text-center mx-8 px-2 py-3 rounded-md text-lg lg:text-xl xl:text-2xl font-lato font-bold text-slate-800 hover:text-white border border-slate-800 hover:bg-slate-800 transition-all duration-300">Reserve a Table</Link>
+                            <Link href="/" className="text-center mx-8 px-2 py-3 rounded-md text-lg lg:text-xl xl:text-2xl font-lato font-bold text-slate-800 hover:text-white border border-slate-800 hover:bg-slate-800 transition-all duration-300">Order Now</Link>
                         </div>
                     </div>
                 </div>
