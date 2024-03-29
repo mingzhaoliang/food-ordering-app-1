@@ -12,6 +12,10 @@ export default function MobileNavigation({ isActive }: { isActive: boolean }) {
     setIsMenuOpen((prevState) => !prevState);
   }
 
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  }
+
   return (
     <div
       className="md:hidden flex flex-col w-full mx-auto transition-all"
@@ -67,7 +71,7 @@ export default function MobileNavigation({ isActive }: { isActive: boolean }) {
               <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
             </svg>
           </div>
-          <SignIn isActive={isActive} isMenuOpen={isMenuOpen} onClick={() => setIsMenuOpen(false)} />
+          <SignIn isActive={isActive} isMenuOpen={isMenuOpen} onClick={closeMenu} />
         </div>
       </div>
       <div
@@ -79,7 +83,7 @@ export default function MobileNavigation({ isActive }: { isActive: boolean }) {
           transform: `translateY(${isMenuOpen ? "0" : "-10%"})`,
         }}
       >
-        <NavigationList isActive={isActive} isMenuOpen={isMenuOpen} />
+        <NavigationList closeMenu={closeMenu} />
       </div>
     </div>
   );

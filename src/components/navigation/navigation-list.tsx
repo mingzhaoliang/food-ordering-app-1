@@ -1,16 +1,16 @@
 import Link from "next/link";
 
 
-export default function NavigationList({ isActive, isMenuOpen }: { isActive: boolean, isMenuOpen?: boolean }) {
+export default function NavigationList({ closeMenu }: { closeMenu?: () => void }) {
 
 
     return (
         <>
-            <Link href="/" draggable={false}>Home</Link>
-            <Link href="/menu" draggable={false}>Menu</Link>
-            <Link href="/about" draggable={false}>About</Link>
-            <Link href="/contact" draggable={false}>Contact</Link>
-            <Link href="/order" draggable={false}>Order Now</Link>
+            <Link href="/" draggable={false} onClick={closeMenu}>Home</Link>
+            <Link href="/menu" draggable={false} onClick={closeMenu}>Menu</Link>
+            <Link href="/about" draggable={false} onClick={closeMenu}>About</Link>
+            <Link href="/contact" draggable={false} onClick={closeMenu}>Contact</Link>
+            <Link href="/order" draggable={false} onClick={closeMenu}>Order Now</Link>
         </>
     )
 }

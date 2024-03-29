@@ -22,7 +22,7 @@ export default function MainNavigation({ isActive }: { isActive: boolean }) {
         Cucina Felice
       </Link>
       <div className="font-lato flex gap-3 justify-around items-center text-[1.06rem] lg:text-lg lg:gap-6 xl:gap-8">
-        <NavigationList isActive={isActive} />
+        <NavigationList />
         <SignIn isActive={isActive} />
       </div>
     </div>
