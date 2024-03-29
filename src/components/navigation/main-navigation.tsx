@@ -1,5 +1,6 @@
 import Link from "next/link";
 import NavigationList from "./navigation-list";
+import SignIn from "./sign-in";
 
 export default function MainNavigation({ isActive }: { isActive: boolean }) {
   return (
@@ -15,12 +16,14 @@ export default function MainNavigation({ isActive }: { isActive: boolean }) {
     >
       <Link
         href="/"
+        draggable={false}
         className="text-3xl lg:text-4xl xl:text-5xl font-black tracking-wider font-cursive"
       >
         Cucina Felice
       </Link>
       <div className="font-lato flex gap-3 justify-around items-center text-[1.06rem] lg:text-lg lg:gap-6 xl:gap-8">
         <NavigationList isActive={isActive} />
+        <SignIn isActive={isActive} />
       </div>
     </div>
   )
