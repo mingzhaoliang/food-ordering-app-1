@@ -10,8 +10,8 @@ import Image, { StaticImageData } from "next/image";
 
 function LinkItem({ activePage, param, name, src, alt }: { activePage?: string, param: string, name: string, src: StaticImageData, alt: string }) {
     return (
-        <Link href={`/account/${param}`} draggable={false} className={`max-md:rounded-full py-2 flex px-2 rounded-md ${activePage === param ? "bg-amber-400/70" : "hover:bg-slate-100"}`}>
-            <Image src={src} alt={alt} width={24} height={24} draggable={false} className="w-auto h-auto" />
+        <Link href={`/account/${param}`} draggable={false} className={`max-md:rounded-full py-2 flex items-center px-2 rounded-md ${activePage === param ? "bg-amber-400/70" : "hover:bg-slate-100"}`}>
+            <Image src={src} alt={alt} width={24} height={24} draggable={false} className="w-6 h-6" />
             <p className="max-md:hidden px-2">{name}</p>
         </Link>
     )
