@@ -2,9 +2,9 @@ import { DefaultSession, DefaultUser } from 'next-auth';
 
 declare module 'next-auth' {
   interface User extends DefaultUser {
+    username?: string;
     phoneNumber?: string;
-    addressLine1?: string;
-    addressLine2?: string;
+    street?: string;
     city?: string;
     state?: string;
     postcode?: string;

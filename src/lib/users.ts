@@ -1,19 +1,31 @@
 import { ObjectId } from "mongodb";
 import clientPromise from "./clientPromise";
 
-export const updateUser = async (user:{ [k: string]: FormDataEntryValue | null; }) => {
+export const getUser = async (id: string) => {
+    const client = await clientPromise;
+    const db = client.db("my-database");
+
+    const user = await db.collection("users").findOne({ _id: new ObjectId(id) });
+    // console.log(JSON.parse(JSON.stringify(user)));
+
+    return JSON.parse(JSON.stringify(user));
+}
+
+export const updateUser = async (user: { [k: string]: FormDataEntryValue | null; }) => {
     const client = await clientPromise;
     const db = client.db("my-database");
 
     await db.collection("users").updateOne(
-        {_id: new ObjectId(String(user.id))}, 
-        {$set: {
-            phoneNumber: user.phoneNumber,
-            addressLine1: user.addressLine1,
-            addressLine2: user.addressLine2,
-            city: user.city,
-            state: user.state,
-            postcode: user.postcode
-        }}
+        { _id: new ObjectId(String(user.id)) },
+        {
+            $set: {
+                username: user.username,
+                phoneNumber: user.phoneNumber,
+                street: user.street,
+                city: user.city,
+                state: user.state,
+                postcode: user.postcode
+            }
+        }
     )
 }

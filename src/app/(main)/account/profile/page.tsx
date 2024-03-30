@@ -3,6 +3,8 @@
 import ProfileFormSubmit from "@/components/account/profile-form-submit";
 import Spinner from "@/components/ui/spinner";
 import { updateProfile } from "@/lib/actions";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { userActions } from "@/store/user-slice";
 import { useSession } from "next-auth/react";
 import { useFormState } from "react-dom";
 
@@ -19,7 +21,8 @@ export default function ProfilePage() {
     const [state, formAction] = useFormState(updateProfile, { message: "" });
 
     const { data: session, status } = useSession();
-    const user = session?.user;
+    const { user } = useAppSelector(state => state.user);
+    const dispatch = useAppDispatch();
 
     if (status === "loading") {
         return (
@@ -29,20 +32,29 @@ export default function ProfilePage() {
         )
     }
 
+    const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        const fd = new FormData(event.currentTarget);
+        const data = Object.fromEntries(fd.entries());
+
+        dispatch(userActions.setUser(data));
+        formAction(fd);
+    }
+
     return (
-        <form className="p-8 flex flex-col gap-4 font-lato max-lg:text-[0.9rem] transition-all" action={formAction}>
+        <form className="p-8 flex flex-col gap-4 font-lato max-lg:text-[0.9rem] transition-all" onSubmit={submitHandler} >
             <h1 className="md:hidden text-xl font-bold">Profile</h1>
-            <FormInput label="Name" id="name" type="text" defaultValue={user?.name || ""} readOnly />
+            <FormInput label="Name" id="username" type="text" defaultValue={user.username || ""} />
             <div className="grid min-[480px]:grid-cols-2 gap-4">
-                <FormInput label="Email" id="email" type="email" defaultValue={user?.email || ""} readOnly />
-                <FormInput label="Phone" id="phoneNumber" type="tel" pattern="^[0]\d{9,9}$" defaultValue={user?.phoneNumber || ""} />
+                <FormInput label="Email" id="email" type="email" defaultValue={user.email || ""} readOnly />
+                <FormInput label="Phone" id="phoneNumber" type="tel" pattern="^[0]\d{9,9}$" defaultValue={user.phoneNumber || ""} />
             </div>
-            <FormInput label="Address Line 1" id="addressLine1" type="text" defaultValue={user?.addressLine1 || ""} />
-            <FormInput label="Address Line 2" id="addressLine2" type="text" defaultValue={user?.addressLine2 || ""} />
+            <FormInput label="Street" id="street" type="text" defaultValue={user.street || ""} />
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-                <FormInput label="City" id="city" type="text" defaultValue={user?.city || ""} />
-                <FormInput label="State" id="state" type="text" defaultValue={user?.state || ""} />
-                <FormInput label="Postcode" id="postcode" type="text" pattern="\d{4,4}" defaultValue={user?.postcode || ""} />
+                <FormInput label="City" id="city" type="text" defaultValue={user.city || ""} />
+                <FormInput label="State" id="state" type="text" defaultValue={user.state || ""} />
+                <FormInput label="Postcode" id="postcode" type="text" pattern="\d{4,4}" defaultValue={user.postcode || ""} />
             </div>
             {state?.message && state.message !== "success" && <p className="text-rose-500">{state.message}</p>}
             {state?.message === "success" && <p className="text-green-500">Profile updated successfully!</p>}

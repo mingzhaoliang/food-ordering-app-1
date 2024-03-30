@@ -18,9 +18,9 @@ export const authOptions: NextAuthOptions = {
                     email: profile.email,
                     image: profile.picture,
                     // Add new fields
+                    username: profile.name,
                     phoneNumber: profile?.phoneNumber || "",
-                    addressLine1: profile?.address?.streetAddress || "",
-                    addressLine2: profile?.address?.extendedAddress || "",
+                    street: profile?.address?.streetAddress || "",
                     city: profile?.address?.locality || "",
                     state: profile?.address?.region || "",
                     postcode: profile?.address?.postalCode || "",
