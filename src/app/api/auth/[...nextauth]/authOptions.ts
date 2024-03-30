@@ -25,11 +25,14 @@ export const authOptions: NextAuthOptions = {
                     state: profile?.address?.region || "",
                     postcode: profile?.address?.postalCode || "",
                 };
-              },
+            },
         }),
     ],
 
-    adapter: MongoDBAdapter(clientPromise, {databaseName: "my-database"}) as Adapter,
+    secret: process.env.NEXTAUTH_SECRET,
+    session: { strategy: "jwt", maxAge: 30 * 24 * 60 * 60 },
+
+    adapter: MongoDBAdapter(clientPromise, { databaseName: "my-database" }) as Adapter,
 
     pages: {
         signIn: "/auth/signin",
@@ -37,15 +40,26 @@ export const authOptions: NextAuthOptions = {
     },
 
     callbacks: {
-        async session({session, user}: {session: Session; user: AdapterUser}) {
-            session.user.id = user.id;
-            session.user.phoneNumber = user.phoneNumber;
-            session.user.addressLine1 = user.addressLine1;
-            session.user.addressLine2 = user.addressLine2;
-            session.user.city = user.city;
-            session.user.state = user.state;
-            session.user.postcode = user.postcode;
+        async jwt({ token, user }) {
+
+            if (!token.user) {
+                token.user = {};
+            }
+
+            if (user) {
+                token.user = { ...user };
+            }
+
+            return token;
+        },
+        async session({ session, token }: { session: Session; token: any; }) {
+
+            session.user = {
+                ...session.user,
+                ...token.user,
+            };
+
             return session;
         },
-      },
+    },
 };
