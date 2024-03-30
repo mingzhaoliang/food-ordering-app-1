@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        "xs": "480px"
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -27,8 +30,8 @@ const config: Config = {
           "50%": {
             transform: "translateY(0)",
             "animation-timing-function": "cubic-bezier(0, 0, 0.2, 1)",
-          }
-        }
+          },
+        },
       },
       animation: {
         "bounce-light": "bounce-light 1s infinite",
@@ -36,6 +39,14 @@ const config: Config = {
       },
       gridTemplateColumns: {
         "auto-fit": "minmax(auto, 0.8fr) 1fr",
+      },
+      fontSize: {
+        md: [
+          "0.9rem",
+          {
+            lineHeight: "1.35rem",
+          },
+        ],
       },
     },
   },
