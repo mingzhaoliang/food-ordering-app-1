@@ -35,6 +35,7 @@ const config: Config = {
       },
       animation: {
         "bounce-light": "bounce-light 1s infinite",
+        "spin-medium": "spin 15s linear infinite",
         "spin-slow": "spin 30s linear infinite",
       },
       gridTemplateColumns: {
