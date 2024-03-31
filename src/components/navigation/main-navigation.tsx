@@ -18,12 +18,12 @@ export default function MainNavigation({ isActive }: { isActive: boolean }) {
       <Link
         href="/"
         draggable={false}
-        className={`w-3/12 min-w-80 py-4 flex gap-4 justify-center items-center ${isActive ? "" : "shadow-md"}`}
+        className={`lg:w-3/12 lg:min-w-[22rem] px-4 py-4 flex gap-4 justify-center items-center ${isActive ? "" : "lg:shadow-md"}`}
       >
-        <div className="w-14 h-14 aspect-square rounded-full border-2 border-slate-400 p-[0.1rem] flex justify-center items-center shadow animate-spin-medium">
-          <Image src={images.pizza.src} alt="Pizza" className="rounded-full border border-slate-400 p-2 object-cover" />
+        <div className={`w-14 h-14 aspect-square rounded-full border-2 p-[0.1rem] flex justify-center items-center shadow animate-spin-medium border-slate-400 ${isActive ? "" : "max-lg:border-white max-lg:bg-white/50"}`}>
+          <Image src={images.pizza.src} alt="Pizza" className={`rounded-full border p-2 object-cover border-slate-400 ${isActive ? "" : "max-lg:border-white"}`} />
         </div>
-        <h1 className="text-3xl xl:text-4xl font-black tracking-wider font-cursive text-slate-800">Cucina Felice</h1>
+        <h1 className="text-3xl xl:text-4xl font-black tracking-wider font-cursive text-white lg:text-slate-800">Cucina Felice</h1>
       </Link>
 
       <div className="py-4 pr-6 lg:pr-8 xl:pr-10 font-lato flex gap-3 justify-around items-center text-[1.06rem] lg:text-lg lg:gap-5 xl:gap-8">

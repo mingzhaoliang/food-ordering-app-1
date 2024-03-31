@@ -24,7 +24,7 @@ export default function MobileNavigation({ isActive }: { isActive: boolean }) {
 
   return (
     <div
-      className="md:hidden flex flex-col w-full mx-auto transition-all"
+      className="md:hidden flex flex-col w-full mx-auto transition-all duration-300"
       style={{
         backgroundColor: isActive || isMenuOpen ? "hsla(0, 0%, 100%, 0.8)" : "transparent",
         backdropFilter: isActive || isMenuOpen ? "blur(4px)" : "none",
@@ -35,7 +35,7 @@ export default function MobileNavigation({ isActive }: { isActive: boolean }) {
         <Link
           href="/"
           draggable={false}
-          className={`md:w-3/12 md:min-w-80 p-4 flex gap-2 xs:gap-4 justify-center items-center`}
+          className={`lg:w-3/12 lg:min-w-[22rem] p-4 flex gap-2 xs:gap-4 justify-center items-center`}
           style={{
             color: isMenuOpen || isActive ? "#1e293b" : "#ffffff",
           }}
@@ -43,7 +43,7 @@ export default function MobileNavigation({ isActive }: { isActive: boolean }) {
           <div className={`max-[380px]:hidden w-12 h-12 xs:w-14 xs:h-14 aspect-square rounded-full border-2 ${isActive || isMenuOpen ? "border-slate-400" : "border-white bg-white/50"} p-[0.1rem] flex justify-center items-center shadow animate-spin-medium`}>
             <Image src={images.pizza.src} alt="Pizza" className={`rounded-full border ${isActive || isMenuOpen ? "border-slate-400" : "border-white"} p-2 object-cover`} />
           </div>
-          <h1 className="text-[1.35rem] xs:text-3xl font-black tracking-wider font-cursive">Cucina Felice</h1>
+          <h1 className="text-[1.35rem] xs:text-2xl sm:text-3xl font-black tracking-wider font-cursive">Cucina Felice</h1>
         </Link>
 
         <div className="py-4 pr-6 lg:pr-8 xl:pr-10 flex justify-center items-center gap-2 xs:gap-4 max-sm:text-md">
