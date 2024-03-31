@@ -6,8 +6,8 @@ import Card from "../ui/card";
 export default function BriefAbout() {
 
     return (
-        <div id="brief-about" className="p-10 md:p-20 flex flex-col gap-8 sm:gap-12 md:gap-20 justify-center items-center transition-all duration-300">
-            <div className="p-4 text-4xl sm:text-5xl md:text-6xl font-cursive text-pretty flex flex-wrap gap-4 justify-center items-center transition-all duration-300">
+        <div id="brief-about" className="px-2 py-10 xs:px-6 sm:p-10 md:p-20 flex flex-col gap-2 xs:gap-8 sm:gap-12 md:gap-20 justify-center items-center transition-all duration-300">
+            <div className="p-2 xs:p-4 text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-cursive text-pretty flex flex-wrap gap-4 justify-center items-center transition-all duration-300">
                 <h1 className="text-nowrap">Welcome to Cucina Felice</h1>
                 <h1 className="text-nowrap">- A Taste of Italy!</h1>
             </div>
@@ -15,13 +15,13 @@ export default function BriefAbout() {
                 <div className="h-full flex flex-col justify-between gap-4">
                     <Card title={briefAbout.story.title} description={briefAbout.story.description} />
                     <Card title={briefAbout.services.title} description={briefAbout.services.description} />
-                    <div className="p-1 border-4 border-slate-200">
+                    {/* <div className="p-1 border-4 border-slate-200">
                         <div className="p-4 lg:p-6 border-2 border-slate-100 flex flex-col gap-4">
                             <h2 className="pb-4 text-2xl lg:text-2xl xl:text-3xl font-portLligatSans text-center transition-all duration-300">Ready to Savour the Taste of Italy?</h2>
                             <Link href="/" className="text-center mx-8 px-2 py-3 rounded-md text-lg lg:text-xl xl:text-2xl font-lato font-bold text-slate-800 hover:text-white border border-slate-800 hover:bg-slate-800 transition-all duration-300">Reserve a Table</Link>
                             <Link href="/" className="text-center mx-8 px-2 py-3 rounded-md text-lg lg:text-xl xl:text-2xl font-lato font-bold text-slate-800 hover:text-white border border-slate-800 hover:bg-slate-800 transition-all duration-300">Order Now</Link>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="relative row-start-1 col-span-1 flex justify-center h-full select-none">
                     <DisplayImage
