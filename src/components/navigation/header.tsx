@@ -23,7 +23,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="fixed z-50 w-full select-none"
+      className="fixed z-50 w-screen select-none"
     >
       <MainNavigation isActive={active} />
       <MobileNavigation isActive={active} />

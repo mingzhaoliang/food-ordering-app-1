@@ -9,6 +9,7 @@ import x from "@/assets/icons/x.svg";
 import cart from "@/assets/icons/cart2.svg";
 import Image from "next/image";
 import IconButton from "../ui/icon-button";
+import { images } from "@/utils/data";
 
 export default function MobileNavigation({ isActive }: { isActive: boolean }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,26 +26,29 @@ export default function MobileNavigation({ isActive }: { isActive: boolean }) {
     <div
       className="md:hidden flex flex-col w-full mx-auto transition-all"
       style={{
-        backgroundColor: isActive || isMenuOpen ? "hsla(0, 0%, 100%, 0.6)" : "transparent",
+        backgroundColor: isActive || isMenuOpen ? "hsla(0, 0%, 100%, 0.8)" : "transparent",
         backdropFilter: isActive || isMenuOpen ? "blur(4px)" : "none",
         boxShadow: isActive || isMenuOpen ? "0 4px 6px rgba(0, 0, 0, 0.1)" : "none",
       }}
     >
-      <div className="px-4 py-4 md:px-6 lg:px-8 xl:px-10 w-full flex justify-between items-center text-white">
+      <div className="w-full flex justify-between items-center text-white">
         <Link
           href="/"
           draggable={false}
-          className="text-[1.35rem] xs:text-3xl font-black tracking-wider font-cursive"
+          className={`md:w-3/12 md:min-w-80 p-4 flex gap-2 xs:gap-4 justify-center items-center`}
           style={{
             color: isMenuOpen || isActive ? "#1e293b" : "#ffffff",
-            transition: "all 0.25s ease-in-out",
           }}
         >
-          Cucina Felice
+          <div className={`max-[380px]:hidden w-12 h-12 xs:w-14 xs:h-14 aspect-square rounded-full border-2 ${isActive || isMenuOpen ? "border-slate-400" : "border-white bg-white/50"} p-[0.1rem] flex justify-center items-center shadow animate-spin-medium`}>
+            <Image src={images.pizza.src} alt="Pizza" className={`rounded-full border ${isActive || isMenuOpen ? "border-slate-400" : "border-white"} p-2 object-cover`} />
+          </div>
+          <h1 className="text-[1.35rem] xs:text-3xl font-black tracking-wider font-cursive">Cucina Felice</h1>
         </Link>
 
-        <div className="flex justify-center items-center gap-4 max-sm:text-md">
+        <div className="py-4 pr-6 lg:pr-8 xl:pr-10 flex justify-center items-center gap-2 xs:gap-4 max-sm:text-md">
           <SignIn isActive={isActive} isMenuOpen={isMenuOpen} onClick={closeMenu} />
+          <IconButton src={cart} alt="Cart" />
           <IconButton
             src={isMenuOpen ? x : hamburger}
             alt={isMenuOpen ? "Close menu" : "Open menu"}

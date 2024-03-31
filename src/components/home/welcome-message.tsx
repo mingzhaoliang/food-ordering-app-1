@@ -1,38 +1,19 @@
-"use client";
-
 import Link from "next/link";
-import Image from "next/image";
-import chevronDown from "@/assets/icons/chevron-compact-down.svg";
-import { useState } from "react";
 
 export default function WelcomeMessage() {
-    const [isHovered, setIsHovered] = useState(false);
-
-    const mouseOverHandler = () => {
-        setIsHovered(true);
-    }
-
-    const mouseOutHandler = () => {
-        setIsHovered(false);
-    }
-
     return (
-        <Link
-            href="#brief-about"
-            className="relative z-10 mb-28 leading-relaxed border-2 border-dashed border-white text-pretty transition-all duration-300 flex flex-col items-center justify-between lg:gap-2 xl:gap-4"
-            onMouseOver={mouseOverHandler}
-            onMouseOut={mouseOutHandler}
-            style={{
-                backgroundColor: isHovered ? "hsla(0, 0%, 100%, 0.4)" : "transparent",
-            }}
-        >
-            <h1
-                className="px-6 pt-8 md:px-8 md:pt-10 lg:px-10 lg:pt-12 text-3xl md:text-4xl lg:text-5xl xl:text-[4rem] font-cursive text-white tracking-wider transition-all duration-300"
-                style={{
-                    color: isHovered ? "#0f172a" : "#ffffff",
-                }}
-            >Benvenuti !</h1>
-            <Image src={chevronDown} alt="Chevron pointing down" width={32} height={32} className="pb-2 lg:pb-[0.75rem] xl:pb-4 animate-bounce-light" />
-        </Link>
+        <div className="h-full px-8 xl:px-10 flex flex-col justify-center items-center">
+            <div className="relative z-10 border-2 p-1 border-slate-800">
+                <div className="px-[0.4rem] py-4 transition-all duration-300 flex flex-col justify-between gap-2 xl:gap-4 border border-slate-800">
+                    <h1 className="text-2xl text-center md:text-3xl lg:text-4xl font-portLligatSans text-slate-800">
+                        Benvenuti!
+                    </h1>
+                    <p className="text-xl md:text-2xl lg:text-3xl font-portLligatSans text-pretty text-center lg:leading-normal">Indulge in Melbourne's finest, artisanal Italian cuisine.</p>
+
+                    <Link href="/" className="text-center mx-8 px-3 py-3 rounded md:text-lg lg:text-xl font-lato font-bold text-white bg-slate-700 hover:bg-slate-900 transition-all duration-300">Reserve a Table</Link>
+                    <Link href="/" className="text-center mx-8 px-3 py-3 rounded md:text-lg lg:text-xl font-lato font-bold text-white bg-slate-700 hover:bg-slate-900 transition-all duration-300">Order Now</Link>
+                </div>
+            </div>
+        </div>
     )
 }

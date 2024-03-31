@@ -17,7 +17,7 @@ export default function ImageCarouselItem({ image, displayCondition, translation
                 src={image.src}
                 alt={image.alt}
                 draggable={false}
-                className="absolute w-full h-full object-cover object-center transition-all duration-1000 opacity-90"
+                className="absolute w-full h-full object-cover object-center transition-transform duration-1000 opacity-90"
                 style={{
                     display:
                         displayCondition
