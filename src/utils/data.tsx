@@ -3,9 +3,6 @@ import authBackground from "@/assets/images/auth-background.jpg";
 import restaurantEnvironment from "@/assets/images/restaurant-environment.jpg";
 import background0 from "@/assets/images/background-0.jpg";
 
-import signin from "@/assets/icons/signin.svg";
-import googleG from "@/assets/icons/google-g.svg";
-
 import pizza from "@/assets/images/pizza.png";
 
 
@@ -13,11 +10,11 @@ export const restaurantName = "Cucina Felice";
 
 export const logos: any = {
     default: {
-        src: signin,
+        src: "/icons/box-arrow-in-right.svg",
         alt: "Sign In Logo"
     },
     google: {
-        src: googleG,
+        src: "/icons/google-g.svg",
         alt: "Google Logo"
     }
 };
