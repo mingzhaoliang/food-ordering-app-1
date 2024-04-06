@@ -11,7 +11,7 @@ import { menuActions } from "@/lib/store/menu-slice";
 
 export default function MainNavigation() {
 	const { showHeaderBackground } = useAppSelector(state => state.navigation);
-	const { showCartModal } = useAppSelector(state => state.menu);
+	const { changed, addedItems } = useAppSelector(state => state.cart);
 	const pathname = usePathname();
 
 	const activeCourse = pathname.includes("/menu/") ? pathname.split("/")[2] : "antipasti";
@@ -25,9 +25,16 @@ export default function MainNavigation() {
 				<div className="flex gap-2 items-center">
 					<Link
 						href={`/menu/${activeCourse}`}
-						className="lg:hidden"
+						className="lg:hidden relative flex items-center"
 					>
-						<IconButton src="/icons/cart2.svg" alt="Cart" onClick={() => { dispatch(menuActions.setShowCartModal(true)) }} />
+						<IconButton
+							src="/icons/cart2.svg"
+							alt="Cart"
+							onClick={() => { dispatch(menuActions.setShowCartModal(true)) }}
+						/>
+						<div className={`absolute -top-1 -right-2 bg-teal-800 rounded-full p-1 text-xs transition-all duration-300 ${changed ? "scale-100 opacity-100" : "scale-0 opacity-0"}`}>
+							+{addedItems}
+						</div>
 					</Link>
 					<SignInButton />
 				</div>

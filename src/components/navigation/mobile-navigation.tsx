@@ -9,11 +9,13 @@ import Logo from "./logo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { menuActions } from "@/lib/store/menu-slice";
+import { useEffect } from "react";
 
 export default function MobileNavigation() {
 	const pathname = usePathname();
-	const { showHeaderBackground, showMenu } = useAppSelector(state => state.navigation);
 	const dispatch = useAppDispatch();
+	const { showHeaderBackground, showMenu } = useAppSelector(state => state.navigation);
+	const { changed, addedItems } = useAppSelector(state => state.cart);
 
 	const activeCourse = pathname.includes("/menu/") ? pathname.split("/")[2] : "antipasti";
 
@@ -33,8 +35,16 @@ export default function MobileNavigation() {
 					<SignInButton onClick={closeMenu} />
 					<Link
 						href={`/menu/${activeCourse}`}
+						className="relative flex items-center"
 					>
-						<IconButton src="/icons/cart2.svg" alt="Cart" onClick={() => { dispatch(menuActions.setShowCartModal(true)) }} />
+						<IconButton
+							src="/icons/cart2.svg"
+							alt="Cart"
+							onClick={() => { dispatch(menuActions.setShowCartModal(true)) }}
+						/>
+						<div className={`absolute -top-1 -right-2 bg-teal-800 rounded-full p-1 text-xs transition-all duration-300 ${changed ? "scale-100 opacity-100" : "scale-0 opacity-0"}`}>
+							+{addedItems}
+						</div>
 					</Link>
 					<IconButton src={showMenu ? "/icons/x.svg" : "/icons/hamburger.svg"} alt={showMenu ? "Close menu" : "Open menu"} className={`transition-transform ${showMenu ? "-rotate-90" : "rotate-0"}`} onClick={toggleMenu} />
 				</div>

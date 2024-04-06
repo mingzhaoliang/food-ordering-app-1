@@ -1,15 +1,21 @@
 "use client";
 
-import { useAppDispatch } from "@/lib/store/hooks";
-import { addItem } from "@/lib/store/cart-slice";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { addItem, cartActions } from "@/lib/store/cart-slice";
 import { MenuItem } from "@/lib/crud/model-type";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRef } from "react";
+
 
 export default function AddToCartButton({ item }: { item: MenuItem }) {
     const { data: session, status } = useSession();
 
+    let timer1 = useRef<NodeJS.Timeout | undefined>();
+    let timer2 = useRef<NodeJS.Timeout | undefined>();
+
     const dispatch = useAppDispatch();
+
 
     const clickHandler = () => {
         dispatch(addItem(session!.user.id, {
@@ -18,7 +24,17 @@ export default function AddToCartButton({ item }: { item: MenuItem }) {
             public_id: item.public_id,
             price: item.price,
             unit: item.unit,
-        }))
+        }));
+        dispatch(cartActions.setChanged(true));
+        dispatch(cartActions.setAddedItems());
+
+        clearTimeout(timer1.current);
+        clearTimeout(timer2.current);
+
+        timer1.current = setTimeout(() => {
+            dispatch(cartActions.setChanged(false));
+            timer2.current = setTimeout(() => dispatch(cartActions.resetAddedItems()), 500)
+        }, 1000 * 1.25)
     }
 
     let content;
