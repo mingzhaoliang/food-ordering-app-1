@@ -3,8 +3,6 @@
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import IconButton from "../ui/icon-button";
-import person from "@/assets/icons/person.svg";
-import arrowIn from "@/assets/icons/box-arrow-in-right.svg";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { fetchUserData } from "@/lib/store/user-slice";
@@ -32,7 +30,7 @@ export default function SignInButton({ onClick }: { onClick?: () => void }) {
 
         content = (
             <div className="whitespace-pre flex justify-center items-center gap-1 rounded-md min-[900px]:px-1 min-[900px]:py-2 transition-all" onClick={onClick}>
-                <IconButton src={person} alt="Person">
+                <IconButton src="/icons/person.svg" alt="Person">
                     <p className="max-[900px]:hidden text-slate-800 text-md px-1">Verifying...</p>
                 </IconButton>
             </div>
@@ -42,7 +40,7 @@ export default function SignInButton({ onClick }: { onClick?: () => void }) {
 
         content = (
             <Link href="/account/profile" draggable={false} className="whitespace-pre flex justify-center items-center gap-1 rounded-md min-[900px]:px-1 min-[900px]:py-2 transition-all" onClick={onClick}>
-                <IconButton src={person} alt="Person">
+                <IconButton src="/icons/person.svg" alt="Person">
                     <p className="max-[900px]:hidden text-slate-800 text-md px-1 max-w-28 text-ellipsis overflow-hidden">Hi!<span className="underline">{user.username}</span></p>
                 </IconButton>
             </Link>
@@ -52,7 +50,7 @@ export default function SignInButton({ onClick }: { onClick?: () => void }) {
 
         content = (
             <Link href="/api/auth/signin">
-                <IconButton src={arrowIn} alt="Sign in"><p className="text-slate-800 text-md px-1">Sign in</p></IconButton>
+                <IconButton src="/icons/box-arrow-in-right.svg" alt="Sign in"><p className="text-slate-800 text-md px-1">Sign in</p></IconButton>
             </Link>
         )
 
