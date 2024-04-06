@@ -1,16 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AppDispatch } from "./store";
 import { CartItem } from "@/lib/crud/model-type";
-import { addItemToCart, getCart, removeItemFromCart } from "../crud/order";
+import { addItemToCart, getCart, removeItemFromCart } from "../crud/cart";
 
 interface CartState {
     items: {
         [key: string]: CartItem & { quantity: number };
-    }
+    },
+    changed: boolean;
+    addedItems: number;
 }
 
 const initialState: CartState = {
     items: {},
+    changed: false,
+    addedItems: 0,
 };
 
 const cartSlice = createSlice({
@@ -45,6 +49,15 @@ const cartSlice = createSlice({
         removeAllItems(state) {
             state.items = {};
         },
+        setChanged(state, action) {
+            state.changed = action.payload;
+        },
+        setAddedItems(state) {
+            state.addedItems += 1;
+        },
+        resetAddedItems(state) {
+            state.addedItems = 0;
+        }
     }
 })
 
