@@ -1,18 +1,9 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { getUser, updateUser } from "./users";
+import { updateUser } from "./crud/users";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
-
-export const getProfile = async () => {
-    const session = await getServerSession(authOptions);
-    if (!session) {
-        return null;
-    }
-
-    return await getUser(session.user.id);
-}
 
 export const updateProfile = async (prevState: { message: string; } | undefined, formData: FormData) => {
     const session = await getServerSession(authOptions);

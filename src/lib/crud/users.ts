@@ -1,12 +1,13 @@
+"use server";
+
 import { ObjectId } from "mongodb";
-import clientPromise from "./clientPromise";
+import clientPromise from "../clientPromise";
 
 export const getUser = async (id: string) => {
     const client = await clientPromise;
     const db = client.db("my-database");
 
     const user = await db.collection("users").findOne({ _id: new ObjectId(id) });
-    // console.log(JSON.parse(JSON.stringify(user)));
 
     return JSON.parse(JSON.stringify(user));
 }

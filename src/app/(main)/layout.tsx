@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Header from "@/components/navigation/header";
-import Providers from "@/utils/providers";
+import Providers from "@/lib/providers/providers";
 
 export const metadata: Metadata = {
   title: "Cucina Felice",

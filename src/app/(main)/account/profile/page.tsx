@@ -3,8 +3,8 @@
 import ProfileFormSubmit from "@/components/account/profile-form-submit";
 import Spinner from "@/components/ui/spinner";
 import { updateProfile } from "@/lib/actions";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { userActions } from "@/store/user-slice";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { userActions } from "@/lib/store/user-slice";
 import { useSession } from "next-auth/react";
 import { useFormState } from "react-dom";
 

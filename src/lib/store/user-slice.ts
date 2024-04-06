@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { getUser } from "../crud/users";
 
 const initialState = {
     user: {
@@ -25,6 +26,12 @@ const userSlice = createSlice({
     }
 })
 
+export default userSlice.reducer;
 export const userActions = userSlice.actions;
 
-export default userSlice.reducer;
+export const fetchUserData = (id: string) => {
+    return async (dispatch: any) => {
+        const user = await getUser(id);
+        dispatch(userActions.setUser(user));
+    }
+}
