@@ -24,7 +24,7 @@ const getTranslation2 = (index: number, currentIndex: number, imagesNumber: numb
     );
 };
 
-export default function ImageCarousel({ images }: { images: { src: StaticImageData, alt: string, ref: JSX.Element }[] }) {
+export default function ImageCarousel({ images }: { images: { src: StaticImageData | string, alt: string, reference: React.ReactNode }[] }) {
     const concatImages = [...images, ...images];
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
@@ -89,7 +89,7 @@ export default function ImageCarousel({ images }: { images: { src: StaticImageDa
                 onMouseOver={mouseOverHandler}
                 onMouseOut={mouseOutHandler}
             >
-                {concatImages[currentImageIndex] ? concatImages[currentImageIndex].ref : ""}
+                {concatImages[currentImageIndex] ? concatImages[currentImageIndex].reference : ""}
             </p>
 
             <div className="absolute w-full bottom-[10%] flex justify-center transition-all">

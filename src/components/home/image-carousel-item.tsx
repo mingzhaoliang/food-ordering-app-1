@@ -2,7 +2,7 @@ import Image, { StaticImageData } from "next/image";
 
 
 export interface ImageCarouselItemProps {
-    image: { src: StaticImageData, alt: string, ref: JSX.Element };
+    image: { src: StaticImageData | string, alt: string, reference: React.ReactNode };
     displayCondition: boolean;
     translationX: number;
     mouseOverHandler: () => void;
@@ -17,6 +17,7 @@ export default function ImageCarouselItem({ image, displayCondition, translation
                 src={image.src}
                 alt={image.alt}
                 draggable={false}
+                fill
                 className="absolute w-full h-full object-cover object-center transition-transform duration-1000 opacity-90"
                 style={{
                     display:

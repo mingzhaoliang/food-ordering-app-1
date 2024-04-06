@@ -2,7 +2,7 @@ import { StaticImageData } from "next/image";
 import ImageCarousel from "./image-carousel";
 import WelcomeMessage from "./welcome-message";
 
-export default function Hero({ images }: { images: { src: StaticImageData, alt: string, ref: JSX.Element }[] }) {
+export default function Hero({ images }: { images: { src: StaticImageData | string, alt: string, reference: React.ReactNode }[] }) {
     return (
         <div className="relative w-screen lg:h-screen lg:min-h-[40rem] overflow-x-hidden z-0 flex flex-col max-lg:items-center max-lg:gap-8 lg:flex-row-reverse lg:shadow">
             <div className="relative w-full z-0 max-lg:h-[calc(100vh_*_9/15)] max-lg:min-h-60 lg:w-9/12 transition-none">
