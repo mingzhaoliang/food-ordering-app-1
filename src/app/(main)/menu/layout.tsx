@@ -1,6 +1,8 @@
 import FoodCourseSidebar from "@/components/menu/food-course-sidebar";
 import DisplayImage from "@/components/ui/display-image";
 import { images } from "@/utils/data";
+import Cart from "@/components/menu/cart";
+import CartModal from "@/components/menu/cart-modal";
 
 export default function MenuPageLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -29,9 +31,11 @@ export default function MenuPageLayout({ children }: { children: React.ReactNode
                         {children}
                     </div>
                     <div className="max-lg:hidden sticky z-50 top-20 xs:top-24 md:top-28  ml-4 xl:ml-6 2xl:ml-8 md:row-start-2 md:col-span-2 transition-all">
+                        <Cart />
                     </div>
                 </div>
             </div>
+            <CartModal />
         </>
     )
 }

@@ -5,24 +5,24 @@ import Link from "next/link";
 import IconButton from "../ui/icon-button";
 import person from "@/assets/icons/person.svg";
 import arrowIn from "@/assets/icons/box-arrow-in-right.svg";
-import { getProfile } from "@/lib/actions";
-import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { userActions } from "@/store/user-slice";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { fetchUserData } from "@/lib/store/user-slice";
+import { fetchCartData } from "@/lib/store/cart-slice";
 
-export default function SignIn({ isActive, isMenuOpen, onClick }: { isActive: boolean, isMenuOpen?: boolean, onClick?: () => void }) {
+export default function SignInButton({ onClick }: { onClick?: () => void }) {
     const { data: session, status } = useSession();
     const { user } = useAppSelector(state => state.user);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        async function getUser() {
-            const user = await getProfile();
-            dispatch(userActions.setUser(user));
+        async function init() {
+            dispatch(fetchUserData(session!.user.id));
+            dispatch(fetchCartData(session!.user.id));
         }
 
         if (status === "authenticated" && session?.user) {
-            getUser();
+            init();
         }
     }, [status])
 
@@ -31,7 +31,7 @@ export default function SignIn({ isActive, isMenuOpen, onClick }: { isActive: bo
     if (status === "loading") {
 
         content = (
-            <div className="whitespace-pre flex justify-center items-center gap-1 rounded-md px-1 py-2 transition-all" onClick={onClick}>
+            <div className="whitespace-pre flex justify-center items-center gap-1 rounded-md min-[900px]:px-1 min-[900px]:py-2 transition-all" onClick={onClick}>
                 <IconButton src={person} alt="Person">
                     <p className="max-[900px]:hidden text-slate-800 text-md px-1">Verifying...</p>
                 </IconButton>
@@ -41,7 +41,7 @@ export default function SignIn({ isActive, isMenuOpen, onClick }: { isActive: bo
     } else if (status === "authenticated" && session?.user) {
 
         content = (
-            <Link href="/account/profile" draggable={false} className="whitespace-pre flex justify-center items-center gap-1 rounded-md px-1 py-2 transition-all" onClick={onClick}>
+            <Link href="/account/profile" draggable={false} className="whitespace-pre flex justify-center items-center gap-1 rounded-md min-[900px]:px-1 min-[900px]:py-2 transition-all" onClick={onClick}>
                 <IconButton src={person} alt="Person">
                     <p className="max-[900px]:hidden text-slate-800 text-md px-1 max-w-28 text-ellipsis overflow-hidden">Hi!<span className="underline">{user.username}</span></p>
                 </IconButton>

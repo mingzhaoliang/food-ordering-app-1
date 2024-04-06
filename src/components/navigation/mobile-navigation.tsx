@@ -1,76 +1,47 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
 import NavigationList from "./navigation-list";
-import SignIn from "./sign-in";
-import hamburger from "@/assets/icons/hamburger.svg";
-import x from "@/assets/icons/x.svg";
-import cart from "@/assets/icons/cart2.svg";
-import Image from "next/image";
+import SignInButton from "./sign-in-button";
 import IconButton from "../ui/icon-button";
-import { images } from "@/utils/data";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { navigationActions } from "@/lib/store/navigation-slice";
+import Logo from "./logo";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { menuActions } from "@/lib/store/menu-slice";
 
-export default function MobileNavigation({ isActive }: { isActive: boolean }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+export default function MobileNavigation() {
+	const pathname = usePathname();
+	const { showHeaderBackground, showMenu } = useAppSelector(state => state.navigation);
+	const dispatch = useAppDispatch();
 
-  const toggleMenu = () => {
-    setIsMenuOpen((prevState) => !prevState);
-  }
+	const activeCourse = pathname.includes("/menu/") ? pathname.split("/")[2] : "antipasti";
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  }
+	const closeMenu = () => {
+		dispatch(navigationActions.setShowMenu(false));
+	}
 
-  return (
-    <div
-      className="md:hidden flex flex-col w-full mx-auto transition-all duration-300"
-      style={{
-        backgroundColor: isActive || isMenuOpen ? "hsla(0, 0%, 100%, 0.8)" : "transparent",
-        backdropFilter: isActive || isMenuOpen ? "blur(4px)" : "none",
-        boxShadow: isActive || isMenuOpen ? "0 4px 6px rgba(0, 0, 0, 0.1)" : "none",
-      }}
-    >
-      <div className="w-full flex justify-between items-center text-white">
-        <Link
-          href="/"
-          draggable={false}
-          className={`lg:w-3/12 lg:min-w-[22rem] p-4 flex gap-2 xs:gap-4 justify-center items-center`}
-          style={{
-            color: isMenuOpen || isActive ? "#1e293b" : "#ffffff",
-          }}
-        >
-          <div className={`max-[380px]:hidden w-12 h-12 xs:w-14 xs:h-14 aspect-square rounded-full border-2 ${isActive || isMenuOpen ? "border-slate-400" : "border-white bg-white/50"} p-[0.1rem] flex justify-center items-center shadow animate-spin-medium`}>
-            <Image src={images.pizza.src} alt="Pizza" className={`rounded-full border ${isActive || isMenuOpen ? "border-slate-400" : "border-white"} p-2 object-cover`} />
-          </div>
-          <h1 className="text-[1.35rem] xs:text-2xl sm:text-3xl font-black tracking-wider font-cursive">Cucina Felice</h1>
-        </Link>
+	const toggleMenu = () => {
+		dispatch(navigationActions.toggleMenu());
+	}
 
-        <div className="py-4 pr-6 lg:pr-8 xl:pr-10 flex justify-center items-center gap-2 xs:gap-4 max-sm:text-md">
-          <SignIn isActive={isActive} isMenuOpen={isMenuOpen} onClick={closeMenu} />
-          <IconButton src={cart} alt="Cart" />
-          <IconButton
-            src={isMenuOpen ? x : hamburger}
-            alt={isMenuOpen ? "Close menu" : "Open menu"}
-            className={`transition-transform ${isMenuOpen ? "-rotate-90" : "rotate-0"}`}
-            // imageSize={isMenuOpen ? 7 : 5}
-            onClick={toggleMenu}
-          />
-        </div>
-
-      </div>
-      <div
-        className="max-sm:text-md font-lato px-6 py-6 lg:px-8 xl:px-10 flex flex-col gap-[1.5rem] justify-around items-center text-[1.06rem] text-slate-800 lg:text-lg lg:gap-6 xl:gap-8 transition-all"
-        style={{
-          maxHeight: isMenuOpen ? "100vh" : "0",
-          justifyContent: isMenuOpen ? "center" : "flex-end",
-          padding: isMenuOpen ? "1.5rem" : "0",
-          opacity: isMenuOpen ? 1 : 0,
-          transform: `translateY(${isMenuOpen ? "0" : "-10%"})`,
-        }}
-      >
-        <NavigationList closeMenu={closeMenu} />
-      </div>
-    </div>
-  );
+	return (
+		<div className={`md:hidden flex flex-col w-full mx-auto transition-all duration-300 ${showHeaderBackground || showMenu ? "bg-white/80 backdrop-blur-sm shadow-md" : "bg-transparent"}`}>
+			<div className="w-full flex justify-between items-center text-white">
+				<Logo />
+				<div className="pr-6 lg:pr-8 xl:pr-10 flex justify-center items-center gap-2 xs:gap-4 max-sm:text-md">
+					<SignInButton onClick={closeMenu} />
+					<Link
+						href={`/menu/${activeCourse}`}
+					>
+						<IconButton src="/icons/cart2.svg" alt="Cart" onClick={() => { dispatch(menuActions.setShowCartModal(true)) }} />
+					</Link>
+					<IconButton src={showMenu ? "/icons/x.svg" : "/icons/hamburger.svg"} alt={showMenu ? "Close menu" : "Open menu"} className={`transition-transform ${showMenu ? "-rotate-90" : "rotate-0"}`} onClick={toggleMenu} />
+				</div>
+			</div>
+			<div className={`font-lato flex flex-col items-center gap-[1.5rem] lg:gap-6 xl:gap-8 text-slate-800 text-md sm:text-base lg:text-lg transition-all ${showMenu ? "max-h-screen justify-around opacity-100 translate-y-0 p-6 lg:px-8 xl:px-10" : "max-h-0 p-0 bg-transparent justify-end opacity-0 -translate-y-[10%]"}`}>
+				<NavigationList closeMenu={closeMenu} />
+			</div>
+		</div>
+	);
 }

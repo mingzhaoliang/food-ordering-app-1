@@ -1,5 +1,7 @@
 "use client";
 
+import { useAppDispatch } from "@/lib/store/hooks";
+import { addItem } from "@/lib/store/cart-slice";
 import { MenuItem } from "@/lib/crud/model-type";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -7,8 +9,16 @@ import Link from "next/link";
 export default function AddToCartButton({ item }: { item: MenuItem }) {
     const { data: session, status } = useSession();
 
+    const dispatch = useAppDispatch();
 
     const clickHandler = () => {
+        dispatch(addItem(session!.user.id, {
+            menu_id: item._id,
+            name: item.name,
+            public_id: item.public_id,
+            price: item.price,
+            unit: item.unit,
+        }))
     }
 
     let content;
