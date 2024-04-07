@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { AppDispatch } from "./store";
 import { addItemToCart, getCart, removeItemFromCart } from "../crud/cart";
 import { CartItem, ClientCartItem } from "@/lib/crud/model-type";
+import { accessCart } from "../actions";
 
 interface CartState {
     items: {
@@ -69,16 +70,16 @@ const cartSlice = createSlice({
 export default cartSlice.reducer;
 export const cartActions = cartSlice.actions;
 
-export const fetchCartData = (userId: string) => {
+export const fetchCartData = () => {
     return async (dispatch: AppDispatch) => {
-        const cartItems = await getCart(userId);
+        const cartItems = await accessCart("get");
         dispatch(cartActions.setItems(cartItems));
     }
 }
 
-export const addItem = (userId: string, item: ClientCartItem) => {
+export const addItem = (item: ClientCartItem) => {
     return async (dispatch: any) => {
-        const response = await addItemToCart(userId, item.menu_id);
+        const response = await accessCart("add", item.menu_id);
         if (response) {
             throw new Error(response.message);
         } else {
@@ -87,9 +88,9 @@ export const addItem = (userId: string, item: ClientCartItem) => {
     }
 }
 
-export const removeItem = (userId: string, itemId: string) => {
+export const removeItem = (itemId: string) => {
     return async (dispatch: AppDispatch) => {
-        const response = await removeItemFromCart(userId, itemId);
+        const response = await accessCart("remove", itemId);
         if (response) {
             throw new Error(response.message);
         } else {

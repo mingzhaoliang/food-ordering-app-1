@@ -12,14 +12,14 @@ export default function CartItems({ userId, cartItems }: { userId: string, cartI
     const dispatch = useAppDispatch();
 
     const addItemHandler = (item: CartItem) => {
-        dispatch(addItem(userId, item)).catch(error => {
+        dispatch(addItem(item)).catch(error => {
             dispatch(cartActions.setError(error.message));
             dispatch(menuActions.setShowCartModal(false))
         })
     }
 
     const removeItemHandler = (item: CartItem) => {
-        dispatch(removeItem(userId, item.menu_id)).catch(error => {
+        dispatch(removeItem(item.menu_id)).catch(error => {
             dispatch(cartActions.setError(error.message));
             dispatch(menuActions.setShowCartModal(false))
         })

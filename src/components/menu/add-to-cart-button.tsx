@@ -18,7 +18,7 @@ export default function AddToCartButton({ item }: { item: MenuItem }) {
 
 
     const clickHandler = () => {
-        dispatch(addItem(session!.user.id, {
+        dispatch(addItem({
             menu_id: item._id,
             name: item.name,
             public_id: item.public_id,

@@ -9,7 +9,6 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect } from "react";
 import { fetchCartData } from "@/lib/store/cart-slice";
-import Spinner from "../ui/spinner";
 
 const DEFAULT_DELIVERY_FEE = 5;
 const FREE_DELIVERY_THRESHOLD = 50;
@@ -21,7 +20,7 @@ export default function Cart() {
 
     useEffect(() => {
         async function init() {
-            dispatch(fetchCartData(session!.user.id));
+            dispatch(fetchCartData());
         }
 
         if (status === "authenticated" && session?.user) {
