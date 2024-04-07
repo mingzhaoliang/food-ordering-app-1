@@ -31,7 +31,7 @@ export default function MenuPageLayout({ children }: { children: React.ReactNode
                     <div className="md:row-start-2 md:col-span-6 rounded-md">
                         {children}
                     </div>
-                    <div className="max-lg:hidden sticky z-50 top-20 xs:top-24 md:top-28  ml-4 xl:ml-6 2xl:ml-8 md:row-start-2 md:col-span-2 transition-all">
+                    <div className="max-lg:hidden sticky z-50 top-20 xs:top-24 md:top-28  ml-2 xl:ml-6 2xl:ml-8 md:row-start-2 md:col-span-2 transition-all">
                         <Cart />
                     </div>
                 </div>
