@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect } from "react";
 import { fetchCartData } from "@/lib/store/cart-slice";
+import Spinner from "../ui/spinner";
 
 const DEFAULT_DELIVERY_FEE = 5;
 const FREE_DELIVERY_THRESHOLD = 50;
@@ -28,13 +29,22 @@ export default function Cart() {
         }
     }, [status])
 
-    if (status !== "authenticated") {
+    if (status === "unauthenticated") {
         return (
             <div className="bg-white w-full rounded-md p-6 flex flex-col gap-4 font-lato">
                 <h1 className="text-2xl pb-2 border-b border-slate-800/20">Your Order</h1>
                 <CartItems userId="" cartItems={[]} />
                 <CartCheckout subtotal={0} deliveryFee={null} total={0} />
                 <Link href="/api/auth/signin" className="text-center bg-teal-700 hover:bg-teal-900 text-white rounded py-2 transition-all">Sign in to order</Link>
+            </div>
+        )
+    } else if (status === "loading") {
+        return (
+            <div className="bg-white w-full rounded-md p-6 flex flex-col gap-4 font-lato">
+                <h1 className="text-2xl pb-2 border-b border-slate-800/20">Your Order</h1>
+                <CartItems userId="" />
+                <CartCheckout subtotal={0} deliveryFee={null} total={0} />
+                <p className="bg-teal-700 hover:bg-teal-900 text-white rounded py-2 transition-all text-center">Loading...</p>
             </div>
         )
     }
@@ -47,7 +57,7 @@ export default function Cart() {
     return (
         <div className="bg-white w-full rounded-md p-6 flex flex-col gap-4 font-lato">
             <h1 className="text-2xl pb-2 border-b border-slate-800/20">Your Order</h1>
-            <CartItems userId={session.user.id} cartItems={cartItems} />
+            <CartItems userId={session!.user.id} cartItems={cartItems} />
             <CartCheckout subtotal={subtotal} deliveryFee={deliveryFee} total={total} />
             {
                 cartItems.length > 0 && (deliveryFee && deliveryFee > 0

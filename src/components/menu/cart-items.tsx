@@ -6,8 +6,9 @@ import { useAppDispatch } from "@/lib/store/hooks";
 import { menuActions } from "@/lib/store/menu-slice";
 import { formatter } from "@/utils/formatter";
 import Image from "next/image";
+import Spinner from "../ui/spinner";
 
-export default function CartItems({ userId, cartItems }: { userId: string, cartItems: (CartItem)[] }) {
+export default function CartItems({ userId, cartItems }: { userId: string, cartItems?: (CartItem)[] | null | undefined, }) {
     const dispatch = useAppDispatch();
 
     const addItemHandler = (item: CartItem) => {
@@ -27,7 +28,7 @@ export default function CartItems({ userId, cartItems }: { userId: string, cartI
     return (
         <div className="flex flex-col gap-2 pt-2 pb-6 border-b border-slate-800/20 overflow-auto max-h-96">
             {
-                cartItems.length > 0 && cartItems.map(item => (
+                cartItems && cartItems.length > 0 && cartItems.map(item => (
                     <div key={item.menu_id} className="grid grid-cols-[1fr_auto] xxs:grid-cols-[2.1fr_1fr_1fr] lg:grid-cols-[1fr_auto] xl:grid-cols-[2.4fr_1fr_1fr] items-center gap-x-4">
                         <p className="w-full max-xl:self-start max-xxs:row-span-2 lg:row-span-2 xl:row-auto leading-tight">{item.name}</p>
                         <div className="flex gap-2 items-center justify-self-end xl:justify-self-center">
@@ -42,10 +43,17 @@ export default function CartItems({ userId, cartItems }: { userId: string, cartI
                 ))
             }
             {
-                cartItems.length === 0 && (
+                cartItems && cartItems.length === 0 && (
                     <div className="flex gap-2 justify-center items-center">
                         <Image src="/icons/cart2.svg" alt="empty cart" width={20} height={20} draggable={false} />
                         <p>Your cart is empty</p>
+                    </div>
+                )
+            }
+            {
+                !cartItems && (
+                    <div className="flex justify-center items-center">
+                        <Spinner fallback="Loading cart..." />
                     </div>
                 )
             }
