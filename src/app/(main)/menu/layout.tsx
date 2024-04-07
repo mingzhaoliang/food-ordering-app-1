@@ -3,6 +3,7 @@ import DisplayImage from "@/components/ui/display-image";
 import { images } from "@/utils/data";
 import Cart from "@/components/menu/cart";
 import CartModal from "@/components/menu/cart-modal";
+import ErrorModal from "@/components/menu/error-modal";
 
 export default function MenuPageLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -36,6 +37,7 @@ export default function MenuPageLayout({ children }: { children: React.ReactNode
                 </div>
             </div>
             <CartModal />
+            <ErrorModal />
         </>
     )
 }

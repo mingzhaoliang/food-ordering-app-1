@@ -1,10 +1,8 @@
 "use server";
 
-import { getServerSession } from "next-auth";
 import clientPromise from "../clientPromise";
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { ObjectId } from "mongodb";
-import { CartItem } from "./model-type";
+import { MenuItem } from "./model-type";
 
 
 export const getCart = async (userId: string) => {
@@ -16,28 +14,38 @@ export const getCart = async (userId: string) => {
     return JSON.parse(JSON.stringify(cart?.items)) || {};
 }
 
-export const addItemToCart = async (userId: string, item: CartItem) => {
+export const addItemToCart = async (userId: string, itemId: string) => {
 
     const client = await clientPromise;
     const db = client.db("restaurant");
+    const userDb = client.db("my-database");
+
+    // validation
+    const existingUser = await userDb.collection("users").findOne({ _id: new ObjectId(userId) });
+    const existingMenuItem = await db.collection("menu").findOne({ _id: new ObjectId(itemId) }) as MenuItem | null;
+
+    if (!existingUser || !existingMenuItem) {
+        return { message: "Malicious activity detected." }
+    }
+
     const cart = await db.collection("cart").findOne({ user_id: new ObjectId(userId) });
 
-    if (cart && cart.items.hasOwnProperty(item.menu_id)) {
+    if (cart && cart.items.hasOwnProperty(itemId)) {
         db.collection("cart").updateOne(
             { user_id: new ObjectId(userId) },
-            { $inc: { [`items.${item.menu_id}.quantity`]: 1 } }
+            { $inc: { [`items.${itemId}.quantity`]: 1 } }
         );
     } else {
         db.collection("cart").updateOne(
             { user_id: new ObjectId(userId) },
             {
                 $set: {
-                    [`items.${item.menu_id}`]: {
-                        menu_id: new ObjectId(item.menu_id),
-                        name: item.name,
+                    [`items.${itemId}`]: {
+                        menu_id: existingMenuItem._id,
+                        name: existingMenuItem.name,
                         quantity: 1,
-                        price: item.price,
-                        unit: item.unit
+                        price: existingMenuItem.price,
+                        unit: existingMenuItem.unit,
                     }
                 }
             },
@@ -45,13 +53,23 @@ export const addItemToCart = async (userId: string, item: CartItem) => {
         );
     }
 
-    return;
+    return null;
 
 }
 
 export const removeItemFromCart = async (userId: string, itemId: string) => {
     const client = await clientPromise;
     const db = client.db("restaurant");
+    const userDb = client.db("my-database");
+
+    // validation
+    const existingUser = await userDb.collection("users").findOne({ _id: new ObjectId(userId) });
+    const existingMenuItem = await db.collection("menu").findOne({ _id: new ObjectId(itemId) }) as MenuItem | null;
+
+    if (!existingUser || !existingMenuItem) {
+        return { message: "Malicious activity detected." }
+    }
+
     const cart = await db.collection("cart").findOne({ user_id: new ObjectId(userId) });
 
     if (cart && cart.items.hasOwnProperty(itemId)) {
@@ -68,5 +86,5 @@ export const removeItemFromCart = async (userId: string, itemId: string) => {
         }
     }
 
-    return;
+    return null;
 }

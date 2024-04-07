@@ -16,7 +16,6 @@ export default function SignInButton({ onClick }: { onClick?: () => void }) {
     useEffect(() => {
         async function init() {
             dispatch(fetchUserData(session!.user.id));
-            dispatch(fetchCartData(session!.user.id));
         }
 
         if (status === "authenticated" && session?.user) {

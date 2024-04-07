@@ -32,8 +32,9 @@ export default function CartModal() {
     }, [])
 
     return (
-        <Modal open={showCartModal} onClose={onClose}>
+        <Modal open={showCartModal} onClose={onClose} isFlexible>
             <Cart />
+            <button onClick={onClose} className="absolute top-4 right-4 p-2 text-slate-800 hover:translate-y-0.5 transition-transform">{"\u2715"}</button>
         </Modal>
     )
 }

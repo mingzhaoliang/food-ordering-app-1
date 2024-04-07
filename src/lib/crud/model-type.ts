@@ -22,6 +22,15 @@ export interface CartItem {
     menu_id: string;
     name: string;
     public_id: string;
+    quantity: number;
+    price: number;
+    unit: { number: number, measurement: string };
+}
+
+export interface ClientCartItem {
+    menu_id: string;
+    name: string;
+    public_id: string;
     // quantity: number;
     price: number;
     unit: { number: number, measurement: string };

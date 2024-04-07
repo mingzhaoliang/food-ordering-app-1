@@ -1,34 +1,41 @@
 "use client";
 
 import { CartItem } from "@/lib/crud/model-type";
-import { addItem, removeItem } from "@/lib/store/cart-slice";
+import { addItem, cartActions, removeItem } from "@/lib/store/cart-slice";
 import { useAppDispatch } from "@/lib/store/hooks";
+import { menuActions } from "@/lib/store/menu-slice";
 import { formatter } from "@/utils/formatter";
 import Image from "next/image";
 
-export default function CartItems({ userId, cartItems }: { userId: string, cartItems: (CartItem & { quantity: number })[] }) {
+export default function CartItems({ userId, cartItems }: { userId: string, cartItems: (CartItem)[] }) {
     const dispatch = useAppDispatch();
 
     const addItemHandler = (item: CartItem) => {
-        dispatch(addItem(userId, item));
+        dispatch(addItem(userId, item)).catch(error => {
+            dispatch(cartActions.setError(error.message));
+            dispatch(menuActions.setShowCartModal(false))
+        })
     }
 
     const removeItemHandler = (item: CartItem) => {
-        dispatch(removeItem(userId, item.menu_id));
+        dispatch(removeItem(userId, item.menu_id)).catch(error => {
+            dispatch(cartActions.setError(error.message));
+            dispatch(menuActions.setShowCartModal(false))
+        })
     }
 
     return (
         <div className="flex flex-col gap-2 pt-2 pb-6 border-b border-slate-800/20 overflow-auto max-h-96">
             {
                 cartItems.length > 0 && cartItems.map(item => (
-                    <div key={item.menu_id} className="grid grid-cols-[1fr_auto] xl:grid-cols-[2.4fr_1fr_1fr] items-center gap-x-4">
-                        <p className="w-full max-xl:self-start max-xl:row-span-2 leading-tight">{item.name}</p>
+                    <div key={item.menu_id} className="grid grid-cols-[1fr_auto] xxs:grid-cols-[2.1fr_1fr_1fr] lg:grid-cols-[1fr_auto] xl:grid-cols-[2.4fr_1fr_1fr] items-center gap-x-4">
+                        <p className="w-full max-xl:self-start max-xxs:row-span-2 lg:row-span-2 xl:row-auto leading-tight">{item.name}</p>
                         <div className="flex gap-2 items-center justify-self-end xl:justify-self-center">
                             <button onClick={() => removeItemHandler(item)} className="w-4 h-4 rounded-full border border-slate-800 flex justify-center items-center font-mono hover:bg-slate-800 hover:text-white transition-all outline-none">-</button>
                             <p>{item.quantity}</p>
                             <button onClick={() => addItemHandler(item)} className="w-4 h-4 rounded-full border border-slate-800 flex justify-center items-center font-mono hover:bg-slate-800 hover:text-white transition-all outline-none">+</button>
                         </div>
-                        <p className="justify-self-end xl:justify-self-center max-xl:col-start-2">
+                        <p className="justify-self-end xl:justify-self-center max-xxs:col-start-2 lg:col-start-2 xl:col-auto">
                             {formatter(item.price * item.quantity)}
                         </p>
                     </div>

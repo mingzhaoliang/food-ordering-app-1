@@ -1,20 +1,32 @@
 "use client";
 
-import { useAppSelector } from "@/lib/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { formatter } from "@/utils/formatter";
 import Image from "next/image";
 import CartItems from "./cart-items";
 import CartCheckout from "./cart-checkout";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useEffect } from "react";
+import { fetchCartData } from "@/lib/store/cart-slice";
 
 const DEFAULT_DELIVERY_FEE = 5;
 const FREE_DELIVERY_THRESHOLD = 50;
 
 export default function Cart() {
     const { data: session, status } = useSession();
-
     const { items } = useAppSelector(state => state.cart);
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        async function init() {
+            dispatch(fetchCartData(session!.user.id));
+        }
+
+        if (status === "authenticated" && session?.user) {
+            init();
+        }
+    }, [status])
 
     if (status !== "authenticated") {
         return (
