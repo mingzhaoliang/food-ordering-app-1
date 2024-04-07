@@ -12,7 +12,7 @@ export default function CartCheckout({ subtotal, deliveryFee, total }: { subtota
             </div>
             <div className="flex justify-between">
                 <p className="font-bold">Delivery fee</p>
-                <p>{deliveryFee ? formatter(deliveryFee) : ""}</p>
+                <p>{deliveryFee !== null ? formatter(deliveryFee) : ""}</p>
             </div>
             <div className="flex justify-between">
                 <p className="font-bold">Total</p>
