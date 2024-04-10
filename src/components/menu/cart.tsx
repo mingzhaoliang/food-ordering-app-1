@@ -7,26 +7,19 @@ import CartItems from "./cart-items";
 import CartSummary from "./cart-summary";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useEffect } from "react";
-import { fetchCartData } from "@/lib/store/cart-slice";
+import { cartActions } from "@/lib/store/cart-slice";
+import { defaultDeliveryFee, freeDeliveryThreshold } from "@/utils/data";
 
-const DEFAULT_DELIVERY_FEE = 5;
-const FREE_DELIVERY_THRESHOLD = 50;
 
 export default function Cart() {
+
     const { data: session, status } = useSession();
     const { items } = useAppSelector(state => state.cart);
     const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        async function init() {
-            dispatch(fetchCartData());
-        }
-
-        if (status === "authenticated" && session?.user) {
-            init();
-        }
-    }, [status])
+    const checkoutHandler = () => {
+        dispatch(cartActions.setCheckout(true));
+    }
 
     if (status === "unauthenticated") {
         return (
@@ -50,7 +43,7 @@ export default function Cart() {
 
     const cartItems = Object.values(items);
     const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    const deliveryFee = cartItems.length > 0 ? (subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : DEFAULT_DELIVERY_FEE) : null;
+    const deliveryFee = cartItems.length > 0 ? (subtotal >= freeDeliveryThreshold ? 0 : defaultDeliveryFee) : null;
     const total = subtotal + (deliveryFee ? deliveryFee : 0);
 
     return (
@@ -60,13 +53,13 @@ export default function Cart() {
             <CartSummary subtotal={subtotal} deliveryFee={deliveryFee} total={total} />
             {
                 cartItems.length > 0 && (deliveryFee && deliveryFee > 0
-                    ? <p className="text-sm text-slate-800">Spend {formatter(FREE_DELIVERY_THRESHOLD - subtotal)} more to get FREE delivery</p>
+                    ? <p className="text-sm text-slate-800">Spend {formatter(freeDeliveryThreshold - subtotal)} more to get FREE delivery</p>
                     : <p className="text-sm text-slate-800 flex items-center gap-2">
                         <Image src="/icons/truck.svg" alt="truck" width={16} height={16} draggable={false} />
                         Your order qualifies for free delivery!
                     </p>)
             }
-            <button className="bg-teal-700 hover:bg-teal-900 text-white rounded py-2 transition-all">Checkout</button>
+            <button className="bg-teal-700 hover:bg-teal-900 text-white rounded py-2 transition-all" onClick={checkoutHandler}>Checkout</button>
         </div>
     )
 }

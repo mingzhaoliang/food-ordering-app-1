@@ -5,6 +5,8 @@ import background0 from "@/assets/images/background-0.jpg";
 
 import pizza from "@/assets/images/pizza.png";
 
+export const defaultDeliveryFee = 10;
+export const freeDeliveryThreshold = 50;
 
 export const restaurantName = "Cucina Felice";
 

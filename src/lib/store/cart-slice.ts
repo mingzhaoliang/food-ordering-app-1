@@ -10,6 +10,7 @@ interface CartState {
     changed: boolean;
     addedItems: number;
     error: string | null;
+    checkout: boolean;
 }
 
 const initialState: CartState = {
@@ -17,6 +18,7 @@ const initialState: CartState = {
     changed: false,
     addedItems: 0,
     error: null,
+    checkout: false,
 };
 
 const cartSlice = createSlice({
@@ -63,6 +65,9 @@ const cartSlice = createSlice({
         setError(state, action) {
             state.error = action.payload;
         },
+        setCheckout(state, action) {
+            state.checkout = action.payload;
+        }
     }
 })
 

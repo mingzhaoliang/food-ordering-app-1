@@ -2,10 +2,11 @@
 
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import Modal from "../ui/modal";
-import Cart from "./cart";
 import { menuActions } from "@/lib/store/menu-slice";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+import Order from "./order";
+import { cartActions } from "@/lib/store/cart-slice";
 
 export default function CartModal() {
     const searchParams = useSearchParams();
@@ -16,6 +17,7 @@ export default function CartModal() {
 
     const onClose = () => {
         dispatch(menuActions.setShowCartModal(false));
+        dispatch(cartActions.setCheckout(false));
     }
 
     useEffect(() => {
@@ -33,7 +35,7 @@ export default function CartModal() {
 
     return (
         <Modal open={showCartModal} onClose={onClose} isFlexible>
-            <Cart />
+            <Order />
             <button onClick={onClose} className="absolute top-4 right-4 p-2 text-slate-800 hover:translate-y-0.5 transition-transform">{"\u2715"}</button>
         </Modal>
     )

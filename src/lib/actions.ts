@@ -67,3 +67,42 @@ export const accessCart = async (type: string, itemId?: string) => {
             return { message: "Invalid request" };
     }
 }
+
+export const checkout = async (prevState: { message: string; url: string } | undefined, formData: FormData) => {
+    const session = await getServerSession(authOptions);
+    const result = await updateProfile(undefined, formData);
+
+    if (result.message !== "success") {
+        return { message: result.message, url: "" };
+    }
+
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/create-checkout-session`, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                userId: session!.user.id,
+                deliveryDetails: {
+                    ...data
+                }
+            }),
+            method: "POST",
+        })
+
+        if (!response.ok) {
+            throw new Error("Failed to continue to payment.");
+        }
+
+        const { url } = await response.json();
+
+        return { message: "success", url: url as string };
+
+    } catch (error: any) {
+        console.error(error);
+
+        return { message: error.message, url: "" };
+    }
+};

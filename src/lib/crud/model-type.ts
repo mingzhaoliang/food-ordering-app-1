@@ -41,7 +41,24 @@ export interface ClientCartItem {
     menu_id: string;
     name: string;
     public_id: string;
-    // quantity: number;
     price: number;
     unit: { number: number, measurement: string };
+}
+
+export interface Order {
+    user_id: string;
+    status: string;
+    delivery_details: DeliveryDetails;
+    items: CartItem[];
+    total_amount: number;
+    created_at: Date;
+}
+
+export interface DeliveryDetails {
+    username: string;
+    phoneNumber: string;
+    street: string;
+    city: string;
+    state: string;
+    postcode: string;
 }
