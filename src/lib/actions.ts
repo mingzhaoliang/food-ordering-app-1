@@ -1,25 +1,25 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { updateUser } from "./crud/users";
+import { updateUser } from "./crud/user";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { addItemToCart, getCart, removeItemFromCart } from "./crud/cart";
 
-export const updateProfile = async (prevState: { message: string; } | undefined, formData: FormData) => {
+export const updateProfile = async (prevState: { message: string } | undefined, formData: FormData) => {
     const session = await getServerSession(authOptions);
     if (!session) {
         return { message: "Unauthorized!" };
     }
 
     const updatedUser = {
-        id: session.user.id,
-        username: formData.get("username"),
-        phoneNumber: formData.get("phoneNumber"),
-        street: formData.get("street"),
-        city: formData.get("city"),
-        state: formData.get("state"),
-        postcode: formData.get("postcode"),
+        _id: session.user.id,
+        username: formData.get("username") as string,
+        phoneNumber: formData.get("phoneNumber") as string,
+        street: formData.get("street") as string,
+        city: formData.get("city") as string,
+        state: formData.get("state") as string,
+        postcode: formData.get("postcode") as string,
     }
 
     if (updatedUser.phoneNumber && !String(updatedUser.phoneNumber).match(/^[0]\d{9,9}$/)) {

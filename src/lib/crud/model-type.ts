@@ -1,3 +1,13 @@
+export interface User {
+    _id: string;
+    username: string;
+    phoneNumber: string;
+    street: string;
+    city: string;
+    state: string;
+    postcode: string;
+}
+
 export interface MenuItem {
     _id: string;
     course: string;
@@ -15,7 +25,7 @@ export interface MenuItem {
 export interface Cart {
     _id: string;
     user_id: string;
-    items: { [key: string]: CartItem & { quantity: number } };
+    items: { [key: string]: CartItem };
 }
 
 export interface CartItem {

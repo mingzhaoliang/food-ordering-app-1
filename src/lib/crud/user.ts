@@ -2,6 +2,7 @@
 
 import { ObjectId } from "mongodb";
 import clientPromise from "../clientPromise";
+import { User } from "./model-type";
 
 export const getUser = async (id: string) => {
     const client = await clientPromise;
@@ -12,12 +13,12 @@ export const getUser = async (id: string) => {
     return JSON.parse(JSON.stringify(user));
 }
 
-export const updateUser = async (user: { [k: string]: FormDataEntryValue | null; }) => {
+export const updateUser = async (user: User) => {
     const client = await clientPromise;
     const db = client.db("my-database");
 
     await db.collection("users").updateOne(
-        { _id: new ObjectId(String(user.id)) },
+        { _id: new ObjectId(String(user._id)) },
         {
             $set: {
                 username: user.username,
