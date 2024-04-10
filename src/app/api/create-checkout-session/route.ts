@@ -4,6 +4,7 @@ import { getCartItems } from "@/lib/crud/cart";
 import { Cart, DeliveryDetails, Order } from "@/lib/crud/model-type";
 import { defaultDeliveryFee, freeDeliveryThreshold } from "@/utils/data";
 import { createOrder } from "@/lib/crud/order";
+import { ObjectId } from "mongodb";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     typescript: true,
@@ -18,14 +19,17 @@ type CheckoutSessionRequest = {
 export async function POST(req: NextRequest) {
     const checkoutSessionRequest: CheckoutSessionRequest = await req.json();
 
+    const newOrderId = new ObjectId();
+
     const { lineItems, cartItems, totalPrice, deliveryFee } = await createLineItems(checkoutSessionRequest.userId);
-    const stripSession = await createSession(lineItems, "test order id", deliveryFee);
+    const stripSession = await createSession(lineItems, newOrderId.toString(), deliveryFee);
 
     if (!stripSession.url) {
         return NextResponse.json({ message: "Failed to create stripe session" }, { status: 500 });
     };
 
     const newOrder: Order = {
+        _id: newOrderId,
         user_id: checkoutSessionRequest.userId,
         status: "placed",
         delivery_details: checkoutSessionRequest.deliveryDetails,

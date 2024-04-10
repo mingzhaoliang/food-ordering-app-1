@@ -1,3 +1,5 @@
+import { ObjectId } from "mongodb";
+
 export interface User {
     _id: string;
     username: string;
@@ -46,6 +48,7 @@ export interface ClientCartItem {
 }
 
 export interface Order {
+    _id: ObjectId;
     user_id: string;
     status: string;
     delivery_details: DeliveryDetails;
