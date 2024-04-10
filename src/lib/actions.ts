@@ -4,7 +4,8 @@ import { revalidatePath } from "next/cache";
 import { updateUser } from "./crud/user";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
-import { addItemToCart, getCart, removeItemFromCart } from "./crud/cart";
+import { addItemToCart, getCartItems, removeItemFromCart } from "./crud/cart";
+import { getMenuItemById } from "./crud/menu";
 
 export const updateProfile = async (prevState: { message: string } | undefined, formData: FormData) => {
     const session = await getServerSession(authOptions);
@@ -42,11 +43,24 @@ export const accessCart = async (type: string, itemId?: string) => {
         return { message: "Unauthorized!" };
     }
 
+    let existingMenuItem;
+
+    if (itemId) {
+        if (!itemId.match(/^[0-9a-fA-F]{24}$/)) {
+            return { message: "Invalid item id" };
+        } else {
+            existingMenuItem = await getMenuItemById(itemId);
+            if (!existingMenuItem) {
+                return { message: "Item not found" };
+            }
+        }
+    }
+
     switch (type) {
         case "get":
-            return getCart(session.user.id);
+            return getCartItems(session.user.id);
         case "add":
-            return addItemToCart(session.user.id, itemId!);
+            return addItemToCart(session.user.id, existingMenuItem!);
         case "remove":
             return removeItemFromCart(session.user.id, itemId!);
         default:

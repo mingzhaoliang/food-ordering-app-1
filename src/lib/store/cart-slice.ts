@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AppDispatch } from "./store";
-import { addItemToCart, getCart, removeItemFromCart } from "../crud/cart";
 import { CartItem, ClientCartItem } from "@/lib/crud/model-type";
 import { accessCart } from "../actions";
 
