@@ -12,7 +12,7 @@ export default function ErrorModal() {
     if (!error) return null;
 
     const onClose = () => {
-        dispatch(cartActions.setError(null));
+        dispatch(cartActions.resetError());
     }
 
     return (

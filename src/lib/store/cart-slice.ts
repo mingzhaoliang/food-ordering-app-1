@@ -65,6 +65,9 @@ const cartSlice = createSlice({
         setError(state, action) {
             state.error = action.payload;
         },
+        resetError(state) {
+            state.error = null;
+        },
         setCheckout(state, action) {
             state.checkout = action.payload;
         }
