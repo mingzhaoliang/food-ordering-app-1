@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
 
         const newOrder: Order = {
             _id: newOrderId,
-            user_id: checkoutSessionRequest.userId,
+            user_id: new ObjectId(checkoutSessionRequest.userId),
             status: "placed",
             delivery_details: checkoutSessionRequest.deliveryDetails,
             items: cartItems,

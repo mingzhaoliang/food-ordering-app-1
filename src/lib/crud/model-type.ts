@@ -49,7 +49,7 @@ export interface ClientCartItem {
 
 export interface Order {
     _id: ObjectId;
-    user_id: string;
+    user_id: ObjectId;
     status: string;
     delivery_details: DeliveryDetails;
     items: CartItem[];
