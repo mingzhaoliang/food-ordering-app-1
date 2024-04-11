@@ -1,6 +1,6 @@
 import Image from "next/image";
 import DisplayImage from "../ui/display-image";
-import { formatter } from "@/utils/formatter";
+import { priceFormatter } from "@/utils/formatter";
 import Link from "next/link";
 import { getCloudinaryUrl } from "@/utils/cloudinary-configs";
 import { MenuItem } from "@/lib/crud/model-type";
@@ -28,7 +28,7 @@ export default function FoodCard({ menuItem, showUnit }: { menuItem: MenuItem; s
 
                 <div className="px-3 flex justify-between items-center gap-4 xs:gap-8 max-sm:pt-2 max-sm:border-t max-sm:border-slate-800/30 sm:bg-white text-sm xs:text-md sm:text-base">
                     <div className="py-2 pl-2 flex flex-wrap">
-                        <p>{formatter(menuItem.price)}</p>
+                        <p>{priceFormatter(menuItem.price)}</p>
                         {showUnit && <p className="whitespace-pre">{` / ${menuItem.unit.number} ${menuItem.unit.measurement}${menuItem.unit.number > 1 ? "s" : ""}`}</p>}
                     </div>
                     {menuItem.online_available

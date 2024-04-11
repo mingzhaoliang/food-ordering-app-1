@@ -1,7 +1,7 @@
 "use client";
 
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { formatter } from "@/utils/formatter";
+import { priceFormatter } from "@/utils/formatter";
 import Image from "next/image";
 import CartItems from "./cart-items";
 import CartSummary from "./cart-summary";
@@ -53,7 +53,7 @@ export default function Cart() {
             <CartSummary subtotal={subtotal} deliveryFee={deliveryFee} total={total} />
             {
                 cartItems.length > 0 && (deliveryFee && deliveryFee > 0
-                    ? <p className="text-sm text-slate-800">Spend {formatter(freeDeliveryThreshold - subtotal)} more to get FREE delivery</p>
+                    ? <p className="text-sm text-slate-800">Spend {priceFormatter(freeDeliveryThreshold - subtotal)} more to get FREE delivery</p>
                     : <p className="text-sm text-slate-800 flex items-center gap-2">
                         <Image src="/icons/truck.svg" alt="truck" width={16} height={16} draggable={false} />
                         Your order qualifies for free delivery!

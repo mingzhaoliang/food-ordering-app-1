@@ -4,7 +4,7 @@ import { CartItem } from "@/lib/crud/model-type";
 import { addItem, cartActions, removeItem } from "@/lib/store/cart-slice";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { menuActions } from "@/lib/store/menu-slice";
-import { formatter } from "@/utils/formatter";
+import { priceFormatter } from "@/utils/formatter";
 import Image from "next/image";
 import Spinner from "../ui/spinner";
 
@@ -37,7 +37,7 @@ export default function CartItems({ userId, cartItems }: { userId: string, cartI
                             <button onClick={() => addItemHandler(item)} className="w-4 h-4 rounded-full border border-slate-800 flex justify-center items-center font-mono hover:bg-slate-800 hover:text-white transition-all outline-none">+</button>
                         </div>
                         <p className="justify-self-end xl:justify-self-center max-xxs:col-start-2 lg:col-start-2 xl:col-auto">
-                            {formatter(item.price * item.quantity)}
+                            {priceFormatter(item.price * item.quantity)}
                         </p>
                     </div>
                 ))

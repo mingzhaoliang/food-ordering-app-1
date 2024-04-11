@@ -1,6 +1,6 @@
 "use client";
 
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { useAppDispatch } from "@/lib/store/hooks";
 import { addItem, cartActions } from "@/lib/store/cart-slice";
 import { MenuItem } from "@/lib/crud/model-type";
 import { useSession } from "next-auth/react";
