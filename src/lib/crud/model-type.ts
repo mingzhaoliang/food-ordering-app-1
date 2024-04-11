@@ -55,6 +55,7 @@ export interface Order {
     items: CartItem[];
     total_amount: number;
     created_at: Date;
+    expires_at: Date;
 }
 
 export interface DeliveryDetails {

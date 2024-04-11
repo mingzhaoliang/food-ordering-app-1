@@ -29,15 +29,18 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ message: "Failed to create stripe session" }, { status: 500 });
         };
 
-    const newOrder: Order = {
-        _id: newOrderId,
-        user_id: checkoutSessionRequest.userId,
-        status: "placed",
-        delivery_details: checkoutSessionRequest.deliveryDetails,
-        items: cartItems,
-        total_amount: totalPrice + deliveryFee,
-        created_at: new Date(),
-    }
+        const dateNow = Date.now();
+
+        const newOrder: Order = {
+            _id: newOrderId,
+            user_id: checkoutSessionRequest.userId,
+            status: "placed",
+            delivery_details: checkoutSessionRequest.deliveryDetails,
+            items: cartItems,
+            total_amount: totalPrice + deliveryFee,
+            created_at: new Date(dateNow),
+            expires_at: new Date(dateNow + orderExpirationTime * 1000 + overdueTime * 1000),
+        }
 
         await createOrder(newOrder);
 
