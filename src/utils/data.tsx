@@ -3,10 +3,10 @@ import authBackground from "@/assets/images/auth-background.jpg";
 import restaurantEnvironment from "@/assets/images/restaurant-environment.jpg";
 import background0 from "@/assets/images/background-0.jpg";
 
-import pizza from "@/assets/images/pizza.png";
-
 export const defaultDeliveryFee = 10;
 export const freeDeliveryThreshold = 50;
+export const orderExpirationTime = 60 * 60; // 1 hour
+export const overdueTime = 60 * 30; // 30 minutes
 
 export const restaurantName = "Cucina Felice";
 
@@ -22,10 +22,6 @@ export const logos: any = {
 };
 
 export const images = {
-    pizza: {
-        src: pizza,
-        alt: "Pizza Emoji",
-    },
     authBackground: {
         src: authBackground,
         alt: "Vegetable Salad in Bowls",
