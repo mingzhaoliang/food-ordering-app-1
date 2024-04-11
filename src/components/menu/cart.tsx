@@ -59,7 +59,7 @@ export default function Cart() {
                         Your order qualifies for free delivery!
                     </p>)
             }
-            <button className="bg-teal-700 hover:bg-teal-900 text-white rounded py-2 transition-all" onClick={checkoutHandler}>Checkout</button>
+            <button disabled={Object.keys(items).length === 0} className={`${Object.keys(items).length === 0 ? "bg-teal-700/60 cursor-not-allowed" : "bg-teal-700 hover:bg-teal-900"} text-white rounded py-2 transition-all`} onClick={checkoutHandler}>Checkout</button>
         </div>
     )
 }

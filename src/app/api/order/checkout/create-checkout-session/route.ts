@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getCartItems } from "@/lib/crud/cart";
 import { Cart, DeliveryDetails, Order } from "@/lib/crud/model-type";
-import { defaultDeliveryFee, freeDeliveryThreshold } from "@/utils/data";
+import { defaultDeliveryFee, freeDeliveryThreshold, orderExpirationTime, overdueTime } from "@/utils/data";
 import { createOrder } from "@/lib/crud/order";
 import { ObjectId } from "mongodb";
 
@@ -19,14 +19,15 @@ type CheckoutSessionRequest = {
 export async function POST(req: NextRequest) {
     const checkoutSessionRequest: CheckoutSessionRequest = await req.json();
 
-    const newOrderId = new ObjectId();
+    try {
+        const newOrderId = new ObjectId();
 
-    const { lineItems, cartItems, totalPrice, deliveryFee } = await createLineItems(checkoutSessionRequest.userId);
-    const stripSession = await createSession(lineItems, newOrderId.toString(), deliveryFee);
+        const { lineItems, cartItems, totalPrice, deliveryFee } = await createLineItems(checkoutSessionRequest.userId);
+        const stripSession = await createSession(lineItems, newOrderId.toString(), deliveryFee);
 
-    if (!stripSession.url) {
-        return NextResponse.json({ message: "Failed to create stripe session" }, { status: 500 });
-    };
+        if (!stripSession.url) {
+            return NextResponse.json({ message: "Failed to create stripe session" }, { status: 500 });
+        };
 
     const newOrder: Order = {
         _id: newOrderId,
@@ -38,15 +39,23 @@ export async function POST(req: NextRequest) {
         created_at: new Date(),
     }
 
-    await createOrder(newOrder);
+        await createOrder(newOrder);
 
-    return NextResponse.json({ url: stripSession.url }, { status: 200 });
+        return NextResponse.json({ url: stripSession.url }, { status: 200 });
+    } catch (error: any) {
+        console.error(error);
+        return NextResponse.json({ message: error.message }, { status: 400 });
+    }
 
 }
 
 const createLineItems = async (userId: string) => {
     const userCartItems = await getCartItems(userId) as Cart;
     const cartItems = Object.values(userCartItems);
+
+    if (cartItems.length === 0) {
+        throw new Error("Your cart is empty");
+    }
 
     const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
     const deliveryFee = totalPrice > freeDeliveryThreshold ? 0 : defaultDeliveryFee;
@@ -94,6 +103,7 @@ const createSession = async (
         },
         success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/menu/antipasti`,
         cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/menu/antipasti`,
+        expires_at: Math.floor(Date.now() / 1000) + 60 * 30 // orderExpirationTime,
     })
 
     return sessionData;
