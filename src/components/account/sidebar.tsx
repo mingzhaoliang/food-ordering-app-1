@@ -18,7 +18,7 @@ export default function Sidebar() {
     const activePage = pathname.split("/").pop();
 
     return (
-        <div className="p-2 md:p-4 flex flex-grow justify-around gap-4 font-lato text-lg tracking-wide max-lg:text-[0.9rem] transition-all">
+        <div className="p-2 md:p-4 flex flex-grow justify-around gap-4 font-lato text-lg tracking-wide max-md:text-md max-lg:text-base transition-all">
             <LinkItem activePage={activePage} param="profile" name="Profile" src="/icons/person.svg" alt="person" />
             <LinkItem activePage={activePage} param="orders" name="Orders" src="/icons/text.svg" alt="text" />
             <LinkItem activePage={activePage} param="settings" name="Settings" src="/icons/gear.svg" alt="gear" />

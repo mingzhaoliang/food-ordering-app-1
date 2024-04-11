@@ -43,7 +43,7 @@ export default function ProfilePage() {
     }
 
     return (
-        <form className="p-8 flex flex-col gap-4 font-lato max-lg:text-[0.9rem] transition-all" onSubmit={submitHandler} >
+        <form className="p-8 flex flex-col gap-4 font-lato max-md:text-md max-lg:text-base transition-all" onSubmit={submitHandler} >
             <h1 className="md:hidden text-xl font-bold">Profile</h1>
             <FormInput label="Name" id="username" type="text" defaultValue={user.username || ""} />
             <div className="grid min-[480px]:grid-cols-2 gap-4">
