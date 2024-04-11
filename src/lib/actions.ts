@@ -7,6 +7,20 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { addItemToCart, clearCart, getCartItems, removeItemFromCart } from "./crud/cart";
 import { getMenuItemById } from "./crud/menu";
 
+export const getHeroImages = async (itemIds: string[]) => {
+    const heroImages = await Promise.all(itemIds.map(async (itemId) => {
+        const menuItem = await getMenuItemById(itemId);
+        return ({
+            publicId: menuItem!.public_id,
+            course: menuItem!.course,
+            name: menuItem!.name,
+            reference: menuItem!.reference,
+        });
+    }));
+
+    return heroImages;
+}
+
 export const updateProfile = async (prevState: { message: string } | undefined, formData: FormData) => {
     const session = await getServerSession(authOptions);
     if (!session) {
