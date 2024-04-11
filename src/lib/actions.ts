@@ -79,7 +79,7 @@ export const checkout = async (prevState: { message: string; url: string } | und
     const data = Object.fromEntries(formData.entries());
 
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/create-checkout-session`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/checkout/create-checkout-session`, {
             headers: {
                 "Content-Type": "application/json",
             },
