@@ -21,9 +21,10 @@ export async function POST(req: NextRequest) {
 
     try {
         const newOrderId = new ObjectId();
+        const newOrderIdString = newOrderId.toString();
 
         const { lineItems, cartItems, totalPrice, deliveryFee } = await createLineItems(checkoutSessionRequest.userId);
-        const stripSession = await createSession(lineItems, newOrderId.toString(), deliveryFee);
+        const stripSession = await createSession(lineItems, newOrderIdString, deliveryFee);
 
         if (!stripSession.url) {
             return NextResponse.json({ message: "Failed to create stripe session" }, { status: 500 });
@@ -32,8 +33,8 @@ export async function POST(req: NextRequest) {
         const dateNow = Date.now();
 
         const newOrder: Order = {
-            _id: newOrderId,
-            user_id: new ObjectId(checkoutSessionRequest.userId),
+            _id: newOrderIdString,
+            user_id: checkoutSessionRequest.userId,
             status: "placed",
             delivery_details: checkoutSessionRequest.deliveryDetails,
             items: cartItems,

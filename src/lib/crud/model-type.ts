@@ -48,8 +48,8 @@ export interface ClientCartItem {
 }
 
 export interface Order {
-    _id: ObjectId;
-    user_id: ObjectId;
+    _id: string;
+    user_id: string;
     status: string;
     delivery_details: DeliveryDetails;
     items: CartItem[];

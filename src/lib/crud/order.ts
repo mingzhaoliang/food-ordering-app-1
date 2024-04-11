@@ -22,7 +22,12 @@ export const createOrder = async (orderDetails: Order) => {
         );
     }
 
-    await db.collection("orders").insertOne(orderDetails);
+    await db.collection("orders").insertOne({
+        ...orderDetails,
+        _id: new ObjectId(orderDetails._id),
+        user_id: new ObjectId(orderDetails.user_id),
+    });
+}
 }
 
 export const getOrderById = async (orderId: string) => {
