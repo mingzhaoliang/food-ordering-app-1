@@ -1,6 +1,6 @@
 "use client";
 
-import { checkout } from "@/lib/actions";
+import { accessCart, checkout } from "@/lib/actions";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { cartActions } from "@/lib/store/cart-slice";
 import Image from "next/image";
@@ -19,7 +19,14 @@ export default function Checkout() {
     }
 
     useEffect(() => {
+        async function clearCart() {
+            await accessCart("clear");
+        }
         if (state.message === "success" && state.url) {
+            // clear cart before redirecting
+            dispatch(cartActions.removeAllItems());
+            clearCart();
+            // redirect to payment page
             window.location.assign(state.url);
         }
     }, [state])

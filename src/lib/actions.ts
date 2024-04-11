@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { updateUser } from "./crud/user";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
-import { addItemToCart, getCartItems, removeItemFromCart } from "./crud/cart";
+import { addItemToCart, clearCart, getCartItems, removeItemFromCart } from "./crud/cart";
 import { getMenuItemById } from "./crud/menu";
 
 export const updateProfile = async (prevState: { message: string } | undefined, formData: FormData) => {
@@ -63,6 +63,8 @@ export const accessCart = async (type: string, itemId?: string) => {
             return addItemToCart(session.user.id, existingMenuItem!);
         case "remove":
             return removeItemFromCart(session.user.id, itemId!);
+        case "clear":
+            return clearCart(session.user.id);
         default:
             return { message: "Invalid request" };
     }

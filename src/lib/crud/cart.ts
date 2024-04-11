@@ -71,3 +71,15 @@ export const removeItemFromCart = async (userId: string, itemId: string) => {
 
     return null;
 }
+
+export const clearCart = async (userId: string) => {
+    const client = await clientPromise;
+    const db = client.db("restaurant");
+
+    await db.collection("cart").updateOne(
+        { user_id: new ObjectId(userId) },
+        { $set: { items: {} } }
+    );
+
+    return null;
+}
