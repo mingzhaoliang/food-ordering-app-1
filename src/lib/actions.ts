@@ -93,7 +93,8 @@ export const checkout = async (prevState: { message: string; url: string } | und
         })
 
         if (!response.ok) {
-            throw new Error("Failed to continue to payment.");
+            const { message } = await response.json();
+            throw new Error(message || "Failed to continue to payment.");
         }
 
         const { url } = await response.json();
