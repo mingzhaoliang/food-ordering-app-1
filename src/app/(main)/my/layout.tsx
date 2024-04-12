@@ -1,5 +1,4 @@
 import Sidebar from "@/components/ui/sidebar";
-// import Sidebar from "@/components/my/sidebar";
 import DisplayImage from "@/components/ui/display-image";
 import { images } from "@/utils/data";
 
@@ -24,9 +23,7 @@ export default function AccountPageLayout({ children }: { children: React.ReactN
                             <Sidebar src="/icons/gear.svg" href="/my/settings" text="Settings" iconSize="small" rotate={false} />
                         </div>
                     </div>
-                    <div className="w-full md:row-start-2 md:col-span-6 rounded-md">
-                        {children}
-                    </div>
+                    {children}
                 </div>
             </div>
         </>

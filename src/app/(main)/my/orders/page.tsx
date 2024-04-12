@@ -10,7 +10,7 @@ export default async function OrdersPage() {
     const orderHistory = await getOrders(session!.user.id);
 
     return (
-        <div className="max-md:mx-auto max-xs:w-full max-sm:w-11/12 max-md:w-10/12 md:max-w-[50rem] flex flex-col gap-4 font-lato max-md:text-md max-lg:text-base transition-all">
+        <div className="max-md:mx-auto max-xs:w-full max-sm:w-11/12 max-md:w-10/12 lg:max-w-[50rem] flex flex-col gap-4 font-lato max-md:text-md max-lg:text-base transition-all">
             {
                 orderHistory.map((order: Order) => {
                     const date = new Date(order.created_at);

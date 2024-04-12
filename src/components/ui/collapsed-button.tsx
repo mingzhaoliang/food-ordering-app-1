@@ -39,7 +39,7 @@ export default function CollapsedButton({ src, alt, text, expand, imageSize, rot
             <div className={`relative ${imageSizeClasses}`}>
                 <Image src={src} alt={alt} fill sizes="100% 100%" draggable={false} className={`p-1 transition-all duration-300 ${rotate && (isHovered || expand ? "md:rotate-0" : "md:-rotate-[45deg]")}`} />
             </div>
-            <p className={`max-md:hidden font-portLligatSans font-bold md:text-lg lg:text-xl xl:text-2xl text-slate-800 transition-all duration-300 ${isHovered || expand ? "md:max-w-fit md:scale-100 md:opacity-100 md:translate-x-0 md:px-2" : "md:max-w-0 md:scale-0 md:opacity-0 md:-translate-x-5 md:p-0"}`}>{text}</p>
+            <p className={`max-md:hidden font-portLligatSans font-bold md:text-lg lg:text-xl xl:text-[1.35rem] text-slate-800 transition-all duration-300 ${isHovered || expand ? "md:max-w-fit md:scale-100 md:opacity-100 md:translate-x-0 md:px-2" : "md:max-w-0 md:scale-0 md:opacity-0 md:-translate-x-5 md:p-0"}`}>{text}</p>
         </div>
     )
 }
