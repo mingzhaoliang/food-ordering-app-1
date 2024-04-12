@@ -9,6 +9,8 @@ interface CartState {
     },
     changed: boolean;
     addedItems: number;
+    timer1: NodeJS.Timeout | undefined;
+    timer2: NodeJS.Timeout | undefined;
     error: string | null;
     checkout: boolean;
 }
@@ -17,6 +19,8 @@ const initialState: CartState = {
     items: {},
     changed: false,
     addedItems: 0,
+    timer1: undefined,
+    timer2: undefined,
     error: null,
     checkout: false,
 };
@@ -57,6 +61,20 @@ const cartSlice = createSlice({
         },
         setAddedItems(state) {
             state.addedItems += 1;
+        },
+        setTimer1(state, action) {
+            state.timer1 = action.payload;
+        },
+        setTimer2(state, action) {
+            state.timer2 = action.payload;
+        },
+        clearTimers(state) {
+            if (state.timer1) {
+                clearTimeout(state.timer1);
+            }
+            if (state.timer2) {
+                clearTimeout(state.timer2);
+            }
         },
         resetAddedItems(state) {
             state.addedItems = 0;
