@@ -1,7 +1,7 @@
 "use client";
 
 import NavigationList from "./navigation-list";
-import SignInButton from "./sign-in-button";
+import UserButton from "./user/user-button";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import Logo from "./logo";
 import IconButton from "../ui/icon-button";
@@ -36,7 +36,7 @@ export default function MainNavigation() {
 							+{addedItems}
 						</div>
 					</Link>
-					<SignInButton />
+					<UserButton />
 				</div>
 			</div>
 		</div>

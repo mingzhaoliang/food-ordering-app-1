@@ -1,8 +1,7 @@
 import { images, briefAbout } from "@/utils/data";
-import Link from "next/link";
 import DisplayImage from "../ui/display-image";
 import Card from "../ui/card";
-import LinkButton from "../ui/link-button";
+import LinkButtonRectangular from "../ui/link-button-rectangular";
 
 export default function BriefAbout() {
 
@@ -19,7 +18,7 @@ export default function BriefAbout() {
                     <div className="p-1 border-4 border-slate-200">
                         <div className="p-4 lg:p-6 border-2 border-slate-100 flex flex-col items-center gap-4">
                             <h2 className="pb-4 text-2xl lg:text-2xl xl:text-3xl font-portLligatSans text-center transition-all duration-300">Ready to Savour the Taste of Italy?</h2>
-                            <LinkButton href="/menu/antipasti" text="Explore Menu" />
+                            <LinkButtonRectangular href="/menu/antipasti" text="Explore Menu" />
                         </div>
                     </div>
                 </div>

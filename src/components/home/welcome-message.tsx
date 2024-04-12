@@ -1,5 +1,4 @@
-import Link from "next/link";
-import LinkButton from "../ui/link-button";
+import LinkButtonRectangular from "../ui/link-button-rectangular";
 
 export default function WelcomeMessage() {
     return (
@@ -11,8 +10,8 @@ export default function WelcomeMessage() {
                     </h1>
                     <p className="w-11/12 xs:w-10/12 text-xl md:text-2xl lg:text-3xl font-portLligatSans text-pretty text-center lg:leading-normal">Indulge in Melbourne's finest, artisanal Italian cuisine.</p>
 
-                    <LinkButton href="" text="Reserve a Table" />
-                    <LinkButton href="/menu/antipasti" text="Order Now" />
+                    <LinkButtonRectangular href="" text="Reserve a Table" />
+                    <LinkButtonRectangular href="/menu/antipasti" text="Order Now" />
                 </div>
             </div>
         </div>

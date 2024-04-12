@@ -1,7 +1,7 @@
 "use client";
 
 import NavigationList from "./navigation-list";
-import SignInButton from "./sign-in-button";
+import UserButton from "./user/user-button";
 import IconButton from "../ui/icon-button";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { navigationActions } from "@/lib/store/navigation-slice";
@@ -9,7 +9,6 @@ import Logo from "./logo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { menuActions } from "@/lib/store/menu-slice";
-import { useEffect } from "react";
 
 export default function MobileNavigation() {
 	const pathname = usePathname();
@@ -32,7 +31,7 @@ export default function MobileNavigation() {
 			<div className="w-full flex justify-between items-center text-white">
 				<Logo />
 				<div className="pr-6 lg:pr-8 xl:pr-10 flex justify-center items-center gap-2 xs:gap-4 max-sm:text-md">
-					<SignInButton onClick={closeMenu} />
+					<UserButton onClick={closeMenu} />
 					<Link
 						href={`/menu/${activeCourse}`}
 						className="relative flex items-center"
