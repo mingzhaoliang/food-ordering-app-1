@@ -21,7 +21,7 @@ export default function MenuPageLayout({ children }: { children: React.ReactNode
                         <p className="font-lato text-sm sm:text-base lg:text-lg max-md:text-center">Explore Authentic Italian Flavours</p>
                     </div>
                     <div className="sticky z-50 md:row-start-2 top-20 xs:top-24 md:top-28 mx-auto md:mx-0 max-md:mb-4 w-11/12 xs:w-10/12 sm:w-9/12 md:w-full">
-                        <div className="max-md:p-2 rounded-full flex md:flex-col justify-between xs:justify-around md:justify-normal items-center md:items-start gap-2 md:gap-8 max-md:bg-white/70 max-md:backdrop-blur">
+                        <div className="max-md:p-2 rounded-full flex md:flex-col justify-between xs:justify-around md:justify-normal items-center md:items-start gap-2 md:gap-8 max-md:bg-white/60 max-md:backdrop-blur">
                             <Sidebar src="/icons/green_salad.png" href="/menu/antipasti" text="Antipasti" iconSize="large" rotate />
                             <Sidebar src="/icons/shallow_pan_of_food.png" href="/menu/primi" text="Primi" iconSize="large" rotate />
                             <Sidebar src="/icons/meat_on_bone.png" href="/menu/secondi" text="Secondi" iconSize="large" rotate />

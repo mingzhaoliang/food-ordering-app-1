@@ -21,7 +21,7 @@ export default function CollapsedButton({ src, alt, text, expand, imageSize, rot
             imageSizeClasses = "w-7 h-7 xs:w-9 xs:h-9 md:w-10 md:h-10 lg:w-12 lg:h-12";
             break;
         case "small":
-            imageSizeClasses = "w-6 h-6 xs:w-7 xs:h-7 md:w-8 md:h-8 lg:w-9 lg:h-9";
+            imageSizeClasses = "w-6 h-6 xs:w-7 xs:h-7 md:w-9 md:h-9 lg:w-10 lg:h-10";
             break;
         default:
             imageSizeClasses = "w-7 h-7 xs:w-9 xs:h-9 md:w-10 md:h-10 lg:w-12 lg:h-12";
@@ -32,14 +32,14 @@ export default function CollapsedButton({ src, alt, text, expand, imageSize, rot
     return (
         <div
             draggable={false}
-            className={`p-1 xs:p-[0.4rem] flex items-center rounded-full transition-all duration-300 ${expand ? "bg-white shadow-md" : `${rotate ? "bg-white/60" : "bg-white"} hover:bg-white hover:shadow-md`}`}
+            className={`p-1 xs:p-[0.4rem] flex items-center rounded-full transition-all duration-300 ${expand ? "bg-white shadow-md" : "bg-white/50 md:bg-white/60 hover:bg-white hover:shadow-md"}`}
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
         >
             <div className={`relative ${imageSizeClasses}`}>
-                <Image src={src} alt={alt} fill className={`p-1 transition-all duration-300 ${rotate && (isHovered || expand ? "md:rotate-0" : "md:-rotate-[45deg]")}`} />
+                <Image src={src} alt={alt} fill draggable={false} className={`p-1 transition-all duration-300 ${rotate && (isHovered || expand ? "md:rotate-0" : "md:-rotate-[45deg]")}`} />
             </div>
-            <p className={`max-md:hidden font-portLligatSans font-bold md:text-lg lg:text-xl text-slate-800 transition-all duration-300 ${isHovered || expand ? "md:max-w-fit md:scale-100 md:opacity-100 md:translate-x-0 md:px-2" : "md:max-w-0 md:scale-0 md:opacity-0 md:-translate-x-5 md:p-0"}`}>{text}</p>
+            <p className={`max-md:hidden font-portLligatSans font-bold md:text-lg lg:text-xl xl:text-2xl text-slate-800 transition-all duration-300 ${isHovered || expand ? "md:max-w-fit md:scale-100 md:opacity-100 md:translate-x-0 md:px-2" : "md:max-w-0 md:scale-0 md:opacity-0 md:-translate-x-5 md:p-0"}`}>{text}</p>
         </div>
     )
 }
