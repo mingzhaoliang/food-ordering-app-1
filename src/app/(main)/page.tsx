@@ -5,11 +5,11 @@ import { getCloudinaryUrl } from "@/utils/cloudinary-configs";
 import Link from "next/link";
 
 const itemIds = [
-	"660eda2280db74e048fa429e",
-	"660eda2380db74e048fa42a4",
-	"660eda2380db74e048fa42a6",
-	"660eda2480db74e048fa42ad",
-	"660eda2580db74e048fa42bd",
+	"bruschetta",
+	"frittata",
+	"spaghetti-bolognese",
+	"risotto-ai-funghi",
+	"cannoli",
 ];
 
 export default async function Home() {
