@@ -1,4 +1,4 @@
-import Sidebar from "@/components/account/sidebar";
+import Sidebar from "@/components/my/sidebar";
 import DisplayImage from "@/components/ui/display-image";
 import { images } from "@/utils/data";
 

@@ -38,7 +38,7 @@ export default function SignInButton({ onClick }: { onClick?: () => void }) {
     } else if (status === "authenticated" && session?.user) {
 
         content = (
-            <Link href="/account/profile" draggable={false} className="whitespace-pre flex justify-center items-center gap-1 rounded-md min-[900px]:px-1 min-[900px]:py-2 transition-all" onClick={onClick}>
+            <Link href="/my/profile" draggable={false} className="whitespace-pre flex justify-center items-center gap-1 rounded-md min-[900px]:px-1 min-[900px]:py-2 transition-all" onClick={onClick}>
                 <IconButton src="/icons/person.svg" alt="Person">
                     <p className="max-[900px]:hidden text-slate-800 text-md px-1 max-w-28 text-ellipsis overflow-hidden">Hi!<span className="underline">{user.username}</span></p>
                 </IconButton>
