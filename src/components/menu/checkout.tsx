@@ -32,7 +32,7 @@ export default function Checkout() {
     }, [state])
 
     return (
-        <form className="bg-white w-full rounded-md p-6 flex flex-col gap-4 font-lato" action={formAction}>
+        <form className="bg-white w-full rounded-md p-6 flex flex-col gap-4 font-lato text-slate-800" action={formAction}>
             <div className="space-y-1 pb-2 border-b border-slate-800/20">
                 <div className="relative flex items-center gap-1">
                     <Image src="/icons/chevron-left.svg" alt="back" width={17} height={17} draggable={false} className="-ml-1 cursor-pointer" onClick={backHandler} />
@@ -62,7 +62,15 @@ export default function Checkout() {
                     </div>
                     <div className="space-y-1">
                         <label htmlFor="state">State</label>
-                        <input type="text" id="state" name="state" className="block w-full px-2 py-1 border border-gray-300 rounded-md" defaultValue={user.state} />
+                        <select key={user.state} id="state" name="state" className="block w-full px-2 py-1 border border-gray-300 rounded-md" defaultValue={user.state || "NSW"}>
+                            <option value="NSW">NSW</option>
+                            <option value="VIC">VIC</option>
+                            <option value="QLD">QLD</option>
+                            <option value="SA">SA</option>
+                            <option value="WA">WA</option>
+                            <option value="TAS">TAS</option>
+                            <option value="NT">NT</option>
+                        </select>
                     </div>
                     <div className="space-y-1">
                         <label htmlFor="postcode">Postcode</label>
