@@ -1,5 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
-import OrderItem from "@/components/orders/order-item";
+import OrderItem from "@/components/my/orders/order-item";
 import { Order } from "@/lib/crud/model-type";
 import { getOrders } from "@/lib/crud/order"
 import { getServerSession } from "next-auth";
