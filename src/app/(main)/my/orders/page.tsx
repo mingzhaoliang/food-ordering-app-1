@@ -2,7 +2,6 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import OrderItem from "@/components/orders/order-item";
 import { Order } from "@/lib/crud/model-type";
 import { getOrders } from "@/lib/crud/order"
-import { datetimeFormatter } from "@/utils/formatter";
 import { getServerSession } from "next-auth";
 
 export default async function OrdersPage() {

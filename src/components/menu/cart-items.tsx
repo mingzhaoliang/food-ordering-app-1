@@ -8,7 +8,7 @@ import { priceFormatter } from "@/utils/formatter";
 import Image from "next/image";
 import Spinner from "../ui/spinner";
 
-export default function CartItems({ userId, cartItems }: { userId: string, cartItems?: (CartItem)[] | null | undefined, }) {
+export default function CartItems({ cartItems }: { cartItems?: (CartItem)[] | null | undefined, }) {
     const dispatch = useAppDispatch();
 
     const addItemHandler = (item: CartItem) => {
