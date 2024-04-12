@@ -1,6 +1,6 @@
 "use client";
 
-import ProfileFormSubmit from "@/components/my/profile-form-submit";
+import ProfileFormSubmit from "@/components/my/profile/profile-form-submit";
 import Spinner from "@/components/ui/spinner";
 import { updateProfile } from "@/lib/actions";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
