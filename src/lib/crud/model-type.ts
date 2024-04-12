@@ -33,6 +33,7 @@ export interface CartItem {
     menu_id: string;
     name: string;
     public_id: string;
+    course: string;
     quantity: number;
     price: number;
 }
@@ -41,6 +42,7 @@ export interface ClientCartItem {
     menu_id: string;
     name: string;
     public_id: string;
+    course: string;
     price: number;
 }
 

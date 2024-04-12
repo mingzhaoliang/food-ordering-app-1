@@ -1,4 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import OrderItem from "@/components/orders/order-item";
 import { Order } from "@/lib/crud/model-type";
 import { getOrders } from "@/lib/crud/order"
 import { datetimeFormatter } from "@/utils/formatter";
@@ -10,17 +11,12 @@ export default async function OrdersPage() {
     const orderHistory = await getOrders(session!.user.id);
 
     return (
-        <div className="p-8 flex flex-col gap-4 font-lato max-md:text-md max-lg:text-base transition-all">
+        <div className="max-md:mx-auto max-xs:w-full max-sm:w-11/12 max-md:w-10/12 md:max-w-[50rem] flex flex-col gap-4 font-lato max-md:text-md max-lg:text-base transition-all">
             {
                 orderHistory.map((order: Order) => {
                     const date = new Date(order.created_at);
                     return (
-                        <div key={order._id} className="p-4 rounded-md border border-gray-300">
-                            <h2 className="text-xl font-bold">Order ID: {order._id}</h2>
-                            <p className="text-lg">Total: ${order.total_amount}</p>
-                            <p className="text-lg">Status: {order.status}</p>
-                            <p className="text-lg">Ordered on: {datetimeFormatter(date)}</p>
-                        </div>
+                        <OrderItem key={order._id} order={order} />
                     )
                 })
             }

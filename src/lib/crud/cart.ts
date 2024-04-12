@@ -34,6 +34,8 @@ export const addItemToCart = async (userId: string, existingMenuItem: MenuItem) 
                 $set: {
                     [`items.${itemId}`]: {
                         menu_id: new ObjectId(itemId),
+                        public_id: existingMenuItem.public_id,
+                        course: existingMenuItem.course,
                         name: existingMenuItem.name,
                         quantity: 1,
                         price: existingMenuItem.price,

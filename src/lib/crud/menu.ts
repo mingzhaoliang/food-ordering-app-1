@@ -21,3 +21,12 @@ export const getMenuItemById = async (itemId: string): Promise<MenuItem | null> 
 
     return JSON.parse(JSON.stringify(data));
 }
+
+export const getMenuItemByPublicId = async (publicId: string): Promise<MenuItem | null> => {
+    const client = await clientPromise;
+    const db = client.db("restaurant");
+
+    const data = await db.collection("menu").findOne<MenuItem>({ "public_id": publicId });
+
+    return JSON.parse(JSON.stringify(data));
+}

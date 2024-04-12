@@ -40,6 +40,7 @@ const cartSlice = createSlice({
                     menu_id: action.payload.menu_id,
                     name: action.payload.name,
                     public_id: action.payload.public_id,
+                    course: action.payload.course,
                     quantity: 1,
                     price: action.payload.price,
                 }

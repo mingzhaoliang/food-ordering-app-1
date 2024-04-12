@@ -9,25 +9,25 @@ export const createOrder = async (orderDetails: Order) => {
     const client = await clientPromise;
     const db = client.db("restaurant");
 
-    const collections = (await db.listCollections().toArray()).filter(collection => collection.name === "orders");
-
-    if (collections.length === 0) {
-        await db.collection("orders").createIndex(
-            { "created_at": 1 },
-            {
-                name: "Partial-TTL-Index",
-                partialFilterExpression: { "status": "placed" },
-                expireAfterSeconds: orderExpirationTime + overdueTime,
-            }
-        );
-    }
-
     await db.collection("orders").insertOne({
         ...orderDetails,
         _id: new ObjectId(orderDetails._id),
         user_id: new ObjectId(orderDetails.user_id),
+        items: orderDetails.items.map(item => ({
+            ...item,
+            menu_id: new ObjectId(item.menu_id),
+        }))
     });
 }
+
+export const getOrders = async (userId: string) => {
+    const client = await clientPromise;
+    const db = client.db("restaurant");
+
+    const data = await db.collection("orders").find<Order>({ "user_id": new ObjectId(userId) }).sort({ "created_at": -1 }).toArray();
+
+    return JSON.parse(JSON.stringify(data));
+
 }
 
 export const getOrderById = async (orderId: string) => {

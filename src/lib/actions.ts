@@ -5,11 +5,12 @@ import { updateUser } from "./crud/user";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { addItemToCart, clearCart, getCartItems, removeItemFromCart } from "./crud/cart";
-import { getMenuItemById } from "./crud/menu";
+import { getMenuItemById, getMenuItemByPublicId } from "./crud/menu";
 
-export const getHeroImages = async (itemIds: string[]) => {
-    const heroImages = await Promise.all(itemIds.map(async (itemId) => {
-        const menuItem = await getMenuItemById(itemId);
+export const getHeroImages = async (publicIds: string[]) => {
+    const heroImages = await Promise.all(publicIds.map(async (publicId) => {
+        const menuItem = await getMenuItemByPublicId(publicId);
+        console.log(menuItem);
         return ({
             publicId: menuItem!.public_id,
             course: menuItem!.course,
@@ -123,3 +124,7 @@ export const checkout = async (prevState: { message: string; url: string } | und
         return { message: error.message, url: "" };
     }
 };
+
+export const refreshPage = (path: string, type: "layout" | "page" | undefined) => {
+    revalidatePath(path, type);
+}
