@@ -38,7 +38,6 @@ const cartSlice = createSlice({
                     public_id: action.payload.public_id,
                     quantity: 1,
                     price: action.payload.price,
-                    unit: action.payload.unit,
                 }
             }
         },

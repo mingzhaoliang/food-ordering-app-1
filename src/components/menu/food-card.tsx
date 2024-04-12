@@ -6,7 +6,7 @@ import { getCloudinaryUrl } from "@/utils/cloudinary-configs";
 import { MenuItem } from "@/lib/crud/model-type";
 import AddToCartButton from "./add-to-cart-button";
 
-export default function FoodCard({ menuItem, showUnit }: { menuItem: MenuItem; showUnit?: boolean }) {
+export default function FoodCard({ menuItem }: { menuItem: MenuItem }) {
     const imageSrc = getCloudinaryUrl(`menu/${menuItem.course}/${menuItem.public_id}`);
     const imageRef = <>Photo by <Link href={menuItem.reference.owner_url} className="underline">{menuItem.reference.owner}</Link> on <Link href={menuItem.reference.url} className="underline">{menuItem.reference.platform}</Link></>
 
@@ -29,7 +29,6 @@ export default function FoodCard({ menuItem, showUnit }: { menuItem: MenuItem; s
                 <div className="px-3 flex justify-between items-center gap-4 xs:gap-8 max-sm:pt-2 max-sm:border-t max-sm:border-slate-800/30 sm:bg-white text-sm xs:text-md sm:text-base">
                     <div className="py-2 pl-2 flex flex-wrap">
                         <p>{priceFormatter(menuItem.price)}</p>
-                        {showUnit && <p className="whitespace-pre">{` / ${menuItem.unit.number} ${menuItem.unit.measurement}${menuItem.unit.number > 1 ? "s" : ""}`}</p>}
                     </div>
                     {menuItem.online_available
                         ? <AddToCartButton item={menuItem} />

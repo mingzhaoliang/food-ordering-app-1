@@ -37,7 +37,6 @@ export const addItemToCart = async (userId: string, existingMenuItem: MenuItem) 
                         name: existingMenuItem.name,
                         quantity: 1,
                         price: existingMenuItem.price,
-                        unit: existingMenuItem.unit,
                     }
                 }
             },

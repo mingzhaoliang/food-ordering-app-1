@@ -19,7 +19,6 @@ export interface MenuItem {
     reference: { owner: string, owner_url: string, platform: string, url: string };
     description: string;
     price: number;
-    unit: { number: number, measurement: string };
     tags: string[];
     online_available: boolean;
 }
@@ -36,7 +35,6 @@ export interface CartItem {
     public_id: string;
     quantity: number;
     price: number;
-    unit: { number: number, measurement: string };
 }
 
 export interface ClientCartItem {
@@ -44,7 +42,6 @@ export interface ClientCartItem {
     name: string;
     public_id: string;
     price: number;
-    unit: { number: number, measurement: string };
 }
 
 export interface Order {
