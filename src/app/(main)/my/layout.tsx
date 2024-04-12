@@ -1,4 +1,5 @@
-import Sidebar from "@/components/my/sidebar";
+import Sidebar from "@/components/ui/sidebar";
+// import Sidebar from "@/components/my/sidebar";
 import DisplayImage from "@/components/ui/display-image";
 import { images } from "@/utils/data";
 
@@ -11,12 +12,29 @@ export default function AccountPageLayout({ children }: { children: React.ReactN
                 imageRef={images.background0.ref}
                 className="w-screen h-screen fixed top-0 left-0 -z-10 opacity-85 overflow-hidden"
             />
-            <div className="relative z-40 mt-32 sm:mt-36 lg:mt-40 mb-16 mx-auto p-2 sm:p-4 rounded-md w-11/12 sm:w-10/12 md:w-9/12 max-w-[65rem] bg-white/40 backdrop-blur space-y-2 md:space-y-4 transition-all">
+            {/* <div className="relative z-40 mt-32 sm:mt-36 lg:mt-40 mb-16 mx-auto p-2 sm:p-4 rounded-md w-11/12 sm:w-10/12 md:w-9/12 max-w-[65rem] bg-white/40 backdrop-blur space-y-2 md:space-y-4 transition-all">
                 <div className="bg-white rounded-md">
                     <Sidebar />
                 </div>
                 <div className="bg-white rounded-md">
                     {children}
+                </div>
+            </div> */}
+            <div className="relative z-40 mt-16 xs:mt-20 md:mt-24 lg:mt-28 mb-16 mx-4 xs:mx-8 lg:mx-12 rounded-md space-y-2 md:space-y-4 transition-all">
+                <div className="flex flex-col gap-4 md:gap-3 md:grid md:grid-rows-[auto_1fr] md:grid-cols-[minmax(calc(100vw_*_1/7),_auto)_repeat(6,_1fr)] items-center md:items-start">
+                    <div className="md:row-start-1 md:col-start-2 md:col-end-[-1] pt-2 pb-4 md:pb-8 flex flex-col gap-4 text-white">
+                        <h1 className="font-portLligatSans font-bold text-4xl sm:text-5xl lg:text-6xl max-md:text-center">Account</h1>
+                    </div>
+                    <div className="sticky z-50 md:row-start-2 top-20 xs:top-24 md:top-28 mx-auto md:mx-0 max-md:mb-4 w-11/12 xs:w-10/12 sm:w-9/12 md:w-full">
+                        <div className="md:mr-6 max-md:p-2 rounded-full flex md:flex-col justify-between xs:justify-around md:justify-normal items-center md:items-start gap-2 md:gap-8 max-md:bg-white/70 max-md:backdrop-blur">
+                            <Sidebar src="/icons/person.svg" href="/my/profile" text="Profile" iconSize="small" rotate={false} />
+                            <Sidebar src="/icons/text.svg" href="/my/orders" text="Orders" iconSize="small" rotate={false} />
+                            <Sidebar src="/icons/gear.svg" href="/my/settings" text="Settings" iconSize="small" rotate={false} />
+                        </div>
+                    </div>
+                    <div className="w-full md:row-start-2 md:col-span-6 rounded-md">
+                        {children}
+                    </div>
                 </div>
             </div>
         </>
