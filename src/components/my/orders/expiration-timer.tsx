@@ -40,7 +40,7 @@ export default function ExpirationTimer({ orderStatus, expiresAt }: { orderStatu
 
     return (
         <>
-            {orderStatus === "placed" && timeLeft > 0 && <p className="px-2 py-[0.1rem] text-rose-500 text-sm font-semibold">{durationFormatter(timeLeft)}</p>}
+            {orderStatus === "placed" && timeLeft > 0 && <p className="px-2 py-[0.1rem] text-rose-500 max-lg:text-sm font-semibold">{durationFormatter(timeLeft)}</p>}
         </>
     )
 }
