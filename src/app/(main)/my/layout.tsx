@@ -23,7 +23,9 @@ export default function AccountPageLayout({ children }: { children: React.ReactN
                             <Sidebar src="/icons/gear.svg" href="/my/settings" text="Settings" iconSize="small" rotate={false} />
                         </div>
                     </div>
-                    {children}
+                    <div className="w-full md:row-start-2 md:col-span-6 rounded-md">
+                        {children}
+                    </div>
                 </div>
             </div>
         </>
