@@ -8,13 +8,13 @@ import ExpirationTimer from "../expiration-timer";
 import PlacedOrderActions from "../further-actions/buttons/placed-order-actions";
 import PaidOrderActions from "../further-actions/buttons/paid-order-actions";
 import CancelledOrderActions from "../further-actions/buttons/cancelled-order-actions";
-import OrderItemDetailsItem from "./order-item-details-item";
+import OrderDetailsItem from "./order-details-item";
 import PlacedOrderCheckout from "../further-actions/actions/placed-order-checkout";
 import { ordersActions } from "@/lib/store/orders-slice";
 import { Order } from "@/lib/crud/model-type";
 import { GoChevronUp } from "react-icons/go";
 
-export default function OrderItemDetails({ order }: { order: Order }) {
+export default function OrderDetails({ order }: { order: Order }) {
     const { furtherAction } = useAppSelector(state => state.orders);
     const dispatch = useAppDispatch();
 
@@ -72,7 +72,7 @@ export default function OrderItemDetails({ order }: { order: Order }) {
                         </button>
                     </div>
                     <div className="space-y-2 sm:space-y-3 md:space-y-4 py-3 xs:py-4 border-b border-slate-800/20 cursor-pointer" onClick={closeHandler}>
-                        {items.map(item => <OrderItemDetailsItem key={item.menu_id} item={item} />)}
+                        {items.map(item => <OrderDetailsItem key={item.menu_id} item={item} />)}
                     </div>
                     <CartSummary subtotal={subtotal} deliveryFee={delivery_fee} total={total_amount} />
                     <div className="max-lg:text-sm text-slate-800/60 flex items-center py-3 xs:py-4">

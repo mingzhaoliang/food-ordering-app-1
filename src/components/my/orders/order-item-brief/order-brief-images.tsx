@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function OrderItemBriefImages({ imageSrcs, names }: { imageSrcs: string[], names: string[] }) {
+export default function OrderBriefImages({ imageSrcs, names }: { imageSrcs: string[], names: string[] }) {
 
     return (
         <div className={`relative rounded-xl max-xs:w-full xs:min-w-36 sm:min-w-40 xl:min-w-44 h-36 overflow-hidden`}>

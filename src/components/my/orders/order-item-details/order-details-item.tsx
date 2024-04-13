@@ -3,7 +3,7 @@ import { getCloudinaryUrl } from "@/utils/cloudinary-configs";
 import { priceFormatter } from "@/utils/formatter";
 import Image from "next/image";
 
-export default function OrderItemDetailsItem({ item }: { item: CartItem }) {
+export default function OrderDetailsItem({ item }: { item: CartItem }) {
     return (
         <div className="grid grid-cols-[auto_1fr] gap-2 xxs:gap-4">
             <div className="w-20 h-full relative rounded-md overflow-hidden">

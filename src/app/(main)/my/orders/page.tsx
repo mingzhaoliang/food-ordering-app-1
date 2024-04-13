@@ -1,5 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
-import OrderItem from "@/components/my/orders/order-item";
+import HistoryOrder from "@/components/my/orders/history-order";
 import { Order } from "@/lib/crud/model-type";
 import { getOrders } from "@/lib/crud/order"
 import { getServerSession } from "next-auth";
@@ -15,7 +15,7 @@ export default async function OrdersPage() {
                 orderHistory.map((order: Order) => {
                     const date = new Date(order.created_at);
                     return (
-                        <OrderItem key={order._id} order={order} />
+                        <HistoryOrder key={order._id} order={order} />
                     )
                 })
             }

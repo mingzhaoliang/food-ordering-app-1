@@ -2,10 +2,10 @@
 
 import { Order } from "@/lib/crud/model-type";
 import { useAppSelector } from "@/lib/store/hooks";
-import OrderItemBrief from "./order-item-brief/order-item-brief";
-import OrderItemDetails from "./order-item-details/order-item-details";
+import OrderItemBrief from "./order-item-brief/order-brief";
+import OrderItemDetails from "./order-item-details/order-details";
 
-export default function OrderItem({ order }: { order: Order }) {
+export default function HistoryOrder({ order }: { order: Order }) {
     const { activeOrder } = useAppSelector(state => state.orders);
 
     return (
