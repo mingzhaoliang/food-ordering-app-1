@@ -2,8 +2,8 @@
 
 import { Order } from "@/lib/crud/model-type";
 import { useAppSelector } from "@/lib/store/hooks";
-import OrderItemBrief from "./order-item-brief";
-import OrderItemDetails from "./order-details/order-item-details";
+import OrderItemBrief from "./order-item-brief/order-item-brief";
+import OrderItemDetails from "./order-item-details/order-item-details";
 
 export default function OrderItem({ order }: { order: Order }) {
     const { activeOrder } = useAppSelector(state => state.orders);
