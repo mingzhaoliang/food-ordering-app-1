@@ -18,7 +18,7 @@ export default function BriefAbout() {
                     <div className="p-1 border-4 border-slate-200">
                         <div className="p-4 lg:p-6 border-2 border-slate-100 flex flex-col items-center gap-4">
                             <h2 className="pb-4 text-2xl lg:text-2xl xl:text-3xl font-portLligatSans text-center transition-all duration-300">Ready to Savour the Taste of Italy?</h2>
-                            <LinkButtonRectangular href="/menu/antipasti" text="Explore Menu" />
+                            <LinkButtonRectangular className="w-10/12 xs:w-9/12" href="/menu/antipasti" text="Explore Menu" />
                         </div>
                     </div>
                 </div>
