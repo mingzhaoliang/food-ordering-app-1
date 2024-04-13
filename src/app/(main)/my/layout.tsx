@@ -11,7 +11,7 @@ export default function AccountPageLayout({ children }: { children: React.ReactN
                 imageRef={images.background0.ref}
                 className="w-screen h-screen fixed top-0 left-0 -z-10 opacity-85 overflow-hidden"
             />
-            <div className="relative z-40 mt-16 xs:mt-20 md:mt-24 lg:mt-28 mb-16 mx-4 xs:mx-8 lg:mx-12 rounded-md space-y-2 md:space-y-4 transition-all">
+            <div className="relative z-40 mt-16 xs:mt-20 md:mt-24 lg:mt-28 mb-16 mx-4 xs:mx-8 lg:mx-12 space-y-2 md:space-y-4 transition-all">
                 <div className="flex flex-col gap-4 md:gap-3 md:grid md:grid-rows-[auto_1fr] md:grid-cols-[minmax(calc(100vw_*_1/7),_auto)_repeat(6,_1fr)] items-center md:items-start">
                     <div className="md:row-start-1 md:col-start-2 md:col-end-[-1] pt-2 pb-4 md:pb-8 flex flex-col gap-4 text-white">
                         <h1 className="font-portLligatSans font-bold text-4xl sm:text-5xl lg:text-6xl max-md:text-center">Account</h1>
@@ -23,7 +23,7 @@ export default function AccountPageLayout({ children }: { children: React.ReactN
                             <Sidebar src="/icons/gear.svg" href="/my/settings" text="Settings" iconSize="small" rotate={false} />
                         </div>
                     </div>
-                    <div className="w-full md:row-start-2 md:col-span-6 rounded-md">
+                    <div className="w-full md:row-start-2 md:col-span-6 rounded-lg">
                         {children}
                     </div>
                 </div>
