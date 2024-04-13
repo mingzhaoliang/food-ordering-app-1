@@ -52,6 +52,8 @@ export interface Order {
     status: string;
     delivery_details: DeliveryDetails;
     items: CartItem[];
+    subtotal: number;
+    delivery_fee: number;
     total_amount: number;
     created_at: Date;
     expires_at: Date;

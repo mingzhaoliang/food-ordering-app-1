@@ -3,6 +3,7 @@ import userReducer from "./user-slice";
 import menuReducer from "./menu-slice";
 import navigationReducer from "./navigation-slice";
 import cartReducer from "./cart-slice";
+import ordersReducer from "./orders-slice";
 
 export const makeStore = () => {
     return configureStore({
@@ -10,7 +11,8 @@ export const makeStore = () => {
             user: userReducer,
             navigation: navigationReducer,
             menu: menuReducer,
-            cart: cartReducer
+            cart: cartReducer,
+            orders: ordersReducer,
         }
     });
 

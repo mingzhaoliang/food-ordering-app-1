@@ -1,4 +1,4 @@
-import OrderDetails from "@/components/my/orders/order-details";
+import OrderDetails from "@/components/my/orders/order-details/order-details";
 
 export default function OrdersPageLayout({ children }: { children: React.ReactNode }) {
     return (
