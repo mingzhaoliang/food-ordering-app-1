@@ -13,6 +13,7 @@ import PlacedOrderCheckout from "../further-actions/actions/placed-order-checkou
 import { ordersActions } from "@/lib/store/orders-slice";
 import { Order } from "@/lib/crud/model-type";
 import { GoChevronUp } from "react-icons/go";
+import OrderDetailsDeliveryInfo from "./order-details-delivery-info";
 
 export default function OrderDetails({ order }: { order: Order }) {
     const { furtherAction } = useAppSelector(state => state.orders);
@@ -75,6 +76,7 @@ export default function OrderDetails({ order }: { order: Order }) {
                         {items.map(item => <OrderDetailsItem key={item.menu_id} item={item} />)}
                     </div>
                     <CartSummary subtotal={subtotal} deliveryFee={delivery_fee} total={total_amount} />
+                    <OrderDetailsDeliveryInfo deliveryDetails={order.delivery_details} />
                     <div className="max-lg:text-sm text-slate-800/60 flex items-center py-3 xs:py-4">
                         {statusNote}
                     </div>
