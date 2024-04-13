@@ -9,6 +9,7 @@ export default function OrdersPageLayout({ children }: { children: React.ReactNo
 
     useEffect(() => {
         dispatch(ordersActions.setActiveOrder(null));
+        dispatch(ordersActions.setFurtherAction(null));
     }, [])
 
     return (
