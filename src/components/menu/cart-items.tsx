@@ -26,7 +26,7 @@ export default function CartItems({ cartItems }: { cartItems?: (CartItem)[] | nu
     }
 
     return (
-        <div className="flex flex-col gap-2 pt-2 pb-6 border-b border-slate-800/20 overflow-auto max-h-96">
+        <div className="flex flex-col gap-2 py-3 xs:py-4 border-b border-slate-800/20 overflow-auto max-h-96">
             {
                 cartItems && cartItems.length > 0 && cartItems.map(item => (
                     <div key={item.menu_id} className="grid grid-cols-[1fr_auto] xxs:grid-cols-[2.1fr_1fr_1fr] lg:grid-cols-[1fr_auto] xl:grid-cols-[2.4fr_1fr_1fr] items-center gap-x-4">

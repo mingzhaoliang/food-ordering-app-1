@@ -27,7 +27,6 @@ export default function OrderItemDetails({ order }: { order: Order }) {
     let furtherActionPage = null;
 
     const closeHandler = () => {
-        console.log("closeHandler");
         dispatch(ordersActions.setActiveOrder(null));
         dispatch(ordersActions.setFurtherAction(null));
     }
@@ -59,21 +58,24 @@ export default function OrderItemDetails({ order }: { order: Order }) {
     return (
         <>
             {!furtherAction && (
-                <div className="bg-white w-full rounded-md p-4 sm:p-6 flex flex-col gap-4 font-lato text-slate-800">
-                    <div className="pb-2 border-b border-slate-800/20 flex justify-between items-start">
+                <div className="bg-white w-full rounded-md p-4 sm:p-6 flex flex-col font-lato text-slate-800">
+                    <div className="xs:pb-2 border-b border-slate-800/20 flex justify-between items-start cursor-pointer" onClick={closeHandler}>
                         <div className="flex items-center flex-wrap gap-2 md:gap-4">
-                            <h1 className="text-xl md:text-2xl">Order Details</h1>
+                            <h1 className="text-xl md:text-2xl">
+                                <span className="hidden xxs:inline">Order </span>
+                                Details
+                            </h1>
                             <OrderStatusTag status={status} />
                         </div>
-                        <button onClick={closeHandler} className="text-sm p-2 text-slate-800/60 flex items-center">
+                        <button className="text-sm p-2 text-slate-800/60 flex items-center">
                             <GoChevronUp /> Collapse
                         </button>
                     </div>
-                    <div className="space-y-4 pb-4 border-b border-slate-800/20">
+                    <div className="space-y-2 sm:space-y-3 md:space-y-4 py-3 xs:py-4 border-b border-slate-800/20 cursor-pointer" onClick={closeHandler}>
                         {items.map(item => <OrderItemDetailsItem key={item.menu_id} item={item} />)}
                     </div>
                     <CartSummary subtotal={subtotal} deliveryFee={delivery_fee} total={total_amount} />
-                    <div className="max-lg:text-sm text-slate-800/60 flex items-center">
+                    <div className="max-lg:text-sm text-slate-800/60 flex items-center py-3 xs:py-4">
                         {statusNote}
                     </div>
                     {furtherActions}

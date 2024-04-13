@@ -23,7 +23,7 @@ export default function CartDetails() {
 
     if (status === "unauthenticated") {
         return (
-            <div className="bg-white w-full rounded-md p-6 flex flex-col gap-4 font-lato">
+            <div className="bg-white w-full rounded-md p-4 xxs:p-6 flex flex-col font-lato">
                 <h1 className="text-2xl pb-2 border-b border-slate-800/20">Your Order</h1>
                 <CartItems cartItems={[]} />
                 <CartSummary subtotal={0} deliveryFee={null} total={0} />
@@ -32,7 +32,7 @@ export default function CartDetails() {
         )
     } else if (status === "loading") {
         return (
-            <div className="bg-white w-full rounded-md p-6 flex flex-col gap-4 font-lato">
+            <div className="bg-white w-full rounded-md p-4 xxs:p-6 flex flex-col font-lato">
                 <h1 className="text-2xl pb-2 border-b border-slate-800/20">Your Order</h1>
                 <CartItems />
                 <CartSummary subtotal={0} deliveryFee={null} total={0} />
@@ -47,14 +47,14 @@ export default function CartDetails() {
     const total = subtotal + (deliveryFee ? deliveryFee : 0);
 
     return (
-        <div className="bg-white w-full rounded-md p-6 flex flex-col gap-4 font-lato">
+        <div className="bg-white w-full rounded-md p-4 xxs:p-6 flex flex-col font-lato">
             <h1 className="text-2xl pb-2 border-b border-slate-800/20">Your Order</h1>
             <CartItems cartItems={cartItems} />
             <CartSummary subtotal={subtotal} deliveryFee={deliveryFee} total={total} />
             {
                 cartItems.length > 0 && (deliveryFee && deliveryFee > 0
-                    ? <p className="text-sm text-slate-800">Spend {priceFormatter(freeDeliveryThreshold - subtotal)} more to get FREE delivery</p>
-                    : <p className="text-sm text-slate-800 flex items-center gap-2">
+                    ? <p className="text-sm text-slate-800 py-3 xs:py-4">Spend {priceFormatter(freeDeliveryThreshold - subtotal)} more to get FREE delivery</p>
+                    : <p className="text-sm text-slate-800 flex items-center gap-2 py-3 xs:py-4">
                         <Image src="/icons/truck.svg" alt="truck" width={16} height={16} draggable={false} />
                         Your order qualifies for free delivery!
                     </p>)

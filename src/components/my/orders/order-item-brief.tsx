@@ -6,7 +6,6 @@ import { datetimeFormatter, priceFormatter } from "@/utils/formatter";
 import ExpirationTimer from "./expiration-timer";
 import { overdueTime } from "@/utils/data";
 import OrderItemImages from "./order-item-images";
-import ViewDetails from "./view-details";
 import OrderStatusTag from "./order-status-tag";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { ordersActions } from "@/lib/store/orders-slice";
@@ -42,7 +41,7 @@ export default function OrderItemBrief({ order }: { order: Order }) {
                 <p>{priceFormatter(order.total_amount)}</p>
                 <div className="flex justify-between items-center gap-2">
                     <OrderStatusTag status={status} />
-                    <ViewDetails order={order} />
+                    <button className="text-sm text-slate-800/60 underline">View details</button>
                 </div>
             </div>
         </div>

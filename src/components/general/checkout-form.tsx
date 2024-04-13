@@ -10,7 +10,7 @@ export default function CheckoutForm({ formState, formAction, backHandler, usern
             <div className="space-y-1 pb-2 border-b border-slate-800/20">
                 <div className="relative flex items-center gap-1">
                     <Image src="/icons/chevron-left.svg" alt="back" width={17} height={17} draggable={false} className="-ml-1 cursor-pointer" onClick={backHandler} />
-                    <h1 className="text-2xl">Delivery Details</h1>
+                    <h1 className="text-xl md:text-2xl">Delivery Details</h1>
                 </div>
                 <p className="text-sm text-slate-600">View and change your delivery details here</p>
             </div>

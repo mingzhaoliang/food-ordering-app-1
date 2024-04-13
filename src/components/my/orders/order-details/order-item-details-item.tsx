@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function OrderItemDetailsItem({ item }: { item: CartItem }) {
     return (
-        <div key={item.menu_id} className="grid grid-cols-[auto_1fr] gap-2 xxs:gap-4">
+        <div className="grid grid-cols-[auto_1fr] gap-2 xxs:gap-4">
             <div className="w-20 h-full relative rounded-md overflow-hidden">
                 <Image src={getCloudinaryUrl(`menu/${item.course}/${item.public_id}`)} alt={item.name} fill sizes="100% 100%" className="w-20 h-20 object-cover rounded-lg" />
             </div>

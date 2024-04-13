@@ -9,7 +9,7 @@ export default function ConfirmToPaymentButton() {
         <button
             type="submit"
             disabled={pending}
-            className={`${pending ? "bg-teal-700/60 cursor-not-allowed" : "bg-teal-700 hover:bg-teal-900"} text-white rounded py-2 transition-all`}
+            className={`${pending ? "bg-teal-700/60 cursor-not-allowed" : "bg-teal-700 hover:bg-teal-900"} text-white rounded py-2 transition-all text-sm xxs:text-base md:text-lg`}
         >
             {pending ? "Processing..." : "Confirm to Payment"}
         </button>
