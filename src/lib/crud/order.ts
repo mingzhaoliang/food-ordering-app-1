@@ -3,7 +3,6 @@
 import { ObjectId } from "mongodb";
 import clientPromise from "../clientPromise";
 import { Order } from "./model-type";
-import { orderExpirationTime, overdueTime } from "@/utils/data";
 
 export const createOrder = async (orderDetails: Order) => {
     const client = await clientPromise;
@@ -44,4 +43,11 @@ export const updateOrderStatus = async (orderId: string, newStatus: string) => {
     const db = client.db("restaurant");
 
     await db.collection("orders").updateOne({ "_id": new ObjectId(orderId) }, { $set: { "status": newStatus } });
+}
+
+export const updateOrderDeliveryDetails = async (orderId: string, deliveryDetails: any) => {
+    const client = await clientPromise;
+    const db = client.db("restaurant");
+
+    await db.collection("orders").updateOne({ "_id": new ObjectId(orderId) }, { $set: { "delivery_details": deliveryDetails } });
 }

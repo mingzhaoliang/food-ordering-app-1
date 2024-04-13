@@ -5,7 +5,7 @@ import Modal from "../ui/modal";
 import { menuActions } from "@/lib/store/menu-slice";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import Order from "./order";
+import Cart from "./cart";
 import { cartActions } from "@/lib/store/cart-slice";
 
 export default function CartModal() {
@@ -35,7 +35,7 @@ export default function CartModal() {
 
     return (
         <Modal open={showCartModal} onClose={onClose} isFlexible>
-            <Order />
+            <Cart />
             <button onClick={onClose} className="absolute top-4 right-4 p-2 text-slate-800 hover:translate-y-0.5 transition-transform">{"\u2715"}</button>
         </Modal>
     )

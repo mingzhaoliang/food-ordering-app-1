@@ -6,11 +6,12 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { addItemToCart, clearCart, getCartItems, removeItemFromCart } from "./crud/cart";
 import { getMenuItemById, getMenuItemByPublicId } from "./crud/menu";
+import { DeliveryDetails } from "./crud/model-type";
 
 export const getHeroImages = async (publicIds: string[]) => {
     const heroImages = await Promise.all(publicIds.map(async (publicId) => {
         const menuItem = await getMenuItemByPublicId(publicId);
-        console.log(menuItem);
+
         return ({
             publicId: menuItem!.public_id,
             course: menuItem!.course,
@@ -85,15 +86,8 @@ export const accessCart = async (type: string, itemId?: string) => {
     }
 }
 
-export const checkout = async (prevState: { message: string; url: string } | undefined, formData: FormData) => {
+const checkout = async (data: { deliveryDetails: DeliveryDetails, callbackUrl: string, orderId?: string }) => {
     const session = await getServerSession(authOptions);
-    const result = await updateProfile(undefined, formData);
-
-    if (result.message !== "success") {
-        return { message: result.message, url: "" };
-    }
-
-    const data = Object.fromEntries(formData.entries());
 
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/checkout/create-checkout-session`, {
@@ -102,9 +96,9 @@ export const checkout = async (prevState: { message: string; url: string } | und
             },
             body: JSON.stringify({
                 userId: session!.user.id,
-                deliveryDetails: {
-                    ...data
-                }
+                deliveryDetails: data.deliveryDetails,
+                callbackUrl: data.callbackUrl,
+                orderId: data.orderId,
             }),
             method: "POST",
         })
@@ -123,7 +117,44 @@ export const checkout = async (prevState: { message: string; url: string } | und
 
         return { message: error.message, url: "" };
     }
+}
+
+export const cartCheckout = async (callbackUrl: string, prevState: { message: string; url: string } | undefined, formData: FormData) => {
+    const data = Object.fromEntries(formData.entries());
+
+    const response = await checkout({
+        deliveryDetails: {
+            username: data.username as string,
+            phoneNumber: data.phoneNumber as string,
+            street: data.street as string,
+            city: data.city as string,
+            state: data.state as string,
+            postcode: data.postcode as string,
+        },
+        callbackUrl: callbackUrl as string
+    });
+
+    return response;
 };
+
+export const placedOrderCheckout = async (orderId: string, callbackUrl: string, prevState: { message: string; url: string } | undefined, formData: FormData) => {
+    const data = Object.fromEntries(formData.entries());
+
+    const response = await checkout({
+        deliveryDetails: {
+            username: data.username as string,
+            phoneNumber: data.phoneNumber as string,
+            street: data.street as string,
+            city: data.city as string,
+            state: data.state as string,
+            postcode: data.postcode as string,
+        },
+        callbackUrl: callbackUrl as string,
+        orderId: orderId as string,
+    });
+
+    return response;
+}
 
 export const refreshPage = (path: string, type: "layout" | "page" | undefined) => {
     revalidatePath(path, type);
