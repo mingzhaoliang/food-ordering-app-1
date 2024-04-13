@@ -26,7 +26,7 @@ export default function OrderBrief({ order }: { order: Order }) {
     }
 
     return (
-        <div className="p-2 xs:pr-4 xl:p-4 xl:pr-8 rounded-lg bg-white shadow-md font-lato grid grid-cols-1 xs:grid-cols-[auto_1fr] gap-2 xs:gap-4 cursor-pointer" onClick={clickHandler}>
+        <div className="p-2 max-xs:pb-3 xs:pr-4 xl:p-4 xl:pr-8 rounded-lg bg-white shadow-md font-lato grid grid-cols-1 xs:grid-cols-[auto_1fr] gap-2 xs:gap-4 cursor-pointer" onClick={clickHandler}>
             <OrderBriefImages imageSrcs={imageSrcs} names={names} />
             <div className="flex flex-col justify-between gap-2 overflow-hidden">
                 <div className="grid grid-cols-[1fr_auto] gap-2 items-center">
