@@ -21,6 +21,7 @@ export default function OrderBrief({ order }: { order: Order }) {
     const status = order.status === "placed" && expiresAt < new Date() ? "cancelled" : order.status;
 
     const clickHandler = () => {
+        dispatch(ordersActions.setFurtherAction(null));
         dispatch(ordersActions.setActiveOrder(order._id));
     }
 
