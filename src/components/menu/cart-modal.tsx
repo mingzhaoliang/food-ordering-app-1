@@ -3,14 +3,11 @@
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import Modal from "../ui/modal";
 import { menuActions } from "@/lib/store/menu-slice";
-import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import Cart from "./cart";
 import { cartActions } from "@/lib/store/cart-slice";
 
 export default function CartModal() {
-    const searchParams = useSearchParams();
-    const showCart = searchParams.get("show-cart") === "true";
 
     const { showCartModal } = useAppSelector(state => state.menu);
     const dispatch = useAppDispatch();

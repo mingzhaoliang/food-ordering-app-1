@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 import { Order } from "../crud/model-type";
 
 type InitialState = {
-    activeOrder: Order | null,
+    activeOrder: string | null,
     furtherAction: "checkout" | "track" | null,
 }
 
@@ -16,7 +16,7 @@ const orderSlice = createSlice({
     initialState,
     reducers: {
         setActiveOrder(state, action) {
-            state.activeOrder = action.payload;
+            state.activeOrder = action.payload === state.activeOrder ? null : action.payload;
         },
         removeActiveOrder(state) {
             state.activeOrder = null;

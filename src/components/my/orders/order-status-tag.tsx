@@ -6,6 +6,6 @@ const tagClasses: { [key: string]: string } = {
 
 export default function OrderStatusTag({ status }: { status: string }) {
     return (
-        <p className={`${tagClasses[status]} px-2 py-[0.1rem] rounded-full text-sm self-start`}>{status.toUpperCase()}</p>
+        <p className={`${tagClasses[status]} px-2 py-[0.1rem] rounded-full text-xs xxs:text-sm`}>{status.toUpperCase()}</p>
     )
 }
