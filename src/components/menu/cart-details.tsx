@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { cartActions } from "@/lib/store/cart-slice";
 import { defaultDeliveryFee, freeDeliveryThreshold } from "@/utils/data";
+import { FiChevronRight } from "react-icons/fi";
 
 
 export default function CartDetails() {
@@ -48,7 +49,10 @@ export default function CartDetails() {
 
     return (
         <div className="bg-white w-full rounded-md p-4 xxs:p-6 flex flex-col font-lato">
-            <h1 className="text-2xl pb-2 border-b border-slate-800/20">Your Order</h1>
+            <div className="flex max-xxs:flex-col justify-start lg:justify-between items-start xxs:items-center gap-2 xxs:gap-4 pb-2 border-b border-slate-800/20">
+                <h1 className="text-xl md:text-2xl">Your Order</h1>
+                <Link href="/my/orders" className="px-2 py-1 text-center leading-tight xxs:leading-tight text-xs xxs:text-sm text-teal-700 border border-teal-700 hover:text-white hover:bg-teal-700 rounded-full transition-colors flex gap-1 items-center">Order History <FiChevronRight /></Link>
+            </div>
             <CartItems cartItems={cartItems} />
             <CartSummary subtotal={subtotal} deliveryFee={deliveryFee} total={total} />
             {
