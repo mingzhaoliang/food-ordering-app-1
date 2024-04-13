@@ -4,11 +4,13 @@ import { Order } from "../crud/model-type";
 type InitialState = {
     activeOrder: string | null,
     furtherAction: "checkout" | "track" | null,
+    cancelOrder: boolean,
 }
 
 const initialState: InitialState = {
     activeOrder: null,
     furtherAction: null,
+    cancelOrder: false,
 }
 
 const orderSlice = createSlice({
@@ -23,6 +25,9 @@ const orderSlice = createSlice({
         },
         setFurtherAction(state, action) {
             state.furtherAction = action.payload;
+        },
+        setCancelOrder(state, action) {
+            state.cancelOrder = action.payload;
         },
     },
 })

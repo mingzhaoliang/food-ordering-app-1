@@ -42,12 +42,19 @@ export const updateOrderStatus = async (orderId: string, newStatus: string) => {
     const client = await clientPromise;
     const db = client.db("restaurant");
 
-    await db.collection("orders").updateOne({ "_id": new ObjectId(orderId) }, { $set: { "status": newStatus } });
+    await db.collection("orders").updateOne({ "_id": new ObjectId(orderId) }, { $set: { "status": newStatus } }, { upsert: false });
 }
 
 export const updateOrderDeliveryDetails = async (orderId: string, deliveryDetails: any) => {
     const client = await clientPromise;
     const db = client.db("restaurant");
 
-    await db.collection("orders").updateOne({ "_id": new ObjectId(orderId) }, { $set: { "delivery_details": deliveryDetails } });
+    await db.collection("orders").updateOne({ "_id": new ObjectId(orderId) }, { $set: { "delivery_details": deliveryDetails } }, { upsert: false });
+}
+
+export const updateOrderExpiration = async (orderId: string, newExpiration: Date) => {
+    const client = await clientPromise;
+    const db = client.db("restaurant");
+
+    await db.collection("orders").updateOne({ "_id": new ObjectId(orderId) }, { $set: { "expires_at": newExpiration } }, { upsert: false });
 }
