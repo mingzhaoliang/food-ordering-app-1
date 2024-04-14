@@ -32,14 +32,14 @@ export default function CollapsedButton({ src, alt, expand, imageSize, rotate = 
     return (
         <div
             draggable={false}
-            className={`p-1 xs:p-[0.4rem] flex items-center rounded-full transition-all duration-300 ${expand ? "bg-white shadow-md" : "bg-white/50 md:bg-white/60 hover:bg-white hover:shadow-md"}`}
+            className={`p-1 xs:p-[0.4rem] flex items-center rounded-full transition-all duration-300 overflow-hidden ${expand ? "bg-white shadow-md" : "bg-white/50 md:bg-white/60 hover:bg-white hover:shadow-md"}`}
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
         >
             <div className={`relative ${imageSizeClasses}`}>
                 <Image src={src} alt={alt} fill sizes="100% 100%" draggable={false} className={`p-1 transition-all duration-300 ${rotate && (isHovered || expand ? "md:rotate-0" : "md:-rotate-[45deg]")}`} />
             </div>
-            <div className={`max-md:hidden font-portLligatSans md:text-lg lg:text-xl xl:text-[1.35rem] text-slate-800 transition-all duration-300 ${isHovered || expand ? "md:max-w-fit md:scale-100 md:opacity-100 md:translate-x-0 md:pl-2 md:pr-3" : "md:max-w-0 md:scale-0 md:opacity-0 md:-translate-x-5 md:p-0"}`}>{children}</div>
+            <div className={`max-md:hidden font-portLligatSans md:text-lg lg:text-xl xl:text-[1.35rem] text-slate-800 transition-all duration-300 origin-left ${isHovered || expand ? "md:max-w-fit md:opacity-100 md:translate-x-0 md:pl-2 md:pr-3" : "md:max-w-0 md:opacity-0 md:-translate-x-5 md:p-0"}`}>{children}</div>
         </div>
     )
 }
