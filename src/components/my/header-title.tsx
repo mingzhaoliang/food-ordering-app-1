@@ -10,12 +10,12 @@ export default function HeaderTitle() {
 
     switch (activePage) {
         case "profile":
-            title = "Profile";
+            title = "Your Profile";
             break;
         case "orders":
             title = (
                 <p className="flex flex-nowrap whitespace-pre">
-                    Order<span className="xl:hidden">s</span><span className="max-xl:hidden"> History</span>
+                    Your Order<span className="xl:hidden">s</span><span className="max-xl:hidden"> History</span>
                 </p>
             );
             break;
@@ -23,14 +23,14 @@ export default function HeaderTitle() {
             title = "Settings";
             break;
         default:
-            title = "Account";
+            title = "Your Account";
             break;
     }
 
     switch (pathname) { }
     return (
         <h1 className="font-portLligatSans text-4xl sm:text-5xl lg:text-6xl max-md:text-center flex whitespace-pre">
-            Your <span className="">{title}</span>
+            {title}
         </h1>
     )
 }
