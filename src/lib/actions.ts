@@ -7,6 +7,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { addItemToCart, clearCart, getCartItems, removeItemFromCart } from "./crud/cart";
 import { getMenuItemById, getMenuItemByPublicId } from "./crud/menu";
 import { DeliveryDetails } from "./crud/model-type";
+import { headers } from "next/headers";
 
 export const getHeroImages = async (publicIds: string[]) => {
     const heroImages = await Promise.all(publicIds.map(async (publicId) => {
@@ -87,15 +88,16 @@ export const accessCart = async (type: string, itemId?: string) => {
 }
 
 const checkout = async (data: { deliveryDetails: DeliveryDetails, callbackUrl: string, orderId?: string }) => {
-    const session = await getServerSession(authOptions);
+    const headersList = headers();
+    const cookie = headersList.get("cookie");
 
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/checkout/create-checkout-session`, {
             headers: {
                 "Content-Type": "application/json",
+                "Cookie": cookie || "",
             },
             body: JSON.stringify({
-                userId: session!.user.id,
                 deliveryDetails: data.deliveryDetails,
                 callbackUrl: data.callbackUrl,
                 orderId: data.orderId,

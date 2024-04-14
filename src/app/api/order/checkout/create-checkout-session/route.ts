@@ -5,6 +5,7 @@ import { Cart, CartItem, DeliveryDetails, Order } from "@/lib/crud/model-type";
 import { defaultDeliveryFee, freeDeliveryThreshold, orderExpirationTime, overdueTime } from "@/utils/data";
 import { createOrder, getOrderById, updateOrderDeliveryDetails } from "@/lib/crud/order";
 import { ObjectId } from "mongodb";
+import { getToken } from "next-auth/jwt";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     typescript: true,
@@ -12,16 +13,21 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 });
 
 type CheckoutSessionRequest = {
-    userId: string,
     deliveryDetails: DeliveryDetails;
     callbackUrl: string;
     orderId?: string;
 }
 
 export async function POST(req: NextRequest) {
+    const token = await getToken({ req });
+    if (!token) {
+        return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+
     const checkoutSessionRequest: CheckoutSessionRequest = await req.json();
     const callbackUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${checkoutSessionRequest.callbackUrl}`;
     const orderExist = !!checkoutSessionRequest.orderId;
+    const userId = token.sub!;
 
     try {
         let orderId: string, items: CartItem[];
@@ -32,7 +38,7 @@ export async function POST(req: NextRequest) {
             items = Object.values(order.items);
         } else {
             orderId = new ObjectId().toString();
-            const cartItems = await getCartItems(checkoutSessionRequest.userId) as Cart;
+            const cartItems = await getCartItems(userId) as Cart;
             items = Object.values(cartItems);
         }
 
@@ -54,7 +60,7 @@ export async function POST(req: NextRequest) {
 
             const newOrder: Order = {
                 _id: orderId,
-                user_id: checkoutSessionRequest.userId,
+                user_id: userId,
                 status: "placed",
                 delivery_details: checkoutSessionRequest.deliveryDetails,
                 items: items,
