@@ -98,11 +98,13 @@ export default function ImageCarousel({ images }: { images: { src: StaticImageDa
                         return (
                             <div
                                 key={index}
-                                className={"w-[0.35rem] h-[0.35rem] md:w-2 md:h-2 rounded-full bg-white cursor-pointer transition-all duration-300"}
+                                className={"w-[0.35rem] h-[0.35rem] md:w-2 md:h-2 rounded-full bg-white cursor-pointer transition-all duration-500"}
                                 style={
                                     currentImageIndex % images.length === index
-                                        ? { backgroundColor: "#fca5a5", transform: "scale(1.5)" }
-                                        : {}
+                                        ? { backgroundColor: "hsl(0, 100%, 80%)", transform: "scale(1.75)" }
+                                        : currentImageIndex % images.length === index - 1 || currentImageIndex % images.length === index + 1
+                                            ? { backgroundColor: "hsl(0, 100%, 90%)", transform: "scale(1.35)" }
+                                            : { backgroundColor: "hsl(0, 0%, 100%)", transform: "scale(1)" }
                                 }
                                 onClick={() => jumpToImage(index)}
                             ></div>
