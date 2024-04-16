@@ -5,19 +5,22 @@ import { getCloudinaryUrl } from "@/utils/cloudinary-configs";
 import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { MenuItem } from "@/lib/crud/model-type";
 
 export default function MenuItemPreview({
     public_id,
     course,
     name,
-    description
-
+    description,
+    tags,
+    online_available,
 }: {
     public_id: string,
     course: string,
     name: string,
-    description: string
-
+    description: string,
+    tags: string[],
+    online_available: boolean,
 }) {
     const [isHovered, setIsHovered] = useState(false);
 
@@ -35,10 +38,21 @@ export default function MenuItemPreview({
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
         >
+            <div className="absolute top-2 right-2">
+                {tags.length > 0 && (
+                    <div className="flex justify-center items-center gap-1 min-w-fit rounded-full p-1">
+                        {tags.map(tag => (
+                            <div key={tag} className="relative w-6 h-6 md:w-7 md:h-7 rounded-full border border-dashed border-teal-600/50">
+                                <Image src={`/icons/${tag}.svg`} alt="tag" draggable={false} fill sizes="100% 100%" className="p-1 object-cover" />
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
             <div className="relative h-full aspect-square rounded-full overflow-hidden">
                 <Image src={getCloudinaryUrl(`menu/${course}/${public_id}`)} alt={name} fill sizes="100% 100%" className="p-2 aspect-square object-cover rounded-full" />
             </div>
-            <h1 className="xxs:text-lg lg:text-xl 2xl:text-2xl text-slate-800 leading-tight text-center">{name}</h1>
+            <h1 className="xxs:text-lg lg:text-xl 3xl:text-2xl text-slate-800 leading-tight text-center w-10/12">{name}</h1>
             <AnimatePresence mode="wait">
                 {isHovered
                     ? (
@@ -50,7 +64,7 @@ export default function MenuItemPreview({
                             transition={{ duration: 0.15 }}
                             className="flex-1 flex items-start"
                         >
-                            <LinkButtonRectangular href={`menu/${course}`} className="" text="Order Now" />
+                            <LinkButtonRectangular href={`menu/${course}`} className="" text={`${online_available ? "Order Now" : "Book a Table"}`} />
                         </motion.div>
                     )
                     : (
