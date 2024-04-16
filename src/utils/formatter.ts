@@ -1,4 +1,5 @@
-export const priceFormatter = (number: number) => new Intl.NumberFormat('en-AU', { style: 'currency', currency: 'AUD' }).format(number);
+export const priceFormatter = (number: number) => new Intl.NumberFormat('en-AU', { style: 'currency', currency: 'AUD', }).format(number);
+export const shortPriceFormatter = (number: number) => new Intl.NumberFormat('en-AU', { style: 'currency', currency: 'AUD', minimumFractionDigits: 0 }).format(number);
 export const datetimeFormatter = (date: Date) => new Intl.DateTimeFormat('en-AU', { dateStyle: "medium", timeStyle: "short" }).format(date);
 export const durationFormatter = (duration: number) => {
     const seconds = Math.floor((duration / 1000) % 60);

@@ -5,7 +5,7 @@ import { getCloudinaryUrl } from "@/utils/cloudinary-configs";
 import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MenuItem } from "@/lib/crud/model-type";
+import { shortPriceFormatter } from "@/utils/formatter";
 
 export default function MenuItemPreview({
     public_id,
@@ -14,6 +14,7 @@ export default function MenuItemPreview({
     description,
     tags,
     online_available,
+    price,
 }: {
     public_id: string,
     course: string,
@@ -21,6 +22,7 @@ export default function MenuItemPreview({
     description: string,
     tags: string[],
     online_available: boolean,
+    price: number,
 }) {
     const [isHovered, setIsHovered] = useState(false);
 
@@ -34,10 +36,13 @@ export default function MenuItemPreview({
 
     return (
         <div
-            className="relative bg-teal-600/[.02] h-56 xs:h-64 sm:h-80 md:h-96 px-2 py-4 sm:px-4 sm:py-6 rounded-2xl shadow-md overflow-hidden grid grid-rows-[5fr_2fr_3fr] justify-items-center items-center font-lato"
+            className="relative min-w-48 sm:min-w-56 md:min-w-64 lg:min-w-72 h-64 xs:h-72 sm:h-80 md:h-[22rem] lg:h-96 bg-slate-400/[.01] px-2 py-4 sm:px-4 sm:py-6 rounded-2xl shadow overflow-hidden grid grid-rows-[5fr_2fr_3fr] justify-items-center items-center font-lato"
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
         >
+            <p className="absolute top-2 left-2 p-2 text-slate-800 max-sm:text-md">
+                {shortPriceFormatter(price)}
+            </p>
             <div className="absolute top-2 right-2">
                 {tags.length > 0 && (
                     <div className="flex justify-center items-center gap-1 min-w-fit rounded-full p-1">
@@ -52,7 +57,7 @@ export default function MenuItemPreview({
             <div className="relative h-full aspect-square rounded-full overflow-hidden">
                 <Image src={getCloudinaryUrl(`menu/${course}/${public_id}`)} alt={name} fill sizes="100% 100%" className="p-2 aspect-square object-cover rounded-full" />
             </div>
-            <h1 className="xxs:text-lg lg:text-xl 3xl:text-2xl text-slate-800 leading-tight text-center w-10/12">{name}</h1>
+            <h1 className="xs:text-lg lg:text-xl 3xl:text-2xl text-slate-800 leading-tight text-center w-10/12">{name}</h1>
             <AnimatePresence mode="wait">
                 {isHovered
                     ? (
@@ -74,7 +79,7 @@ export default function MenuItemPreview({
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.15 }}
-                            className="flex-1 text-balance text-center text-xs xs:text-sm sm:text-base"
+                            className="flex-1 text-balance text-center text-sm sm:text-base"
                         >
                             {description}
                         </motion.p>
