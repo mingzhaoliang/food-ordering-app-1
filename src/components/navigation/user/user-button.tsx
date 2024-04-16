@@ -13,7 +13,7 @@ export default function UserButton({ onClick }: { onClick?: () => void }) {
 
     return (
         <>
-            {status === "loading" && <LinkButtonRounded href="" src="/icons/person.svg" alt="Person" text="Signing in..." onClick={onClick} />}
+            {status === "loading" && <LinkButtonRounded href="" src="/icons/person.svg" alt="Person" text="Loading..." onClick={onClick} />}
             {status === "authenticated" && session?.user && <AuthenticatedUser userId={session.user.id} onClick={onClick!} />}
             {status === "unauthenticated" && <LinkButtonRounded href="/api/auth/signin" src="/icons/box-arrow-in-right.svg" alt="Sign in" text="Sign in" onClick={onClick} />}
         </>
