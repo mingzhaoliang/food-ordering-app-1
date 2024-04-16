@@ -17,5 +17,5 @@ export default function AuthenticatedUser({ userId, onClick }: { userId: string,
         init();
     }, []);
 
-    return <LinkButtonRounded href="/my/profile" src="/icons/person.svg" alt="Person" text={`Hi! ${user.username}`} onClick={onClick} />;
+    return <LinkButtonRounded href="/my/orders" src="/icons/person.svg" alt="Person" text={`Hi! ${user.username}`} onClick={onClick} />;
 }

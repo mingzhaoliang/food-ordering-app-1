@@ -3,6 +3,7 @@ import BriefAbout from "@/components/home/brief-about";
 import { getHeroImages } from "@/lib/actions";
 import { getCloudinaryUrl } from "@/utils/cloudinary-configs";
 import Link from "next/link";
+import MenuOverview from "@/components/home/menu-overview/menu-preview";
 
 const itemIds = [
 	"bruschetta",
@@ -25,9 +26,7 @@ export default async function Home() {
 	return (
 		<main>
 			<Hero images={heroImages} />
-			<BriefAbout />
+			<MenuOverview />
 		</main>
 	);
 }
-
-// Photo by Valeria Boltneva: https://www.pexels.com/photo/yummy-cannoli-dessert-on-plate-7474117/
