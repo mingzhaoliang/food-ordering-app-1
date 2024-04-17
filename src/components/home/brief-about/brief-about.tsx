@@ -5,16 +5,16 @@ import DisplayImage from "../../ui/display-image";
 import Card from "./card";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-export default function BriefAbout() {
+export default function BriefAbout({ picLeftX, picRightX, picLeftOpacity, picRightOpacity }: { picLeftX: any, picRightX: any, picLeftOpacity: any, picRightOpacity: any }) {
 
-    const { scrollYProgress } = useScroll();
-    const picLeftX = useTransform(scrollYProgress, [0.9, 1], [-200, 0]);
-    const picRightX = useTransform(scrollYProgress, [0.7, 0.8], [200, 0]);
-    const picLeftOpacity = useTransform(scrollYProgress, [0.9, 1], [0, 1]);
-    const picRightOpacity = useTransform(scrollYProgress, [0.7, 0.8], [0, 1]);
+    // const { scrollYProgress } = useScroll();
+    // const picLeftX = useTransform(scrollYProgress, [0.7, 0.8], [-200, 0]);
+    // const picRightX = useTransform(scrollYProgress, [0.6, 0.7], [200, 0]);
+    // const picLeftOpacity = useTransform(scrollYProgress, [0.7, 0.8], [0, 1]);
+    // const picRightOpacity = useTransform(scrollYProgress, [0.6, 0.7], [0, 1]);
 
     return (
-        <div id="brief-about" className="w-screen max-w-[80rem] mx-auto mb-20 relative mt-10 xs:mt-12 sm:mt-16 md:mt-20 lg:mt-28 2xl:mt-36 space-y-16 md:space-y-20 lg:space-y-28 2xl:space-y-36">
+        <div id="brief-about" className="relative w-screen max-w-[80rem] mx-auto pb-20 pt-10 xs:pt-12 sm:pt-16 md:py-24 lg:pt-28 lg:pb-24 xl:pt-32 xl:pb-28 2xl:pt-36 2xl:pb-32 space-y-16 md:space-y-20 lg:space-y-28 2xl:space-y-36">
             <div className="relative flex w-full justify-end">
                 <DisplayImage
                     src={images.background3.src}

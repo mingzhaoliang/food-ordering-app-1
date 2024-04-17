@@ -1,9 +1,10 @@
 import Hero from "@/components/home/hero/hero";
-import BriefAbout from "@/components/home/brief-about/brief-about";
 import { getHeroImages } from "@/lib/actions";
 import { getCloudinaryUrl } from "@/utils/cloudinary-configs";
 import Link from "next/link";
 import MenuOverview from "@/components/home/menu-overview/menu-preview";
+import MainBriefAbout from "@/components/home/brief-about/main-brief-about";
+import MobileBriefAbout from "@/components/home/brief-about/mobile-brief-about";
 
 const itemIds = [
 	"bruschetta",
@@ -25,9 +26,10 @@ export default async function Home() {
 
 	return (
 		<main>
-			<Hero images={heroImages} />
-			<MenuOverview />
-			<BriefAbout />
+				<Hero images={heroImages} />
+				<MenuOverview />
+				<MainBriefAbout />
+				<MobileBriefAbout />
 		</main>
 	);
 }
