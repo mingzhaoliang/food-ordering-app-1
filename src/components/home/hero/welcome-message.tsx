@@ -1,4 +1,4 @@
-import LinkButtonRectangular from "../ui/link-button-rectangular";
+import LinkButtonRectangular from "../../ui/link-button-rectangular";
 
 export default function WelcomeMessage() {
     return (

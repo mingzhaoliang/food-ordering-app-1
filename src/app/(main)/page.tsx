@@ -1,4 +1,4 @@
-import Hero from "@/components/home/hero";
+import Hero from "@/components/home/hero/hero";
 import BriefAbout from "@/components/home/brief-about/brief-about";
 import { getHeroImages } from "@/lib/actions";
 import { getCloudinaryUrl } from "@/utils/cloudinary-configs";
