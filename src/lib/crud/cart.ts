@@ -11,7 +11,7 @@ export const getCartItems = async (userId: string) => {
     const db = client.db("restaurant");
     const cart = await db.collection("cart").findOne({ user_id: new ObjectId(userId) });
 
-    return JSON.parse(JSON.stringify(cart?.items)) || {};
+    return JSON.parse(JSON.stringify(cart?.items || {}));
 }
 
 export const addItemToCart = async (userId: string, existingMenuItem: MenuItem) => {
