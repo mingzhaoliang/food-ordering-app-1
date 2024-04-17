@@ -65,6 +65,12 @@ export const briefAbout = {
     },
     services: {
         title: "Experience Italian Hospitality, Anywhere You Are!",
-        description: <>Whether you're planning a special evening out or craving Italian comfort at home, Cucina Felice offers both <span className="font-bold">reservations</span> and <span className="font-bold">online delivery</span> services. Our commitment to exceptional service extends beyond our restaurant doors, ensuring that you can enjoy the taste of Italy wherever you are.</>
+        description: <>Whether you're planning a special evening out or craving Italian comfort at home, Cucina Felice offers both <Link href="" className="font-bold underline">reservations</Link> and <Link href="/menu/antipasti" className="font-bold underline">online delivery</Link> services. Our commitment to exceptional service extends beyond our restaurant doors, ensuring that you can enjoy the taste of Italy wherever you are.</>
     }
 };
+
+export const openingHours = [
+    { day: "Sunday & Monday", hours: ["closed"] },
+    { day: "Tuesday - Thursday", hours: ["12:00 pm - 2:30 pm", "6:00 pm - 9:00 pm"] },
+    { day: "Friday & Saturday", hours: ["12:00 pm - 2:30 pm", "5:30 pm - 10:00 pm"] },
+];

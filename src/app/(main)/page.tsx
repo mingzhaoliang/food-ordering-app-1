@@ -3,6 +3,7 @@ import { getHeroImages } from "@/lib/actions";
 import { getCloudinaryUrl } from "@/utils/cloudinary-configs";
 import Link from "next/link";
 import MenuOverview from "@/components/home/menu-overview/menu-preview";
+import ContactInfo from "@/components/home/contact/contact-info";
 import MainBriefAbout from "@/components/home/brief-about/main-brief-about";
 import MobileBriefAbout from "@/components/home/brief-about/mobile-brief-about";
 
@@ -26,10 +27,14 @@ export default async function Home() {
 
 	return (
 		<main>
+			<div className="relative z-10 bg-white">
 				<Hero images={heroImages} />
 				<MenuOverview />
 				<MainBriefAbout />
 				<MobileBriefAbout />
+			</div>
+
+			<ContactInfo />
 		</main>
 	);
 }
