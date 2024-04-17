@@ -1,7 +1,10 @@
 import Link from "next/link";
 import authBackground from "@/assets/images/auth-background.jpg";
-import restaurantEnvironment from "@/assets/images/restaurant-environment.jpg";
 import background0 from "@/assets/images/background-0.jpg";
+import background1 from "@/assets/images/background-1.jpg";
+import background2 from "@/assets/images/background-2.jpg";
+import background3 from "@/assets/images/background-3.jpg";
+import background4 from "@/assets/images/background-4.jpg";
 
 export const defaultDeliveryFee = 10;
 export const freeDeliveryThreshold = 50;
@@ -32,11 +35,27 @@ export const images = {
         alt: "Flat lay shot of a delicious apricot cake with a sour cream frosting on a dark marble floor.",
         ref: <>Photo by <Link href="https://unsplash.com/@nordwood?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">NordWood Themes</Link> on <Link href="https://unsplash.com/photos/a-slice-of-pizza-on-a-plate-next-to-a-bowl-of-nuts-mue4Jwr-N5M?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</Link></>
     },
-    restaurantEnvironment: {
-        src: restaurantEnvironment,
+    background1: {
+        src: background1,
+        alt: "Restaurant-surrounded-by-trees",
+        ref: <>Photo by <Link href="https://unsplash.com/@fallontravels?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Fallon Travels</Link> on <Link href="https://unsplash.com/photos/restaurant-surrounded-by-trees-q03ZLncun2Y?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</Link>
+        </>
+    },
+    background2: {
+        src: background2,
         alt: "Round white ceramic plate and bowl",
         ref: <>Photo by <Link href="https://unsplash.com/@heftiba?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Toa Heftiba</Link> on <Link href="https://unsplash.com/photos/round-white-ceramic-plate-and-bowl-loS68zG8P38?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</Link></>
     },
+    background3: {
+        src: "/images/background-3.jpg",
+        alt: "White table cloth on table",
+        ref: <>Photo by <Link href="https://unsplash.com/@novosonce?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Danilo</Link> on <Link href="https://unsplash.com/photos/white-table-cloth-on-table-2NKAxzGPxOc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</Link></>
+    },
+    background4: {
+        src: "/images/background-4.jpg",
+        alt: "City buildings near body of water during daytime",
+        ref: <>Photo by <Link href="https://unsplash.com/@julie_soul?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Julia Solonina</Link> on <Link href="https://unsplash.com/photos/city-buildings-near-body-of-water-during-daytime-IilYfjhavow?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</Link></>
+    }
 };
 
 export const briefAbout = {

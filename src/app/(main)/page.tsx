@@ -1,5 +1,5 @@
 import Hero from "@/components/home/hero";
-import BriefAbout from "@/components/home/brief-about";
+import BriefAbout from "@/components/home/brief-about/brief-about";
 import { getHeroImages } from "@/lib/actions";
 import { getCloudinaryUrl } from "@/utils/cloudinary-configs";
 import Link from "next/link";
@@ -27,6 +27,7 @@ export default async function Home() {
 		<main>
 			<Hero images={heroImages} />
 			<MenuOverview />
+			<BriefAbout />
 		</main>
 	);
 }
