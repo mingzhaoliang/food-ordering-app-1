@@ -32,7 +32,7 @@ export const authOptions: NextAuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
     session: { strategy: "jwt", maxAge: 30 * 24 * 60 * 60 },
 
-    adapter: MongoDBAdapter(clientPromise, { databaseName: "my-database" }) as Adapter,
+    adapter: MongoDBAdapter(clientPromise, { databaseName: "authentication" }) as Adapter,
 
     pages: {
         signIn: "/auth/signin",

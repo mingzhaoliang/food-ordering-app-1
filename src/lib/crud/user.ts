@@ -6,7 +6,7 @@ import { User } from "./model-type";
 
 export const getUser = async (id: string) => {
     const client = await clientPromise;
-    const db = client.db("my-database");
+    const db = client.db("authentication");
 
     const user = await db.collection("users").findOne({ _id: new ObjectId(id) });
 
@@ -15,7 +15,7 @@ export const getUser = async (id: string) => {
 
 export const updateUser = async (user: User) => {
     const client = await clientPromise;
-    const db = client.db("my-database");
+    const db = client.db("authentication");
 
     await db.collection("users").updateOne(
         { _id: new ObjectId(String(user._id)) },
