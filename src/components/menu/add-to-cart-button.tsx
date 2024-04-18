@@ -5,6 +5,7 @@ import { addItem, cartActions } from "@/lib/store/cart-slice";
 import { MenuItem } from "@/lib/crud/model-type";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { BsCartPlus } from "react-icons/bs";
 
 
 export default function AddToCartButton({ item }: { item: MenuItem }) {
@@ -35,20 +36,16 @@ export default function AddToCartButton({ item }: { item: MenuItem }) {
 
     if (status === "authenticated") {
         content = (
-            <button className="px-4 py-2 rounded bg-slate-800 hover:bg-slate-700 text-white text-nowrap" onClick={clickHandler}>
-                Add<span className="max-xs:hidden"> to Cart</span>
+            <button className="p-2 rounded-full shadow-md bg-teal-600/20 hover:bg-teal-600/50 text-slate-800 transition-colors duration-300" onClick={clickHandler}>
+                <BsCartPlus className="xs:text-lg xl:text-xl 2xl:text-2xl" />
             </button>
         )
     } else if (status === "loading") {
-        content = (
-            <div className="px-4 py-2 rounded bg-slate-800 text-white text-nowrap">
-                Verifying...
-            </div>
-        )
+        content = null
     } else {
         content = (
-            <Link href="/api/auth/signin" className="px-4 py-2 rounded bg-slate-800 hover:bg-slate-700 text-white text-nowrap">
-                Order
+            <Link href="/api/auth/signin" className="p-2 rounded-full shadow-md bg-teal-600/20 hover:bg-teal-600/50 text-slate-800 transition-colors duration-300">
+                <BsCartPlus className="xs:text-lg xl:text-xl 2xl:text-2xl" />
             </Link>
         )
     }

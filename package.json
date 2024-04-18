@@ -10,13 +10,10 @@
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^2.5.1",
-    "@auth0/nextjs-auth0": "^3.5.0",
     "@reduxjs/toolkit": "^2.2.2",
     "@stripe/react-stripe-js": "^2.6.2",
     "@stripe/stripe-js": "^3.2.0",
     "@tanstack/react-query": "^5.28.8",
-    "@types/bcrypt": "^5.0.2",
-    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "framer-motion": "^10.16.9",
     "mongodb": "^6.5.0",

@@ -5,36 +5,35 @@ import Link from "next/link";
 import { getCloudinaryUrl } from "@/utils/cloudinary-configs";
 import { MenuItem } from "@/lib/crud/model-type";
 import AddToCartButton from "./add-to-cart-button";
+import FoodCardDescription from "./food-card-description";
 
 export default function FoodCard({ menuItem }: { menuItem: MenuItem }) {
     const imageSrc = getCloudinaryUrl(`menu/${menuItem.course}/${menuItem.public_id}`);
     const imageRef = <>Photo by <Link href={menuItem.reference.owner_url} className="underline">{menuItem.reference.owner}</Link> on <Link href={menuItem.reference.url} className="underline">{menuItem.reference.platform}</Link></>
 
     return (
-        <div className="rounded-md flex sm:flex-col sm:items-center sm:gap-2 bg-white/80 backdrop-blur overflow-hidden min-h-48 max-h-56 sm:min-h-[25.5rem] sm:max-h-[32rem] shadow-md">
-            <div className="w-2/5 h-full sm:w-full sm:h-1/2 p-2">
-                <DisplayImage src={imageSrc} alt={menuItem.name} imageRef={imageRef} className="relative w-full h-full rounded-md overflow-hidden" />
+        <div className="rounded-2xl max-sm:p-2 overflow-hidden bg-[#FAFDFD] shadow-md min-h-48 sm:h-96 grid grid-cols-[repeat(auto-fit,_minmax(12rem,_1fr))] xs:grid-cols-[2fr_3fr] sm:grid-cols-1 grid-rows-[1fr_2fr_1fr] sm:grid-rows-[12rem_3rem_5.5rem_3.5rem]">
+            <div className="w-full h-full sm:p-2 rounded-2xl max-sm:min-h-36 max-sm:row-span-3">
+                <DisplayImage src={imageSrc} alt={menuItem.name} imageRef={imageRef} className="relative w-full h-full rounded-2xl overflow-hidden" />
             </div>
-            <div className="w-3/5 sm:w-full max-sm:py-2 max-sm:pr-2 sm:h-1/2 grid grid-cols-1 grid-rows-[0.5fr_1fr_0.5fr] xs:grid-rows-[0.8fr_1fr_0.8fr] gap-2">
-                <div className="px-3 flex justify-between items-center gap-2">
-                    <h1 className="font-bold xs:text-xl font-lato">{menuItem.name}</h1>
-                    {menuItem.tags.length > 0 && <div className="flex justify-center items-center gap-1 min-w-fit bg-white rounded-full p-1">
-                        {menuItem.tags.map(tag => (
-                            <Image key={tag} src={`/icons/${tag}.svg`} alt="tag" draggable={false} width={18} height={18} />
-                        ))}
-                    </div>}
-                </div>
-                <p className="px-3 text-pretty max-xs:text-sm overflow-scroll">{menuItem.description}</p>
 
-                <div className="px-3 flex justify-between items-center gap-4 xs:gap-8 max-sm:pt-2 max-sm:border-t max-sm:border-slate-800/30 sm:bg-white text-sm xs:text-md sm:text-base">
-                    <div className="py-2 pl-2 flex flex-wrap">
-                        <p>{priceFormatter(menuItem.price)}</p>
-                    </div>
-                    {menuItem.online_available
-                        ? <AddToCartButton item={menuItem} />
-                        : <p className="text-slate-800/60 text-sm text-pretty text-end italic">In-store dining exclusive</p>
-                    }
-                </div>
+            <div className="mx-3 mt-2 flex justify-between items-center gap-2">
+                <h1 className="font-bold xs:text-lg xl:text-xl font-lato xs:leading-tight">{menuItem.name}</h1>
+                {menuItem.tags.length > 0 && <div className="flex justify-center items-center gap-1 min-w-fit bg-white rounded-full p-1">
+                    {menuItem.tags.map(tag => (
+                        <Image key={tag} src={`/icons/${tag}.svg`} alt="tag" draggable={false} width={18} height={18} />
+                    ))}
+                </div>}
+            </div>
+            <FoodCardDescription description={menuItem.description} />
+            <div className="max-sm:mx-3 sm:mt-1 sm:px-3 pt-2 sm:py-2 sm:w-full sm:bg-white flex justify-between items-center gap-2 max-sm:border-t max-sm:border-slate-800/30">
+                <p className="py-2 sm:pl-2 text-sm xs:text-md sm:text-base">
+                    {priceFormatter(menuItem.price)}
+                </p>
+                {menuItem.online_available
+                    ? <AddToCartButton item={menuItem} />
+                    : <p className="text-slate-800/60 text-pretty text-end italic text-sm">In-store dining exclusive</p>
+                }
             </div>
         </div>
     )

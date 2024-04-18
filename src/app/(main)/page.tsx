@@ -3,9 +3,9 @@ import { getHeroImages } from "@/lib/actions";
 import { getCloudinaryUrl } from "@/utils/cloudinary-configs";
 import Link from "next/link";
 import MenuOverview from "@/components/home/menu-overview/menu-preview";
-import ContactInfo from "@/components/home/contact/contact-info";
 import MainBriefAbout from "@/components/home/brief-about/main-brief-about";
 import MobileBriefAbout from "@/components/home/brief-about/mobile-brief-about";
+import ContactBrief from "@/components/home/contact/contact-brief";
 
 const itemIds = [
 	"bruschetta",
@@ -34,7 +34,7 @@ export default async function Home() {
 				<MobileBriefAbout />
 			</div>
 
-			<ContactInfo />
+			<ContactBrief />
 		</main>
 	);
 }

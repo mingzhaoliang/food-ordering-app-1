@@ -28,10 +28,10 @@ export default function Cart() {
     }
 
     return (
-        <>{
+        <div className="rounded-lg shadow-md bg-white">{
             checkout
                 ? <CartCheckout />
                 : <CartDetails />
-        }</>
+        }</div>
     )
 }

@@ -6,7 +6,7 @@ import ConfirmToPaymentButton from "./confirm-to-payment-button";
 export default function CheckoutForm({ formState, formAction, backHandler, username, phoneNumber, street, city, state, postcode }: { formState: { message: string; url: string } | undefined, formAction: (payload: FormData) => void, backHandler: () => void, username: string, phoneNumber: string, street: string, city: string, state: string, postcode: string }) {
 
     return (
-        <form className="bg-white w-full rounded-md p-6 flex flex-col gap-4 font-lato text-slate-800" action={formAction}>
+        <form className="w-full rounded-md p-6 flex flex-col gap-4 font-lato text-slate-800" action={formAction}>
             <div className="space-y-1 pb-2 border-b border-slate-800/20">
                 <div className="relative flex items-center gap-1">
                     <Image src="/icons/chevron-left.svg" alt="back" width={17} height={17} draggable={false} className="-ml-1 cursor-pointer" onClick={backHandler} />

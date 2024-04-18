@@ -32,7 +32,7 @@ export default function CollapsedButton({ src, alt, expand, imageSize, rotate = 
     return (
         <div
             draggable={false}
-            className={`p-1 xs:p-[0.4rem] flex items-center rounded-full transition-all duration-300 overflow-hidden ${expand ? "bg-white shadow-md" : "bg-white/50 md:bg-white/60 hover:bg-white hover:shadow-md"}`}
+            className={`p-1 xs:p-[0.4rem] flex items-center rounded-full transition-all duration-300 overflow-hidden shadow-md ${expand ? "bg-teal-600/50" : "bg-white hover:bg-teal-600/20"}`}
             onMouseEnter={mouseEnterHandler}
             onMouseLeave={mouseLeaveHandler}
         >

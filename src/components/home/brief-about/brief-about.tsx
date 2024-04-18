@@ -15,7 +15,7 @@ export default function BriefAbout({ picLeftX, picRightX, picLeftOpacity, picRig
 
     return (
         <div id="brief-about" className="relative w-screen max-w-[80rem] mx-auto pb-20 pt-10 xs:pt-12 sm:pt-16 md:py-24 lg:pt-28 lg:pb-24 xl:pt-32 xl:pb-28 2xl:pt-36 2xl:pb-32 space-y-16 md:space-y-20 lg:space-y-28 2xl:space-y-36">
-            <div className="relative flex w-full justify-end">
+            <div className="relative flex w-full justify-end overflow-hidden">
                 <DisplayImage
                     src={images.background3.src}
                     alt={images.background3.alt}
@@ -32,7 +32,7 @@ export default function BriefAbout({ picLeftX, picRightX, picLeftOpacity, picRig
                     <Card title={briefAbout.story.title} description={briefAbout.story.description} />
                 </motion.div>
             </div>
-            <div className="relative flex w-full justify-start">
+            <div className="relative flex w-full justify-start overflow-hidden">
                 <motion.div
                     style={{
                         x: picLeftX,

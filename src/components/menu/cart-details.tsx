@@ -48,7 +48,7 @@ export default function CartDetails() {
     const total = subtotal + (deliveryFee ? deliveryFee : 0);
 
     return (
-        <div className="bg-white w-full rounded-md p-4 xxs:p-6 flex flex-col font-lato">
+        <div className="w-full rounded-md p-4 xxs:p-6 flex flex-col font-lato">
             <div className="flex max-xxs:flex-col flex-wrap justify-start lg:justify-between items-start xxs:items-center gap-2 pb-2 border-b border-slate-800/20">
                 <h1 className="text-xl md:text-2xl">Your Order</h1>
                 <Link href="/my/orders" className="px-2 py-1 text-center leading-tight xxs:leading-tight text-xs xxs:text-sm text-teal-700 border border-teal-700 hover:text-white hover:bg-teal-700 rounded-full transition-colors flex gap-1 items-center"><p className="whitespace-nowrap">Order History</p> <FiChevronRight /></Link>

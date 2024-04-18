@@ -1,13 +1,19 @@
-import Map from "./map";
-import RestaurantInfo from "./restaurant-info";
+import { MdLocationPin, MdLocalPhone, MdEmail } from "react-icons/md";
 
 export default function ContactInfo() {
-
     return (
-        <div className="sm:sticky z-0 left-0 bottom-0 bg-teal-700">
-            <div className="px-4 py-6 sm:px-6 sm:py-8 md:p-8 lg:p-10 max-w-[80rem] w-full mx-auto flex flex-col-reverse md:grid md:grid-cols-[1fr_auto] justify-items-center gap-6 md:gap-8">
-                <Map />
-                <RestaurantInfo />
+        <div className="flex-1 px-2 py-4 space-y-2 bg-slate-100 shadow-md">
+            <div className="flex items-start gap-2">
+                <MdLocationPin className="text-2xl text-teal-700" />
+                <p>123 Demo Street, Melbourne VIC 3000</p>
+            </div>
+            <div className="flex items-start gap-2">
+                <MdLocalPhone className="text-2xl text-teal-700" />
+                <p>{`(03) 1234 5678`}</p>
+            </div>
+            <div className="flex items-start gap-2">
+                <MdEmail className="text-2xl text-teal-700" />
+                <p>{`info@demo.com`}</p>
             </div>
         </div>
     )

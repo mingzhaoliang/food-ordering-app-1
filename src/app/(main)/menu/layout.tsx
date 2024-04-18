@@ -8,15 +8,9 @@ import Cart from "@/components/menu/cart";
 export default function MenuPageLayout({ children }: { children: React.ReactNode }) {
     return (
         <>
-            <DisplayImage
-                src={images.background0.src}
-                alt={images.background0.alt}
-                imageRef={images.background0.ref}
-                className="w-screen h-screen fixed top-0 left-0 -z-10 opacity-85 overflow-hidden"
-            />
-            <div className="relative z-40 mt-16 xs:mt-20 md:mt-24 lg:mt-28 mb-16 mx-4 xs:mx-8 lg:mx-12 rounded-md space-y-2 md:space-y-4 transition-all">
-                <div className="flex flex-col gap-4 md:gap-3 md:grid md:grid-rows-[auto_1fr] md:grid-cols-[minmax(calc(100vw_*_1/7),_auto)_repeat(6,_1fr)] lg:grid-cols-[minmax(calc(100vw_*_1/7),_auto)_repeat(6,_1fr)_minmax(calc(100vw_*_1/4),_2fr)] items-center md:items-start">
-                    <div className="md:row-start-1 md:col-start-2 md:col-end-[-1] pt-2 pb-4 md:pb-8 flex flex-col gap-4 text-white">
+            <div className="relative min-h-screen z-40 pt-16 xs:pt-20 md:pt-24 lg:pt-28 pb-16 px-4 xs:px-8 lg:px-12 space-y-2 md:space-y-4 transition-all bg-teal-600/10">
+                <div className="max-w-[120rem] mx-auto flex flex-col gap-4 md:gap-3 md:grid md:grid-rows-[auto_1fr] md:grid-cols-[minmax(calc(100vw_*_1/7),_auto)_repeat(6,_1fr)] lg:grid-cols-[minmax(calc(min(100vw,_120rem)_*_1/7),_auto)_repeat(6,_1fr)_minmax(calc(min(100vw,_120rem)_*_1/4),_2fr)] items-center md:items-start">
+                    <div className="md:row-start-1 md:col-start-2 md:col-end-[-1] pt-2 pb-4 md:pb-8 flex flex-col gap-4 text-slate-800">
                         <h1 className="font-portLligatSans text-4xl sm:text-5xl lg:text-6xl max-md:text-center">Our Menu</h1>
                         <p className="font-lato text-sm sm:text-base lg:text-lg max-md:text-center">Explore Authentic Italian Flavours</p>
                     </div>
