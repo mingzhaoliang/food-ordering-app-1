@@ -5,11 +5,12 @@ import BriefAbout from "./brief-about";
 
 export default function MainBriefAbout() {
 
-    const { scrollYProgress } = useScroll();
-    const picLeftX = useTransform(scrollYProgress, [0.7, 0.8], [-200, 0]);
-    const picRightX = useTransform(scrollYProgress, [0.6, 0.7], [200, 0]);
-    const picLeftOpacity = useTransform(scrollYProgress, [0.7, 0.8], [0, 1]);
-    const picRightOpacity = useTransform(scrollYProgress, [0.6, 0.7], [0, 1]);
+    const { scrollY } = useScroll();
+
+    const picLeftX = useTransform(scrollY, [1400, 1700], [-200, 0]);
+    const picRightX = useTransform(scrollY, [1100, 1400], [200, 0]);
+    const picLeftOpacity = useTransform(scrollY, [1400, 1700], [0, 1]);
+    const picRightOpacity = useTransform(scrollY, [1100, 1400], [0, 1]);
 
     return (
         <div className="max-md:hidden">
