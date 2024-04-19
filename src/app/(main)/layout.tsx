@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/components/navigation/header";
 import Providers from "@/lib/providers/providers";
+import Toast from "@/components/ui/toast";
 
 export const metadata: Metadata = {
   title: "Cucina Felice",
@@ -16,6 +17,7 @@ export default function RootLayout({
     <Providers>
       <Header />
       {children}
+      <Toast />
     </Providers>
   );
 }

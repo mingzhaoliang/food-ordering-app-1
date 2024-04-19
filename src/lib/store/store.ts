@@ -5,6 +5,7 @@ import menuReducer from "./menu-slice";
 import navigationReducer from "./navigation-slice";
 import cartReducer from "./cart-slice";
 import ordersReducer from "./orders-slice";
+import globalReducer from "./global-slice";
 
 export const makeStore = () => {
     return configureStore({
@@ -15,6 +16,7 @@ export const makeStore = () => {
             menu: menuReducer,
             cart: cartReducer,
             orders: ordersReducer,
+            global: globalReducer,
         }
     });
 

@@ -1,26 +1,27 @@
 "use client";
 
 import { CartItem } from "@/lib/crud/model-type";
-import { addItem, cartActions, removeItem } from "@/lib/store/cart-slice";
+import { addItem, removeItem } from "@/lib/store/cart-slice";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { menuActions } from "@/lib/store/menu-slice";
 import { priceFormatter } from "@/utils/formatter";
 import Image from "next/image";
 import Spinner from "../ui/spinner";
+import { globalActions } from "@/lib/store/global-slice";
 
 export default function CartItems({ cartItems }: { cartItems?: (CartItem)[] | null | undefined, }) {
     const dispatch = useAppDispatch();
 
     const addItemHandler = (item: CartItem) => {
         dispatch(addItem(item)).catch(error => {
-            dispatch(cartActions.setError(error.message));
+            dispatch(globalActions.setToast({ status: "error", message: error.message }));
             dispatch(menuActions.setShowCartModal(false))
         })
     }
 
     const removeItemHandler = (item: CartItem) => {
         dispatch(removeItem(item.menu_id)).catch(error => {
-            dispatch(cartActions.setError(error.message));
+            dispatch(globalActions.setToast({ status: "error", message: error.message }));
             dispatch(menuActions.setShowCartModal(false))
         })
     }

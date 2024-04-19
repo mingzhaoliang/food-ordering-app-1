@@ -1,8 +1,5 @@
 import Sidebar from "@/components/ui/sidebar";
-import DisplayImage from "@/components/ui/display-image";
-import { images } from "@/utils/data";
 import CartModal from "@/components/menu/cart-modal";
-import ErrorModal from "@/components/menu/error-modal";
 import Cart from "@/components/menu/cart";
 
 export default function MenuPageLayout({ children }: { children: React.ReactNode }) {
@@ -31,7 +28,6 @@ export default function MenuPageLayout({ children }: { children: React.ReactNode
                 </div>
             </div>
             <CartModal />
-            <ErrorModal />
         </>
     )
 }

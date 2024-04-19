@@ -10,11 +10,7 @@ export default function AuthenticatedUser({ userId, onClick }: { userId: string,
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        async function init() {
-            dispatch(fetchUserData(userId));
-        }
-
-        init();
+        dispatch(fetchUserData(userId));
     }, []);
 
     return <LinkButtonRounded href="/my/orders" src="/icons/person.svg" alt="Person" text={`Hi! ${user.username}`} onClick={onClick} />;
