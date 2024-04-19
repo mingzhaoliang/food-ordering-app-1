@@ -89,10 +89,10 @@ export default function CoursePreview() {
             )}
             <div
                 ref={previewRef}
-                className="relative w-fit max-w-[80rem] p-4 transition-all gap-8 items-center overflow-scroll"
+                className="relative w-fit max-w-[80rem] mx-auto p-4 transition-all gap-8 items-center overflow-scroll"
                 style={{
                     display: "grid",
-                    gridTemplateColumns: `repeat(${previewMenuItems.length}, 1fr)`,
+                    gridTemplateColumns: `repeat(${previewMenuItems.length}, minmax(auto, 20rem))`,
                 }}
             >
                 {previewMenuItems.map(item => <MenuItemPreview key={item.public_id} {...item} />)}
