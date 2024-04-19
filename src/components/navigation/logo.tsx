@@ -15,7 +15,7 @@ export default function Logo() {
             draggable={false}
             className={`lg:w-3/12 lg:min-w-[22rem] px-4 xs:px-6 py-2 flex gap-2 xs:gap-4 justify-center items-center ${activePage === "home" && !showHeaderBackground && "lg:shadow-md"}`}
         >
-            <div className={`rounded-full border-2 p-[0.2rem] shadow animate-spin-medium ${borderClasses} ${showHeaderBackground || showMenu ? "" : "bg-white/50"}`}>
+            <div className={`max-xxs:hidden rounded-full border-2 p-[0.2rem] shadow animate-spin-medium ${borderClasses} ${showHeaderBackground || showMenu ? "" : "bg-white/50"}`}>
                 <div className={`relative max-xxs:hidden w-10 h-10 xs:w-12 xs:h-12 aspect-square rounded-full border ${borderClasses}`}>
                     <Image src="/icons/pizza.png" alt="Pizza" fill sizes="100% 100%" className={`object-cover rounded-full p-[0.4rem]`} />
                 </div>
