@@ -6,6 +6,7 @@ import MenuOverview from "@/components/home/menu-overview/menu-preview";
 import MainBriefAbout from "@/components/home/brief-about/main-brief-about";
 import MobileBriefAbout from "@/components/home/brief-about/mobile-brief-about";
 import ContactBrief from "@/components/home/contact/contact-brief";
+import Reservation from "@/components/home/reservation/reservation";
 
 const itemIds = [
 	"bruschetta",
@@ -30,6 +31,7 @@ export default async function Home() {
 			<div className="relative z-10 bg-white">
 				<Hero images={heroImages} />
 				<MenuOverview />
+				<Reservation />
 				<MainBriefAbout />
 				<MobileBriefAbout />
 			</div>

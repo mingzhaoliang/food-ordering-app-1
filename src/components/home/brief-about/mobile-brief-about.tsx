@@ -7,13 +7,13 @@ export default function MobileBriefAbout() {
 
     const { scrollY } = useScroll();
 
-    const picLeftX = useTransform(scrollY, [1200, 1500], [-200, 0]);
-    const picRightX = useTransform(scrollY, [900, 1200], [200, 0]);
-    const picLeftOpacity = useTransform(scrollY, [1200, 1500], [0, 1]);
-    const picRightOpacity = useTransform(scrollY, [900, 1200], [0, 1]);
+    const picLeftX = useTransform(scrollY, [2200, 2500], [-200, 0]);
+    const picRightX = useTransform(scrollY, [1800, 2100], [200, 0]);
+    const picLeftOpacity = useTransform(scrollY, [2200, 2500], [0, 1]);
+    const picRightOpacity = useTransform(scrollY, [1800, 2100], [0, 1]);
 
     return (
-        <div className="md:hidden">
+        <div className="lg:hidden">
             <BriefAbout picLeftX={picLeftX} picRightX={picRightX} picLeftOpacity={picLeftOpacity} picRightOpacity={picRightOpacity} />
         </div>
     )

@@ -6,6 +6,7 @@ import navigationReducer from "./navigation-slice";
 import cartReducer from "./cart-slice";
 import ordersReducer from "./orders-slice";
 import globalReducer from "./global-slice";
+import reservationReducer from "./reservation-slice";
 
 export const makeStore = () => {
     return configureStore({
@@ -17,6 +18,7 @@ export const makeStore = () => {
             cart: cartReducer,
             orders: ordersReducer,
             global: globalReducer,
+            reservation: reservationReducer,
         }
     });
 

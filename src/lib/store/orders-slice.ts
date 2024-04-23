@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { Order } from "../crud/model-type";
 
 type InitialState = {
     activeOrder: string | null,

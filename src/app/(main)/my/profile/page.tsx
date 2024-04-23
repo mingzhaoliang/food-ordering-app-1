@@ -5,7 +5,7 @@ import Spinner from "@/components/ui/spinner";
 import { updateProfile } from "@/lib/actions";
 import { globalActions } from "@/lib/store/global-slice";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { fetchUserData, userActions } from "@/lib/store/user-slice";
+import { fetchUserData } from "@/lib/store/user-slice";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useFormState } from "react-dom";

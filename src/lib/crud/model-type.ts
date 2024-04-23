@@ -67,3 +67,22 @@ export interface DeliveryDetails {
     state: string;
     postcode: string;
 }
+
+export interface ReservationDetails {
+    userId?: string;
+    selectedDate: Date;
+    guests: number;
+    selectedTime: string;
+    name: string;
+    email: string;
+    mobileNumber: string;
+    specialRequests: string;
+}
+
+export type ValuePiece = Date | null;
+export type Value = ValuePiece | [ValuePiece, ValuePiece];
+
+export interface ReservedTimes {
+    smallTable: { [key: string]: number };
+    largeTable: { [key: string]: number };
+}
