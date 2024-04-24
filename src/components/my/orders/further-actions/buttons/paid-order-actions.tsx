@@ -4,5 +4,5 @@ export default function PaidOrderActions() {
             Track
             <span className="hidden xs:inline"> Order</span>
         </button>
-    )
+    );
 }

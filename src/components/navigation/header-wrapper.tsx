@@ -11,13 +11,16 @@ export default function HeaderWrapper({ children }: { children: React.ReactNode 
     const pathname = usePathname();
 
     useEffect(() => {
-
         const styleHeader = () => {
             if (headerRef.current) {
-                dispatch(navigationActions.setShowHeaderBackground(headerRef.current.clientHeight < window.scrollY));
+                dispatch(
+                    navigationActions.setShowHeaderBackground(
+                        headerRef.current.clientHeight < window.scrollY
+                    )
+                );
                 dispatch(navigationActions.setShowMenu(false));
             }
-        }
+        };
 
         styleHeader();
 
@@ -27,21 +30,16 @@ export default function HeaderWrapper({ children }: { children: React.ReactNode 
         return () => {
             window.removeEventListener("scroll", styleHeader);
             window.removeEventListener("resize", styleHeader);
-        }
+        };
     }, [headerRef]);
 
     useEffect(() => {
-
         const activePage = pathname.split("/")[1] || "home";
         dispatch(navigationActions.setActivePage(activePage));
-
-    }, [pathname])
+    }, [pathname]);
 
     return (
-        <header
-            ref={headerRef}
-            className="fixed top-0 left-0 z-50 w-screen select-none"
-        >
+        <header ref={headerRef} className="fixed top-0 left-0 z-50 w-screen select-none">
             {children}
         </header>
     );

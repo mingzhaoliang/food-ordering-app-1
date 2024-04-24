@@ -4,7 +4,6 @@ import { useScroll, useTransform } from "framer-motion";
 import BriefAbout from "./brief-about";
 
 export default function MobileBriefAbout() {
-
     const { scrollY } = useScroll();
 
     const picLeftX = useTransform(scrollY, [2200, 2500], [-200, 0]);
@@ -14,7 +13,12 @@ export default function MobileBriefAbout() {
 
     return (
         <div className="lg:hidden">
-            <BriefAbout picLeftX={picLeftX} picRightX={picRightX} picLeftOpacity={picLeftOpacity} picRightOpacity={picRightOpacity} />
+            <BriefAbout
+                picLeftX={picLeftX}
+                picRightX={picRightX}
+                picLeftOpacity={picLeftOpacity}
+                picRightOpacity={picRightOpacity}
+            />
         </div>
-    )
+    );
 }

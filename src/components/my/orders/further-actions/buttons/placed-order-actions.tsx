@@ -8,35 +8,32 @@ import { myActions } from "@/lib/store/my-slice";
 import { usePathname } from "next/navigation";
 
 export default function PlacedOrderActions() {
-    const { activeOrder, cancelOrder } = useAppSelector(state => state.my);
+    const { activeOrder, cancelOrder } = useAppSelector((state) => state.my);
     const dispatch = useAppDispatch();
     const pathname = usePathname();
 
     const cancelHandler = () => {
         dispatch(myActions.setCancelOrder(true));
-    }
+    };
 
     const payHandler = () => {
         dispatch(myActions.setFurtherAction("checkout"));
-    }
+    };
 
     const closeModalHandler = () => {
         dispatch(myActions.setCancelOrder(false));
-    }
+    };
 
     const confirmHandler = () => {
         async function cancelOrder() {
-            await updateOrderExpiration(
-                activeOrder!,
-                new Date(new Date().getTime() - 1)
-            )
+            await updateOrderExpiration(activeOrder!, new Date(new Date().getTime() - 1));
             refreshPage(pathname, "page");
         }
         dispatch(myActions.setCancelOrder(false));
         dispatch(myActions.setActiveOrder(null));
 
         if (activeOrder) cancelOrder();
-    }
+    };
 
     return (
         <>
@@ -62,11 +59,21 @@ export default function PlacedOrderActions() {
                         Are you sure you want to cancel this order?
                     </h2>
                     <div className="grid grid-cols-2 gap-4">
-                        <button onClick={closeModalHandler} className="w-full px-2 py-1 rounded bg-slate-800 text-white hover:bg-slate-950 transition-all">No</button>
-                        <button onClick={confirmHandler} className="w-full px-2 py-1 rounded border border-slate-800 text-slate-800 hover:border-rose-500 hover:bg-rose-500 hover:text-white transition-all">Confirm</button>
+                        <button
+                            onClick={closeModalHandler}
+                            className="w-full px-2 py-1 rounded bg-slate-800 text-white hover:bg-slate-950 transition-all"
+                        >
+                            No
+                        </button>
+                        <button
+                            onClick={confirmHandler}
+                            className="w-full px-2 py-1 rounded border border-slate-800 text-slate-800 hover:border-rose-500 hover:bg-rose-500 hover:text-white transition-all"
+                        >
+                            Confirm
+                        </button>
                     </div>
                 </div>
             </Modal>
         </>
-    )
+    );
 }

@@ -4,7 +4,6 @@ import { NextAuthOptions, Session } from "next-auth";
 import { Adapter, AdapterUser } from "next-auth/adapters";
 import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 
-
 export const authOptions: NextAuthOptions = {
     providers: [
         GoogleProvider({
@@ -41,7 +40,6 @@ export const authOptions: NextAuthOptions = {
 
     callbacks: {
         async jwt({ token, user }) {
-
             if (!token.user) {
                 token.user = {};
             }
@@ -52,8 +50,7 @@ export const authOptions: NextAuthOptions = {
 
             return token;
         },
-        async session({ session, token }: { session: Session; token: any; }) {
-
+        async session({ session, token }: { session: Session; token: any }) {
             session.user = {
                 ...session.user,
                 ...token.user,

@@ -10,5 +10,5 @@ export default function BackButton() {
         >
             Back
         </button>
-    )
+    );
 }

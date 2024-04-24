@@ -9,7 +9,7 @@ import CartCheckout from "./cart-checkout";
 
 export default function Cart() {
     const { data: session, status } = useSession();
-    const { checkout } = useAppSelector(state => state.cart);
+    const { checkout } = useAppSelector((state) => state.cart);
 
     const dispatch = useAppDispatch();
 
@@ -21,17 +21,15 @@ export default function Cart() {
         if (status === "authenticated" && session?.user) {
             init();
         }
-    }, [status])
+    }, [dispatch, session?.user, status]);
 
     if (status === "unauthenticated" && checkout) {
         throw new Error("Unauthorized");
     }
 
     return (
-        <div className="rounded-lg shadow-md bg-white">{
-            checkout
-                ? <CartCheckout />
-                : <CartDetails />
-        }</div>
-    )
+        <div className="rounded-lg shadow-md bg-white">
+            {checkout ? <CartCheckout /> : <CartDetails />}
+        </div>
+    );
 }

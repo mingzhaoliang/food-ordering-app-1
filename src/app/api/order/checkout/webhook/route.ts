@@ -11,11 +11,13 @@ export async function POST(req: NextRequest) {
     let event;
 
     try {
-
         const signature = req.headers.get("stripe-signature");
         const data = await req.text();
-        event = stripe.webhooks.constructEvent(data, signature as string, process.env.STRIPE_WEBHOOK_SECRET!);
-
+        event = stripe.webhooks.constructEvent(
+            data,
+            signature as string,
+            process.env.STRIPE_WEBHOOK_SECRET!
+        );
     } catch (error: any) {
         console.error(error);
         return NextResponse.json({ message: `webhook error: ${error.message}` }, { status: 400 });

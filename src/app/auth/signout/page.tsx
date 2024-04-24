@@ -5,7 +5,6 @@ import BackButton from "@/components/auth/back-button";
 import { signOut } from "next-auth/react";
 
 export default function SignInPage() {
-
     return (
         <AuthContent title="Sign out" message="Are you sure you want to sign out?">
             <button

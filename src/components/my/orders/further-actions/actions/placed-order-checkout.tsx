@@ -19,20 +19,21 @@ export default function PlacedOrderCheckout({ order }: { order: Order }) {
 
     const backHandler = () => {
         dispatch(myActions.setFurtherAction(null));
-    }
+    };
 
     useEffect(() => {
         if (state.message === "success" && state.url) {
             // redirect to payment page
             window.location.assign(state.url);
         }
-    }, [state])
+    }, [state]);
 
     return (
         <CheckoutForm
             formState={state}
             formAction={formAction}
             backHandler={backHandler}
-            {...order.delivery_details} />
-    )
+            {...order.delivery_details}
+        />
+    );
 }

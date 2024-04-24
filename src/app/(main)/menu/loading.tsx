@@ -5,5 +5,5 @@ export default function MenuLoadingPage() {
         <div className="p-10 bg-white/85 backdrop-blur rounded-md">
             <Spinner fallback="Loading menu..." />
         </div>
-    )
+    );
 }

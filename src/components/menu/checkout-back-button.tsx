@@ -9,9 +9,17 @@ export default function CheckoutBackButton() {
 
     const backHandler = () => {
         dispatch(cartActions.setCheckout(false));
-    }
+    };
 
     return (
-        <Image src="/icons/chevron-left.svg" alt="back" width={17} height={17} draggable={false} className="-ml-1 cursor-pointer" onClick={backHandler} />
-    )
+        <Image
+            src="/icons/chevron-left.svg"
+            alt="back"
+            width={17}
+            height={17}
+            draggable={false}
+            className="-ml-1 cursor-pointer"
+            onClick={backHandler}
+        />
+    );
 }

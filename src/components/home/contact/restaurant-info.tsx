@@ -10,5 +10,5 @@ export default function RestaurantInfo() {
                 <OpeningHours />
             </div>
         </div>
-    )
+    );
 }

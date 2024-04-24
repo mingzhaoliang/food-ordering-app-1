@@ -16,7 +16,7 @@ export interface MenuItem {
     category: string;
     public_id: string;
     name: string;
-    reference: { owner: string, owner_url: string, platform: string, url: string };
+    reference: { owner: string; owner_url: string; platform: string; url: string };
     description: string;
     price: number;
     tags: string[];

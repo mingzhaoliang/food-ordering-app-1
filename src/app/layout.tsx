@@ -7,34 +7,33 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 const lato = Lato({
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "700", "900"],
-  variable: "--font-lato",
+	subsets: ["latin"],
+	display: "swap",
+	weight: ["400", "700", "900"],
+
+	variable: "--font-lato",
 });
 
 const portLligatSans = Port_Lligat_Sans({
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400"],
-  variable: "--font-portLligatSans",
+	subsets: ["latin"],
+	display: "swap",
+	weight: ["400"],
+	variable: "--font-portLligatSans",
 });
 
 export const metadata: Metadata = {
-  title: "Cucina Felice",
-  description: "Authentic Italian Food",
+	title: "Cucina Felice",
+	description: "Authentic Italian Food",
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" className={`scroll-smooth ${portLligatSans.variable} ${lato.variable}`}>
-      <body className={`${inter.className} overscroll-none`}>
-        {children}
-      </body>
-    </html >
-  );
+	return (
+		<html lang="en" className={`scroll-smooth ${portLligatSans.variable} ${lato.variable}`}>
+			<body className={`${inter.className} overscroll-none`}>{children}</body>
+		</html>
+	);
 }

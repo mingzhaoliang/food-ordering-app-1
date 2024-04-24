@@ -7,5 +7,5 @@ export default function Map() {
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
         />
-    )
+    );
 }

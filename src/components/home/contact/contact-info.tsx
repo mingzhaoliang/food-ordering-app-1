@@ -17,5 +17,5 @@ export default function ContactInfo() {
                 <p className="max-xs:text-sm max-md:text-md">{`info@cucinafelice.com`}</p>
             </div>
         </div>
-    )
+    );
 }

@@ -4,79 +4,93 @@ import clientPromise from "../clientPromise";
 import { ReservationDetails, ReservedTimes } from "./model-type";
 
 export const createReservation = async (reservationDetails: ReservationDetails) => {
-    const client = await clientPromise;
-    const db = client.db("restaurant");
+	const client = await clientPromise;
+	const db = client.db("restaurant");
 
-    await db.collection("reservations").insertOne({
-        ...reservationDetails,
-    });
-}
+	await db.collection("reservations").insertOne({
+		...reservationDetails,
+	});
+};
 
-export const getReservations = async (userId: string): Promise<(ReservationDetails & { _id: string })[]> => {
-    const client = await clientPromise;
-    const db = client.db("restaurant");
+export const getReservations = async (
+	userId: string
+): Promise<(ReservationDetails & { _id: string })[]> => {
+	const client = await clientPromise;
+	const db = client.db("restaurant");
 
-    const data = await db.collection("reservations").find<ReservationDetails & { _id: any }>({ "userId": userId }).sort({ "selectedDate": -1 }).toArray();
+	const data = await db
+		.collection("reservations")
+		.find<ReservationDetails & { _id: any }>({ userId: userId })
+		.sort({ selectedDate: -1 })
+		.toArray();
 
-    const processedData = data.map(reservation => ({
-        ...reservation,
-        _id: reservation._id.toString(),
-        selectedDate: new Date(reservation.selectedDate),
-        userId: reservation.userId!.toString(),
-    }))
+	const processedData = data.map((reservation) => ({
+		...reservation,
+		_id: reservation._id.toString(),
+		selectedDate: new Date(reservation.selectedDate),
+		userId: reservation.userId!.toString(),
+	}));
 
-    return processedData;
-}
+	return processedData;
+};
 
 export const getReservedTimes = async (selectedDate: Date): Promise<ReservedTimes> => {
-    const client = await clientPromise;
-    const db = client.db("restaurant");
+	const client = await clientPromise;
+	const db = client.db("restaurant");
 
-    const reservations = await db.collection("reservations").aggregate([
-        {
-            $match: { selectedDate }
-        },
-        {
-            $group: {
-                _id: {
-                    selectedTime: "$selectedTime",
-                    tableType: {
-                        $cond: {
-                            if: { $lte: ["$guests", 2] },
-                            then: "smallTable",
-                            else: "largeTable"
-                        }
-                    }
-                },
-                count: { $sum: 1 }
-            }
-        }
-    ]).toArray();
+	const reservations = await db
+		.collection("reservations")
+		.aggregate([
+			{
+				$match: { selectedDate },
+			},
+			{
+				$group: {
+					_id: {
+						selectedTime: "$selectedTime",
+						tableType: {
+							$cond: {
+								if: { $lte: ["$guests", 2] },
+								then: "smallTable",
+								else: "largeTable",
+							},
+						},
+					},
+					count: { $sum: 1 },
+				},
+			},
+		])
+		.toArray();
 
-    const parsedReservations = JSON.parse(JSON.stringify(reservations));
+	const parsedReservations = JSON.parse(JSON.stringify(reservations));
 
-    const reservedTimes: ReservedTimes = parsedReservations.reduce((acc: ReservedTimes, reservation: {
-        _id: {
-            selectedTime: string,
-            tableType: "smallTable" | "largeTable"
-        },
-        count: number
-    }) => {
-        const { selectedTime, tableType } = reservation._id;
-        const count = reservation.count;
+	const reservedTimes: ReservedTimes = parsedReservations.reduce(
+		(
+			acc: ReservedTimes,
+			reservation: {
+				_id: {
+					selectedTime: string;
+					tableType: "smallTable" | "largeTable";
+				};
+				count: number;
+			}
+		) => {
+			const { selectedTime, tableType } = reservation._id;
+			const count = reservation.count;
 
-        if (!acc[tableType]) {
-            acc[tableType] = {};
-        }
+			if (!acc[tableType]) {
+				acc[tableType] = {};
+			}
 
-        acc[tableType][selectedTime] = count;
+			acc[tableType][selectedTime] = count;
 
-        return acc;
+			return acc;
+		},
+		{
+			smallTable: {},
+			largeTable: {},
+		}
+	);
 
-    }, {
-        smallTable: {},
-        largeTable: {}
-    });
-
-    return reservedTimes;
-}
+	return reservedTimes;
+};

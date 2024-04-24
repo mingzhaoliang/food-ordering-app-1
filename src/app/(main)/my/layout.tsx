@@ -10,20 +10,49 @@ export default function AccountPageLayout({ children }: { children: React.ReactN
                 </div>
                 <div className="sticky z-50 md:row-start-2 top-20 xs:top-24 md:top-28 mx-auto md:mx-0 max-md:mb-4 w-11/12 xs:w-10/12 sm:w-9/12 md:w-full">
                     <div className="md:mr-6 max-md:p-2 max-md:rounded-full flex md:flex-col justify-between xs:justify-around md:justify-normal items-center md:items-start gap-2 md:gap-8 max-md:bg-white/60 max-md:backdrop-blur">
-                        <Sidebar src="/icons/text.svg" alt="Orders" href="/my/orders" iconSize="small" rotate={false}>
+                        <Sidebar
+                            src="/icons/text.svg"
+                            alt="Orders"
+                            href="/my/orders"
+                            iconSize="small"
+                            rotate={false}
+                        >
                             <p className="flex flex-nowrap whitespace-pre">
-                                Order<span className="xl:hidden">s</span><span className="max-xl:hidden"> History</span>
+                                Order<span className="xl:hidden">s</span>
+                                <span className="max-xl:hidden"> History</span>
                             </p>
                         </Sidebar>
-                        <Sidebar src="/icons/calendar-check.svg" alt="Reservations" href="/my/reservations" iconSize="small" rotate={false}>Reservations</Sidebar>
-                        <Sidebar src="/icons/person.svg" alt="Profile" href="/my/profile" iconSize="small" rotate={false}>Profile</Sidebar>
-                        <Sidebar src="/icons/gear.svg" alt="Settings" href="/my/settings" iconSize="small" rotate={false}>Settings</Sidebar>
+                        <Sidebar
+                            src="/icons/calendar-check.svg"
+                            alt="Reservations"
+                            href="/my/reservations"
+                            iconSize="small"
+                            rotate={false}
+                        >
+                            Reservations
+                        </Sidebar>
+                        <Sidebar
+                            src="/icons/person.svg"
+                            alt="Profile"
+                            href="/my/profile"
+                            iconSize="small"
+                            rotate={false}
+                        >
+                            Profile
+                        </Sidebar>
+                        <Sidebar
+                            src="/icons/gear.svg"
+                            alt="Settings"
+                            href="/my/settings"
+                            iconSize="small"
+                            rotate={false}
+                        >
+                            Settings
+                        </Sidebar>
                     </div>
                 </div>
-                <div className="w-full md:row-start-2 md:col-span-6 rounded-lg">
-                    {children}
-                </div>
+                <div className="w-full md:row-start-2 md:col-span-6 rounded-lg">{children}</div>
             </div>
         </div>
-    )
+    );
 }

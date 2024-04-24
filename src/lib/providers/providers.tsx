@@ -6,9 +6,7 @@ import StoreProvider from "./store-provider";
 export default function Providers({ children }: { children: React.ReactNode }) {
     return (
         <StoreProvider>
-            <SessionProvider>
-                {children}
-            </SessionProvider>
+            <SessionProvider>{children}</SessionProvider>
         </StoreProvider>
-    )
+    );
 }

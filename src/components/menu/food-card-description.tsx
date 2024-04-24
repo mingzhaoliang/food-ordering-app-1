@@ -26,8 +26,8 @@ export default function FoodCardDescription({ description }: { description: stri
 
         return () => {
             window.removeEventListener("resize", checkScrollable);
-        }
-    }, [descRef])
+        };
+    }, [descRef]);
 
     return (
         <div className="relative w-full h-full py-2 mt-1">
@@ -35,11 +35,11 @@ export default function FoodCardDescription({ description }: { description: stri
                 <>
                     <motion.div
                         className={`absolute inset-0 pointer-events-none z-10 bg-gradient-to-b from-[#FAFDFD] from-10% via-transparent via-30%`}
-                        style={{ opacity: scrollYProgress, }}
+                        style={{ opacity: scrollYProgress }}
                     />
                     <motion.div
                         className={`absolute inset-0 pointer-events-none z-10 bg-gradient-to-t from-[#FAFDFD] from-15% via-transparent via-50%`}
-                        style={{ opacity: maskOpacity, }}
+                        style={{ opacity: maskOpacity }}
                     />
                     {/* <motion.div
                         className="absolute p-2 z-20 w-full bottom-0 rounded-full bg-transparent pointer-events-none"
@@ -57,5 +57,5 @@ export default function FoodCardDescription({ description }: { description: stri
                 <p className="mx-3 text-pretty text-sm xs:text-md xs:leading-snug">{description}</p>
             </div>
         </div>
-    )
+    );
 }

@@ -8,21 +8,21 @@ import { useEffect } from "react";
 import { myActions } from "@/lib/store/my-slice";
 
 export default function HistoryOrder({ order }: { order: Order }) {
-    const { activeOrder } = useAppSelector(state => state.my);
+    const { activeOrder } = useAppSelector((state) => state.my);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(myActions.setActiveOrder(null));
         dispatch(myActions.setFurtherAction(null));
-    }, [])
+    }, [dispatch]);
 
     return (
         <>
-            {
-                activeOrder === order._id
-                    ? <OrderItemDetails order={order} />
-                    : <OrderItemBrief order={order} />
-            }
+            {activeOrder === order._id ? (
+                <OrderItemDetails order={order} />
+            ) : (
+                <OrderItemBrief order={order} />
+            )}
         </>
-    )
+    );
 }

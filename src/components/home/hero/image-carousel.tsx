@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import ImageCarouselItem from "./image-carousel-item";
 import { StaticImageData } from "next/image";
 
-
 const getTranslation1 = (index: number, currentIndex: number, imagesNumber: number) => {
     let x = (index - currentIndex) * 100;
 
@@ -13,7 +12,6 @@ const getTranslation1 = (index: number, currentIndex: number, imagesNumber: numb
     }
     return x;
 };
-
 
 const getTranslation2 = (index: number, currentIndex: number, imagesNumber: number) => {
     return (
@@ -24,7 +22,11 @@ const getTranslation2 = (index: number, currentIndex: number, imagesNumber: numb
     );
 };
 
-export default function ImageCarousel({ images }: { images: { src: StaticImageData | string, alt: string, reference: React.ReactNode }[] }) {
+export default function ImageCarousel({
+    images,
+}: {
+    images: { src: StaticImageData | string; alt: string; reference: React.ReactNode }[];
+}) {
     const concatImages = [...images, ...images];
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
@@ -36,11 +38,10 @@ export default function ImageCarousel({ images }: { images: { src: StaticImageDa
         setIsHovered(false);
     };
 
-
     const jumpToImage = (index: number) => {
         if (index === currentImageIndex % images.length) return;
         setCurrentImageIndex(index + Math.floor(currentImageIndex / images.length) * images.length);
-    }
+    };
 
     useEffect(() => {
         const intervel = setInterval(() => {
@@ -63,7 +64,11 @@ export default function ImageCarousel({ images }: { images: { src: StaticImageDa
                             currentImageIndex > concatImages.length + 1 &&
                             currentImageIndex < concatImages.length * 2 - 1
                         }
-                        translationX={getTranslation1(index, currentImageIndex, concatImages.length)}
+                        translationX={getTranslation1(
+                            index,
+                            currentImageIndex,
+                            concatImages.length
+                        )}
                         mouseOverHandler={mouseOverHandler}
                         mouseOutHandler={mouseOutHandler}
                     />
@@ -77,7 +82,11 @@ export default function ImageCarousel({ images }: { images: { src: StaticImageDa
                         displayCondition={
                             currentImageIndex > 1 && currentImageIndex < concatImages.length - 1
                         }
-                        translationX={getTranslation2(index, currentImageIndex, concatImages.length)}
+                        translationX={getTranslation2(
+                            index,
+                            currentImageIndex,
+                            concatImages.length
+                        )}
                         mouseOverHandler={mouseOverHandler}
                         mouseOutHandler={mouseOutHandler}
                     />
@@ -85,7 +94,7 @@ export default function ImageCarousel({ images }: { images: { src: StaticImageDa
             })}
             <p
                 className="absolute left-0 bottom-0 px-4 bg-white/50 text-sm"
-                style={{ display: isHovered ? "block" : "none", }}
+                style={{ display: isHovered ? "block" : "none" }}
                 onMouseOver={mouseOverHandler}
                 onMouseOut={mouseOutHandler}
             >
@@ -98,13 +107,25 @@ export default function ImageCarousel({ images }: { images: { src: StaticImageDa
                         return (
                             <div
                                 key={index}
-                                className={"w-[0.35rem] h-[0.35rem] md:w-2 md:h-2 rounded-full bg-white cursor-pointer transition-all duration-500"}
+                                className={
+                                    "w-[0.35rem] h-[0.35rem] md:w-2 md:h-2 rounded-full bg-white cursor-pointer transition-all duration-500"
+                                }
                                 style={
                                     currentImageIndex % images.length === index
-                                        ? { backgroundColor: "hsl(0, 100%, 80%)", transform: "scale(1.75)" }
-                                        : currentImageIndex % images.length === index - 1 || currentImageIndex % images.length === index + 1
-                                            ? { backgroundColor: "hsl(0, 100%, 90%)", transform: "scale(1.35)" }
-                                            : { backgroundColor: "hsl(0, 0%, 100%)", transform: "scale(1)" }
+                                        ? {
+                                              backgroundColor: "hsl(0, 100%, 80%)",
+                                              transform: "scale(1.75)",
+                                          }
+                                        : currentImageIndex % images.length === index - 1 ||
+                                            currentImageIndex % images.length === index + 1
+                                          ? {
+                                                backgroundColor: "hsl(0, 100%, 90%)",
+                                                transform: "scale(1.35)",
+                                            }
+                                          : {
+                                                backgroundColor: "hsl(0, 0%, 100%)",
+                                                transform: "scale(1)",
+                                            }
                                 }
                                 onClick={() => jumpToImage(index)}
                             ></div>

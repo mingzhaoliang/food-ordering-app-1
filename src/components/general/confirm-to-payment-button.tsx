@@ -13,5 +13,5 @@ export default function ConfirmToPaymentButton() {
         >
             {pending ? "Processing..." : "Confirm to Payment"}
         </button>
-    )
+    );
 }

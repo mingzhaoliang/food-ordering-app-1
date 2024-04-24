@@ -9,19 +9,21 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 export default function CoursePreview() {
-    const { activeCourse, previewMenuItems, previewScrollable } = useAppSelector(state => state.home)
+    const { activeCourse, previewMenuItems, previewScrollable } = useAppSelector(
+        (state) => state.home
+    );
     const dispatch = useAppDispatch();
     const previewRef = useRef<HTMLDivElement>(null);
     const { scrollXProgress } = useScroll({ container: previewRef, axis: "x" });
-    const startOpacityIndex = useTransform(scrollXProgress, [0, 0.05, 0.3], [0, 0.8, 1])
-    const endOpacityIndex = useTransform(scrollXProgress, [0.7, 0.95, 1], [1, 0.8, 0])
+    const startOpacityIndex = useTransform(scrollXProgress, [0, 0.05, 0.3], [0, 0.8, 1]);
+    const endOpacityIndex = useTransform(scrollXProgress, [0.7, 0.95, 1], [1, 0.8, 0]);
 
     const scrollHandler = () => {
         previewRef.current?.scrollTo({
             left: previewRef.current.scrollWidth,
-            behavior: "smooth"
+            behavior: "smooth",
         });
-    }
+    };
 
     useEffect(() => {
         previewRef.current?.scrollTo({ left: 0, behavior: "smooth" });
@@ -31,39 +33,45 @@ export default function CoursePreview() {
         }
 
         fetchMenu();
-    }, [activeCourse])
+    }, [activeCourse, dispatch]);
 
     useEffect(() => {
         function checkScrollable() {
             if (previewRef.current) {
-                dispatch(homeActions.setPreviewScrollable(previewRef.current.scrollWidth > previewRef.current.clientWidth));
+                dispatch(
+                    homeActions.setPreviewScrollable(
+                        previewRef.current.scrollWidth > previewRef.current.clientWidth
+                    )
+                );
             }
         }
 
         checkScrollable();
         window.addEventListener("resize", checkScrollable);
-
-    }, [previewRef, previewMenuItems])
+    }, [previewRef, previewMenuItems, dispatch]);
 
     return (
-        <div
-            className={"relative w-full transition-all flex justify-center"}
-        >
+        <div className={"relative w-full transition-all flex justify-center"}>
             {previewScrollable && (
                 <>
                     <motion.div
                         className={`absolute inset-0 pointer-events-none z-20 bg-gradient-to-r from-white from-1% via-transparent via-30%`}
-                        style={{ opacity: startOpacityIndex, }}
+                        style={{ opacity: startOpacityIndex }}
                     />
                     <motion.div
                         className={`absolute inset-0 pointer-events-none z-20 bg-gradient-to-l from-white from-1% via-transparent via-30%`}
-                        style={{ opacity: endOpacityIndex, }}
+                        style={{ opacity: endOpacityIndex }}
                     />
                     <motion.div
                         initial={{ x: 10 }}
                         animate={{ x: 0 }}
                         exit={{ x: 10 }}
-                        transition={{ duration: 1.5, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
+                        transition={{
+                            duration: 1.5,
+                            ease: "easeInOut",
+                            repeat: Infinity,
+                            repeatType: "reverse",
+                        }}
                         className="absolute p-2 z-30 top-1/2 left-0 rounded-full bg-teal-600/[.2] shadow-xl"
                         style={{
                             opacity: startOpacityIndex,
@@ -76,7 +84,12 @@ export default function CoursePreview() {
                         initial={{ x: -10 }}
                         animate={{ x: 0 }}
                         exit={{ x: -10 }}
-                        transition={{ duration: 1.5, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
+                        transition={{
+                            duration: 1.5,
+                            ease: "easeInOut",
+                            repeat: Infinity,
+                            repeatType: "reverse",
+                        }}
                         className="absolute p-2 z-30 top-1/2 right-0 rounded-full bg-teal-600/[.2] shadow-xl"
                         style={{
                             opacity: endOpacityIndex,
@@ -95,8 +108,10 @@ export default function CoursePreview() {
                     gridTemplateColumns: `repeat(${previewMenuItems.length}, minmax(auto, 20rem))`,
                 }}
             >
-                {previewMenuItems.map(item => <MenuItemPreview key={item.public_id} {...item} />)}
+                {previewMenuItems.map((item) => (
+                    <MenuItemPreview key={item.public_id} {...item} />
+                ))}
             </div>
-        </div >
-    )
+        </div>
+    );
 }

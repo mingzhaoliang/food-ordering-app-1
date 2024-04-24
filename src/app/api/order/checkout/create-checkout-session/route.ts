@@ -2,7 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getCartItems } from "@/lib/crud/cart";
 import { Cart, CartItem, DeliveryDetails, Order } from "@/lib/crud/model-type";
-import { defaultDeliveryFee, freeDeliveryThreshold, orderExpirationTime, overdueTime } from "@/utils/data";
+import {
+    defaultDeliveryFee,
+    freeDeliveryThreshold,
+    orderExpirationTime,
+    overdueTime,
+} from "@/utils/data";
 import { createOrder, getOrderById, updateOrderDeliveryDetails } from "@/lib/crud/order";
 import { ObjectId } from "mongodb";
 import { getToken } from "next-auth/jwt";
@@ -16,7 +21,7 @@ type CheckoutSessionRequest = {
     deliveryDetails: DeliveryDetails;
     callbackUrl: string;
     orderId?: string;
-}
+};
 
 export async function POST(req: NextRequest) {
     const token = await getToken({ req });
@@ -38,7 +43,7 @@ export async function POST(req: NextRequest) {
             items = Object.values(order.items);
         } else {
             orderId = new ObjectId().toString();
-            const cartItems = await getCartItems(userId) as Cart;
+            const cartItems = (await getCartItems(userId)) as Cart;
             items = Object.values(cartItems);
         }
 
@@ -50,8 +55,11 @@ export async function POST(req: NextRequest) {
         const stripSession = await createSession(lineItems, orderId, deliveryFee, callbackUrl);
 
         if (!stripSession.url) {
-            return NextResponse.json({ message: "Failed to create stripe session" }, { status: 500 });
-        };
+            return NextResponse.json(
+                { message: "Failed to create stripe session" },
+                { status: 500 }
+            );
+        }
 
         if (orderExist) {
             await updateOrderDeliveryDetails(orderId, checkoutSessionRequest.deliveryDetails);
@@ -69,7 +77,7 @@ export async function POST(req: NextRequest) {
                 total_amount: totalPrice + deliveryFee,
                 created_at: new Date(dateNow),
                 expires_at: new Date(dateNow + orderExpirationTime * 1000 + overdueTime * 1000),
-            }
+            };
 
             await createOrder(newOrder);
         }
@@ -79,14 +87,13 @@ export async function POST(req: NextRequest) {
         console.error(error);
         return NextResponse.json({ message: error.message }, { status: 400 });
     }
-
 }
 
 const createLineItems = async (items: CartItem[]) => {
     const totalPrice = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
     const deliveryFee = totalPrice > freeDeliveryThreshold ? 0 : defaultDeliveryFee;
 
-    const lineItems = items.map(item => {
+    const lineItems = items.map((item) => {
         const lineItem: Stripe.Checkout.SessionCreateParams.LineItem = {
             price_data: {
                 currency: "AUD",
@@ -96,19 +103,19 @@ const createLineItems = async (items: CartItem[]) => {
                 },
             },
             quantity: item.quantity,
-        }
+        };
 
         return lineItem;
-    })
+    });
 
     return { lineItems, totalPrice, deliveryFee };
-}
+};
 
 const createSession = async (
     lineItems: Stripe.Checkout.SessionCreateParams.LineItem[],
     orderId: string,
     deliveryFee: number,
-    callbackUrl: string,
+    callbackUrl: string
 ) => {
     const sessionData = stripe.checkout.sessions.create({
         line_items: lineItems,
@@ -121,8 +128,8 @@ const createSession = async (
                         amount: deliveryFee * 100,
                         currency: "AUD",
                     },
-                }
-            }
+                },
+            },
         ],
         mode: "payment",
         metadata: {
@@ -130,8 +137,8 @@ const createSession = async (
         },
         success_url: callbackUrl,
         cancel_url: callbackUrl,
-        expires_at: Math.floor(Date.now() / 1000) + 60 * 30 // orderExpirationTime,
-    })
+        expires_at: Math.floor(Date.now() / 1000) + 60 * 30, // orderExpirationTime,
+    });
 
     return sessionData;
-}
+};

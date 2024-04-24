@@ -2,11 +2,16 @@
 
 import { refreshPage } from "@/lib/actions";
 import { durationFormatter } from "@/utils/formatter";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-export default function ExpirationTimer({ orderStatus, expiresAt }: { orderStatus: string, expiresAt: Date }) {
-    const router = useRouter();
+export default function ExpirationTimer({
+    orderStatus,
+    expiresAt,
+}: {
+    orderStatus: string;
+    expiresAt: Date;
+}) {
     const [timeExpired, setTimeExpired] = useState<boolean>(false);
     const [timeLeft, setTimeLeft] = useState<number>(0);
     const timer = useRef<NodeJS.Timeout | undefined>();
@@ -34,13 +39,17 @@ export default function ExpirationTimer({ orderStatus, expiresAt }: { orderStatu
 
     useEffect(() => {
         if (timeExpired) {
-            refreshPage(pathname, "page")
+            refreshPage(pathname, "page");
         }
     }, [timeExpired]);
 
     return (
         <>
-            {orderStatus === "placed" && timeLeft > 0 && <p className="px-2 py-[0.1rem] text-rose-500 max-lg:text-sm font-semibold">{durationFormatter(timeLeft)}</p>}
+            {orderStatus === "placed" && timeLeft > 0 && (
+                <p className="px-2 py-[0.1rem] text-rose-500 max-lg:text-sm font-semibold">
+                    {durationFormatter(timeLeft)}
+                </p>
+            )}
         </>
-    )
+    );
 }

@@ -14,12 +14,12 @@ export default function CartCheckout() {
 
     const [state, formAction] = useFormState(CheckoutWithPathname, { message: "", url: "" });
 
-    const { user } = useAppSelector(state => state.user);
+    const { user } = useAppSelector((state) => state.user);
     const dispatch = useAppDispatch();
 
     const backHandler = () => {
         dispatch(cartActions.setCheckout(false));
-    }
+    };
 
     useEffect(() => {
         async function clearCart() {
@@ -33,13 +33,14 @@ export default function CartCheckout() {
             // redirect to payment page
             window.location.assign(state.url);
         }
-    }, [state])
+    }, [dispatch, state]);
 
     return (
         <CheckoutForm
             formState={state}
             formAction={formAction}
             backHandler={backHandler}
-            {...user} />
-    )
+            {...user}
+        />
+    );
 }

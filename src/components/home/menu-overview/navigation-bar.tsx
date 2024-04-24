@@ -9,7 +9,7 @@ export default function NavigationBar() {
 
     const clickHandler = (course: "antipasti" | "primi" | "secondi" | "dolci") => {
         dispatch(homeActions.setActiveCourse(course)); // "primi" // "secondi" // "dolci");
-    }
+    };
 
     return (
         <div className="grid grid-cols-4 sm:grid-cols-[repeat(4,_7rem)] md:grid-cols-[repeat(4,_8rem)] lg:grid-cols-[repeat(4,_10rem)] max-sm:gap-8 gap-4">
@@ -42,5 +42,5 @@ export default function NavigationBar() {
                 Dolci
             </ExpandedButton>
         </div>
-    )
+    );
 }

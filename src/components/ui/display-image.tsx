@@ -3,16 +3,32 @@
 import Image, { StaticImageData } from "next/image";
 import { useState } from "react";
 
-export default function DisplayImage({ src, alt, imageRef, width, height, className, priority }: { src: StaticImageData | string, alt: string, imageRef: React.ReactNode, width?: number, height?: number, className: string, priority?: boolean }) {
+export default function DisplayImage({
+    src,
+    alt,
+    imageRef,
+    width,
+    height,
+    className,
+    priority,
+}: {
+    src: StaticImageData | string;
+    alt: string;
+    imageRef: React.ReactNode;
+    width?: number;
+    height?: number;
+    className: string;
+    priority?: boolean;
+}) {
     const [isHovered, setIsHovered] = useState(false);
 
     const mouseOverHandler = () => {
         setIsHovered(true);
-    }
+    };
 
     const mouseOutHandler = () => {
         setIsHovered(false);
-    }
+    };
 
     return (
         <div className={`${className}`}>
@@ -31,12 +47,12 @@ export default function DisplayImage({ src, alt, imageRef, width, height, classN
             />
             <p
                 className="absolute px-4 bg-white/50 text-sm bottom-0 left-0"
-                style={{ display: isHovered ? "block" : "none", }}
+                style={{ display: isHovered ? "block" : "none" }}
                 onMouseOver={mouseOverHandler}
                 onMouseOut={mouseOutHandler}
             >
                 {imageRef}
             </p>
         </div>
-    )
+    );
 }

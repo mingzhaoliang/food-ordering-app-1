@@ -4,20 +4,20 @@ import Providers from "@/lib/providers/providers";
 import Toast from "@/components/ui/toast";
 
 export const metadata: Metadata = {
-  title: "Cucina Felice",
-  description: "Authentic Italian Food",
+    title: "Cucina Felice",
+    description: "Authentic Italian Food",
 };
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  return (
-    <Providers>
-      <Header />
-      {children}
-      <Toast />
-    </Providers>
-  );
+    return (
+        <Providers>
+            <Header />
+            {children}
+            <Toast />
+        </Providers>
+    );
 }

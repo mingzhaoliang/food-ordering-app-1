@@ -1,6 +1,10 @@
 import { DeliveryDetails } from "@/lib/crud/model-type";
 
-export default function OrderDetailsDeliveryInfo({ deliveryDetails }: { deliveryDetails: DeliveryDetails }) {
+export default function OrderDetailsDeliveryInfo({
+    deliveryDetails,
+}: {
+    deliveryDetails: DeliveryDetails;
+}) {
     const { username, street, city, state, postcode } = deliveryDetails;
 
     return (
@@ -14,5 +18,5 @@ export default function OrderDetailsDeliveryInfo({ deliveryDetails }: { delivery
                 <p className="text-end text-balance">{`${street}, ${city}, ${state} ${postcode}`}</p>
             </div>
         </div>
-    )
+    );
 }

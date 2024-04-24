@@ -2,8 +2,15 @@
 
 import { priceFormatter } from "@/utils/formatter";
 
-export default function CartSummary({ subtotal, deliveryFee, total }: { subtotal: number, deliveryFee: number | null, total: number }) {
-
+export default function CartSummary({
+    subtotal,
+    deliveryFee,
+    total,
+}: {
+    subtotal: number;
+    deliveryFee: number | null;
+    total: number;
+}) {
     return (
         <div className="flex flex-col gap-2 py-3 xs:py-4 border-b border-slate-800/20">
             <div className="flex justify-between">
@@ -19,5 +26,5 @@ export default function CartSummary({ subtotal, deliveryFee, total }: { subtotal
                 <p>{priceFormatter(total)}</p>
             </div>
         </div>
-    )
+    );
 }
