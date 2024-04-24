@@ -16,9 +16,16 @@ export const getReservations = async (userId: string): Promise<(ReservationDetai
     const client = await clientPromise;
     const db = client.db("restaurant");
 
-    const data = await db.collection("reservations").find<ReservationDetails>({ "userId": userId }).sort({ "selectedDate": -1 }).toArray();
+    const data = await db.collection("reservations").find<ReservationDetails & { _id: any }>({ "userId": userId }).sort({ "selectedDate": -1 }).toArray();
 
-    return JSON.parse(JSON.stringify(data));
+    const processedData = data.map(reservation => ({
+        ...reservation,
+        _id: reservation._id.toString(),
+        selectedDate: new Date(reservation.selectedDate),
+        userId: reservation.userId!.toString(),
+    }))
+
+    return processedData;
 }
 
 export const getReservedTimes = async (selectedDate: Date): Promise<ReservedTimes> => {

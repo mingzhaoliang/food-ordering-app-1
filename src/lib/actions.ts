@@ -238,15 +238,27 @@ export const addReservation = async (reservationDetails: ReservationDetails, pre
         return { status: "error", message: "Requests must be less than 2000 characters." }
     }
 
+    if (reservationDetails.selectedTime === "No Time Selected") {
+        return { status: "error", message: "Please select a time." }
+    }
+
+    // Check if the selected time is available
+    const availableTimes = await getAvailableTimes(reservationDetails.selectedDate);
+    if (!availableTimes[reservationDetails.guests][reservationDetails.selectedTime]) {
+        return { status: "error", message: `The selected time for ${reservationDetails.guests} guests is not available. Please select another time.` }
+    }
+
+    // Create reservation
     await createReservation({
         ...reservationDetails,
         userId: session.user.id,
         status: "confirmed",
     })
 
-    const newState = await sendConfirmationEmail(reservationDetails);
+    // const newState = await sendConfirmationEmail(reservationDetails);
 
-    return newState;
+    // return newState;
+    return { status: "success", message: "A table has been reserved for you! Please check your email." }
 }
 
 export const getAvailableTimes = async (selectedDate: Date) => {

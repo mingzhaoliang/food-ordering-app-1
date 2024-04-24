@@ -15,13 +15,14 @@ type InitialState = {
         email: string;
         mobileNumber: string;
         specialRequests: string;
+        selectedTime: string;
     },
     availableTimes: string[]
 }
 
 const initialState: InitialState = {
     guests: 2,
-    selectedTime: "12:00 pm",
+    selectedTime: "No Time Selected",
     contactDetails: {
         name: "",
         email: "",
@@ -34,6 +35,7 @@ const initialState: InitialState = {
         email: "",
         mobileNumber: "",
         specialRequests: "",
+        selectedTime: "",
     },
     availableTimes: [],
 }
@@ -45,7 +47,7 @@ const reservationSlice = createSlice({
         setGuests(state, action) {
             state.guests = action.payload;
         },
-        setTime(state, action) {
+        setSelectedTime(state, action) {
             state.selectedTime = action.payload;
         },
         setContactDetails(state, action) {
