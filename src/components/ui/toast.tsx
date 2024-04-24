@@ -7,7 +7,7 @@ import { VscPass } from "react-icons/vsc";
 import { BiSolidErrorCircle } from "react-icons/bi";
 import { globalActions } from "@/lib/store/global-slice";
 
-const COUNT_DOWN = 5;
+const COUNT_DOWN = 10;
 
 export default function Toast() {
     const [countDown, setCountDown] = useState(COUNT_DOWN);
@@ -42,9 +42,9 @@ export default function Toast() {
     }, [toast])
 
     return (
-        <Modal open={!!toast} onClose={onClose} isFlexible={false}>
+        <Modal open={!!toast} onClose={onClose}>
             {toast && (
-                <div className="relative p-6 bg-white text-center flex flex-col justify-center items-center gap-4">
+                <div className="relative max-w-80 p-6 bg-white text-center flex flex-col justify-center items-center gap-4">
                     {
                         toast.status === "success"
                             ? <VscPass className="text-4xl sm:text-5xl text-teal-700" />

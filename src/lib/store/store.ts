@@ -4,8 +4,9 @@ import homeReducer from "./home-slice";
 import menuReducer from "./menu-slice";
 import navigationReducer from "./navigation-slice";
 import cartReducer from "./cart-slice";
-import ordersReducer from "./orders-slice";
+import myReducer from "./my-slice";
 import globalReducer from "./global-slice";
+import reservationReducer from "./reservation-slice";
 
 export const makeStore = () => {
     return configureStore({
@@ -15,8 +16,9 @@ export const makeStore = () => {
             home: homeReducer,
             menu: menuReducer,
             cart: cartReducer,
-            orders: ordersReducer,
+            my: myReducer,
             global: globalReducer,
+            reservation: reservationReducer,
         }
     });
 

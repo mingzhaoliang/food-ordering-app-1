@@ -5,7 +5,7 @@ import { useAppDispatch } from "@/lib/store/hooks";
 import { useFormState } from "react-dom";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { ordersActions } from "@/lib/store/orders-slice";
+import { myActions } from "@/lib/store/my-slice";
 import CheckoutForm from "@/components/general/checkout-form";
 import { Order } from "@/lib/crud/model-type";
 
@@ -18,7 +18,7 @@ export default function PlacedOrderCheckout({ order }: { order: Order }) {
     const dispatch = useAppDispatch();
 
     const backHandler = () => {
-        dispatch(ordersActions.setFurtherAction(null));
+        dispatch(myActions.setFurtherAction(null));
     }
 
     useEffect(() => {

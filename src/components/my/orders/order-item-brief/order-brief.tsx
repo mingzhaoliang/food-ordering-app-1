@@ -6,9 +6,9 @@ import { datetimeFormatter, priceFormatter } from "@/utils/formatter";
 import ExpirationTimer from "../expiration-timer";
 import { overdueTime } from "@/utils/data";
 import OrderBriefImages from "./order-brief-images";
-import OrderStatusTag from "../order-status-tag";
+import StatusTag from "../../../general/status-tag";
 import { useAppDispatch } from "@/lib/store/hooks";
-import { ordersActions } from "@/lib/store/orders-slice";
+import { myActions } from "@/lib/store/my-slice";
 
 export default function OrderBrief({ order }: { order: Order }) {
     const dispatch = useAppDispatch();
@@ -21,8 +21,8 @@ export default function OrderBrief({ order }: { order: Order }) {
     const status = order.status === "placed" && expiresAt < new Date() ? "cancelled" : order.status;
 
     const clickHandler = () => {
-        dispatch(ordersActions.setFurtherAction(null));
-        dispatch(ordersActions.setActiveOrder(order._id));
+        dispatch(myActions.setFurtherAction(null));
+        dispatch(myActions.setActiveOrder(order._id));
     }
 
     return (
@@ -41,7 +41,7 @@ export default function OrderBrief({ order }: { order: Order }) {
                 </div>
                 <p>{priceFormatter(order.total_amount)}</p>
                 <div className="flex justify-between items-center gap-2">
-                    <OrderStatusTag status={status} />
+                    <StatusTag status={status} />
                     <button className="text-sm text-slate-800/60 underline">View details</button>
                 </div>
             </div>

@@ -1,20 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { Order } from "../crud/model-type";
 
 type InitialState = {
     activeOrder: string | null,
+    activeReservation: string | null,
     furtherAction: "checkout" | "track" | null,
     cancelOrder: boolean,
 }
 
 const initialState: InitialState = {
     activeOrder: null,
+    activeReservation: null,
     furtherAction: null,
     cancelOrder: false,
 }
 
-const orderSlice = createSlice({
-    name: 'orders',
+const mySlice = createSlice({
+    name: 'my',
     initialState,
     reducers: {
         setActiveOrder(state, action) {
@@ -29,8 +30,12 @@ const orderSlice = createSlice({
         setCancelOrder(state, action) {
             state.cancelOrder = action.payload;
         },
+
+        setActiveReservation(state, action) {
+            state.activeReservation = action.payload === state.activeReservation ? null : action.payload;
+        },
     },
 })
 
-export default orderSlice.reducer;
-export const ordersActions = orderSlice.actions;
+export default mySlice.reducer;
+export const myActions = mySlice.actions;

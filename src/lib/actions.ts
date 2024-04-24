@@ -6,8 +6,12 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { addItemToCart, clearCart, getCartItems, removeItemFromCart } from "./crud/cart";
 import { getMenuItemById, getMenuItemByPublicId } from "./crud/menu";
-import { DeliveryDetails } from "./crud/model-type";
+import { DeliveryDetails, ReservationDetails } from "./crud/model-type";
 import { headers } from "next/headers";
+import { createReservation, getReservedTimes } from "./crud/reservations";
+import { availableReservationTimes, availableTableNumber, restaurantName, restaurantNumber } from "@/utils/data";
+import { dateFormatter } from "@/utils/formatter";
+import { smtpTransport } from "@/utils/smtp-transport";
 
 export const getHeroImages = async (publicIds: string[]) => {
     const heroImages = await Promise.all(publicIds.map(async (publicId) => {
@@ -177,4 +181,121 @@ export const placedOrderCheckout = async (orderId: string, callbackUrl: string, 
 
 export const refreshPage = (path: string, type: "layout" | "page" | undefined) => {
     revalidatePath(path, type);
+}
+
+const sendConfirmationEmail = async (reservationDetails: ReservationDetails) => {
+    const emailSubject = `Reservation Confirmation at ${restaurantName}`;
+    const emailHtml = `
+    <p>Dear ${reservationDetails.name},</p>
+    <p>We are delighted to confirm your reservation at ${restaurantName} for <u>${dateFormatter(reservationDetails.selectedDate)}</u> at <u>${reservationDetails.selectedTime}</u>.</p>
+    <p><strong>Reservation Details:</strong></p>
+    <ul>
+        <li><strong>Date:</strong> ${dateFormatter(reservationDetails.selectedDate)}</li>
+        <li><strong>Time:</strong> ${reservationDetails.selectedTime}</li>
+        <li><strong>Number of Guests:</strong> ${reservationDetails.guests}</li>
+        <li><strong>Mobile Number:</strong> ${reservationDetails.mobileNumber}</li>
+        <li><strong>Special Requests:</strong> ${reservationDetails.specialRequests || "None"}</li>
+    </ul>
+    <p>Your reservation has been made under the name of ${reservationDetails.name}.</p>
+    <p>Please note the following:</p>
+    <ul>
+        <li>Your table will be reserved for a duration of 2 hours, starting from the reservation time.</li>
+        <li>If you require more time or have any special requests, please contact us directly at ${restaurantNumber}.</li>
+        <li>We kindly request that you arrive on time for your reservation. If you anticipate being late, please inform us as soon as possible.</li>
+    </ul>
+    <p>We look forward to welcoming you!</p>
+    <p>Warm regards,<br>${restaurantName} Team</p>
+    `
+
+    const result = await smtpTransport(
+        { emailSubject, emailHtml },
+        { status: "success", message: "A table has been reserved for you! Please check your email." },
+        { status: "error", message: "Failed to send email." }
+    )
+
+    return result;
+}
+
+export const addReservation = async (reservationDetails: ReservationDetails, prevState: { status: string; message: string } | undefined, formData: FormData) => {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+        return { status: "error", message: "Unauthorized!" };
+    }
+
+    if (!reservationDetails.name || (reservationDetails.name as string).length < 3) {
+        return { status: "error", message: "Username must be at least 3 characters long." }
+    }
+
+    if (!reservationDetails.email || !String(reservationDetails.email).match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+        return { status: "error", message: "Invalid email address." }
+    }
+
+    if (!reservationDetails.mobileNumber || (!String(reservationDetails.mobileNumber).match(/^[0]\d{9,9}$/))) {
+        return { status: "error", message: "Invalid phone number. Must start with 0 and be 10 digits long." }
+    }
+
+    if (reservationDetails.specialRequests && (reservationDetails.specialRequests as string).length > 2000) {
+        return { status: "error", message: "Requests must be less than 2000 characters." }
+    }
+
+    await createReservation({
+        ...reservationDetails,
+        userId: session.user.id,
+        status: "confirmed",
+    })
+
+    const newState = await sendConfirmationEmail(reservationDetails);
+
+    return newState;
+}
+
+export const getAvailableTimes = async (selectedDate: Date) => {
+    const defaultAvailableTimes = availableReservationTimes[selectedDate.getDay()];
+    const reservedTimes = await getReservedTimes(selectedDate);
+
+    const availableTimes: { [key: string]: { [key: string]: number } } = {
+        "smallTable": {},
+        "largeTable": {},
+    }
+
+    Object.keys(reservedTimes).forEach(tableType => {
+        const reservedTimesForTable = reservedTimes[tableType as "smallTable" | "largeTable"];
+
+        Object.keys(defaultAvailableTimes).forEach(timeKey => {
+            const timeString = defaultAvailableTimes[Number(timeKey)];
+            const previouseTimeString = defaultAvailableTimes[Number(timeKey) - 1];
+            const laterTimeString = defaultAvailableTimes[Number(timeKey) + 1];
+
+            if (!availableTimes[tableType as "smallTable" | "largeTable"][timeString]) {
+                availableTimes[tableType as "smallTable" | "largeTable"][timeString] = 0;
+            }
+
+            let reservedNumber = 0;
+
+            if (reservedTimesForTable[timeString]) {
+                reservedNumber += reservedTimesForTable[timeString];
+            }
+
+            if (previouseTimeString && reservedTimesForTable[previouseTimeString]) {
+                reservedNumber += reservedTimesForTable[previouseTimeString];
+            }
+
+            if (laterTimeString && reservedTimesForTable[laterTimeString]) {
+                reservedNumber += reservedTimesForTable[laterTimeString];
+            }
+
+            availableTimes[tableType as "smallTable" | "largeTable"][timeString] = Math.max(0, availableTableNumber[tableType as "smallTable" | "largeTable"] - reservedNumber);
+        })
+    })
+
+    const result: {
+        [key: number]: { [key: string]: number },
+    } = {
+        1: { ...availableTimes.smallTable },
+        2: { ...availableTimes.smallTable },
+        3: { ...availableTimes.largeTable },
+        4: { ...availableTimes.largeTable },
+    }
+
+    return result;
 }

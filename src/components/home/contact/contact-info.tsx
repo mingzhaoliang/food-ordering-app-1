@@ -1,3 +1,4 @@
+import { restaurantNumber } from "@/utils/data";
 import { MdLocationPin, MdLocalPhone, MdEmail } from "react-icons/md";
 
 export default function ContactInfo() {
@@ -9,7 +10,7 @@ export default function ContactInfo() {
             </div>
             <div className="flex items-start gap-2">
                 <MdLocalPhone className="text-xl md:text-2xl text-teal-700 flex-none" />
-                <p className="max-xs:text-sm max-md:text-md">{`(03) 1234 5678`}</p>
+                <p className="max-xs:text-sm max-md:text-md">{restaurantNumber}</p>
             </div>
             <div className="flex items-start gap-2">
                 <MdEmail className="text-xl md:text-2xl text-teal-700 flex-none" />

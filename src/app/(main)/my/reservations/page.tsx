@@ -1,20 +1,20 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
-import HistoryOrder from "@/components/my/orders/history-order";
-import { Order } from "@/lib/crud/model-type";
-import { getOrders } from "@/lib/crud/order"
+import HistoryReservation from "@/components/my/reservations/history-reservation";
+import { ReservationDetails } from "@/lib/crud/model-type";
+import { getReservations } from "@/lib/crud/reservations";
 import { getServerSession } from "next-auth";
 
 export default async function OrdersPage() {
     const session = await getServerSession(authOptions);
 
-    const orderHistory = await getOrders(session!.user.id);
+    const reservationHistory = await getReservations(session!.user.id);
 
     return (
         <div className="max-md:mx-auto max-xs:w-full max-sm:w-11/12 max-md:w-10/12 lg:max-w-[50rem] flex flex-col gap-4 font-lato max-md:text-md max-lg:text-base transition-all">
             {
-                orderHistory.map((order: Order) => {
+                reservationHistory.map((reservation: ReservationDetails & { _id: string }) => {
                     return (
-                        <HistoryOrder key={order._id} order={order} />
+                        <HistoryReservation key={reservation._id} reservation={reservation} />
                     )
                 })
             }

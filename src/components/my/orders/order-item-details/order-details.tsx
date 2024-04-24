@@ -2,7 +2,7 @@
 
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { overdueTime } from "@/utils/data";
-import OrderStatusTag from "../order-status-tag";
+import StatusTag from "../../../general/status-tag";
 import CartSummary from "@/components/menu/cart-summary";
 import ExpirationTimer from "../expiration-timer";
 import PlacedOrderActions from "../further-actions/buttons/placed-order-actions";
@@ -10,13 +10,13 @@ import PaidOrderActions from "../further-actions/buttons/paid-order-actions";
 import CancelledOrderActions from "../further-actions/buttons/cancelled-order-actions";
 import OrderDetailsItem from "./order-details-item";
 import PlacedOrderCheckout from "../further-actions/actions/placed-order-checkout";
-import { ordersActions } from "@/lib/store/orders-slice";
+import { myActions } from "@/lib/store/my-slice";
 import { Order } from "@/lib/crud/model-type";
 import { GoChevronUp } from "react-icons/go";
 import OrderDetailsDeliveryInfo from "./order-details-delivery-info";
 
 export default function OrderDetails({ order }: { order: Order }) {
-    const { furtherAction } = useAppSelector(state => state.orders);
+    const { furtherAction } = useAppSelector(state => state.my);
     const dispatch = useAppDispatch();
 
     const expiresAt = new Date(new Date(order.expires_at).getTime() - overdueTime * 1000);
@@ -28,8 +28,8 @@ export default function OrderDetails({ order }: { order: Order }) {
     let furtherActionPage = null;
 
     const closeHandler = () => {
-        dispatch(ordersActions.setActiveOrder(null));
-        dispatch(ordersActions.setFurtherAction(null));
+        dispatch(myActions.setActiveOrder(null));
+        dispatch(myActions.setFurtherAction(null));
     }
 
     switch (status) {
@@ -60,13 +60,13 @@ export default function OrderDetails({ order }: { order: Order }) {
         <>
             {!furtherAction && (
                 <div className="bg-white w-full rounded-md p-4 sm:p-6 flex flex-col font-lato text-slate-800">
-                    <div className="xs:pb-2 border-b border-slate-800/20 flex justify-between items-start cursor-pointer" onClick={closeHandler}>
+                    <div className="pb-1 xs:pb-2 border-b border-slate-800/20 flex justify-between items-start cursor-pointer" onClick={closeHandler}>
                         <div className="flex items-center flex-wrap gap-2 md:gap-4">
                             <h1 className="text-xl md:text-2xl">
                                 <span className="hidden xxs:inline">Order </span>
                                 Details
                             </h1>
-                            <OrderStatusTag status={status} />
+                            <StatusTag status={status} />
                         </div>
                         <button className="text-sm p-2 text-slate-800/60 flex items-center">
                             <GoChevronUp /> Collapse

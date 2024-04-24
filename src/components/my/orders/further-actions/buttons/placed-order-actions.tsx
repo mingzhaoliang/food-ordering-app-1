@@ -4,24 +4,24 @@ import Modal from "@/components/ui/modal";
 import { refreshPage } from "@/lib/actions";
 import { updateOrderExpiration } from "@/lib/crud/order";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { ordersActions } from "@/lib/store/orders-slice";
+import { myActions } from "@/lib/store/my-slice";
 import { usePathname } from "next/navigation";
 
 export default function PlacedOrderActions() {
-    const { activeOrder, cancelOrder } = useAppSelector(state => state.orders);
+    const { activeOrder, cancelOrder } = useAppSelector(state => state.my);
     const dispatch = useAppDispatch();
     const pathname = usePathname();
 
     const cancelHandler = () => {
-        dispatch(ordersActions.setCancelOrder(true));
+        dispatch(myActions.setCancelOrder(true));
     }
 
     const payHandler = () => {
-        dispatch(ordersActions.setFurtherAction("checkout"));
+        dispatch(myActions.setFurtherAction("checkout"));
     }
 
     const closeModalHandler = () => {
-        dispatch(ordersActions.setCancelOrder(false));
+        dispatch(myActions.setCancelOrder(false));
     }
 
     const confirmHandler = () => {
@@ -32,8 +32,8 @@ export default function PlacedOrderActions() {
             )
             refreshPage(pathname, "page");
         }
-        dispatch(ordersActions.setCancelOrder(false));
-        dispatch(ordersActions.setActiveOrder(null));
+        dispatch(myActions.setCancelOrder(false));
+        dispatch(myActions.setActiveOrder(null));
 
         if (activeOrder) cancelOrder();
     }
@@ -56,8 +56,8 @@ export default function PlacedOrderActions() {
                     <span className="hidden xs:inline"> Now</span>
                 </button>
             </div>
-            <Modal open={cancelOrder} onClose={closeModalHandler} isFlexible={false}>
-                <div className="bg-white w-full rounded-md p-6 flex flex-col items-center gap-8 font-lato">
+            <Modal open={cancelOrder} onClose={closeModalHandler}>
+                <div className="max-w-80 bg-white w-full rounded-md p-6 flex flex-col items-center gap-8 font-lato">
                     <h2 className="text-xl text-center flex flex-wrap justify-center items-center gap-2">
                         Are you sure you want to cancel this order?
                     </h2>

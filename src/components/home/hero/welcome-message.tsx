@@ -10,7 +10,7 @@ export default function WelcomeMessage() {
                     </h1>
                     <p className="w-11/12 xs:w-10/12 text-xl md:text-2xl lg:text-3xl font-portLligatSans text-pretty text-center lg:leading-normal">Indulge in Melbourne's finest, artisanal Italian cuisine.</p>
 
-                    <LinkButtonRectangular className="w-10/12 xs:w-9/12" href="" text="Reserve a Table" />
+                    <LinkButtonRectangular className="w-10/12 xs:w-9/12" href="/#reservation" text="Reserve a Table" />
                     <LinkButtonRectangular className="w-10/12 xs:w-9/12" href="/menu/antipasti" text="Order Now" />
                 </div>
             </div>
