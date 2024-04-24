@@ -9,15 +9,18 @@ export default function HeaderTitle() {
     let title;
 
     switch (activePage) {
-        case "profile":
-            title = "Your Profile";
-            break;
         case "orders":
             title = (
                 <p className="flex flex-nowrap whitespace-pre">
                     Your Order<span className="xl:hidden">s</span><span className="max-xl:hidden"> History</span>
                 </p>
             );
+            break;
+        case "reservations":
+            title = "Your Reservations";
+            break;
+        case "profile":
+            title = "Your Profile";
             break;
         case "settings":
             title = "Settings";
