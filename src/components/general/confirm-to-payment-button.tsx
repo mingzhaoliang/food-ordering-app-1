@@ -1,17 +1,14 @@
 "use client";
 
 import { useFormStatus } from "react-dom";
+import FilledButton from "../ui/button/filled-button";
 
 export default function ConfirmToPaymentButton() {
-    const { pending } = useFormStatus();
+	const { pending } = useFormStatus();
 
-    return (
-        <button
-            type="submit"
-            disabled={pending}
-            className={`${pending ? "bg-teal-700/60 cursor-not-allowed" : "bg-teal-700 hover:bg-teal-900"} text-white rounded py-2 transition-all text-sm xxs:text-base md:text-lg`}
-        >
-            {pending ? "Processing..." : "Confirm to Payment"}
-        </button>
-    );
+	return (
+		<FilledButton colour="teal" type="submit" disabled={pending}>
+			{pending ? "Processing..." : "Confirm to Payment"}
+		</FilledButton>
+	);
 }

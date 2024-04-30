@@ -1,31 +1,27 @@
 "use client";
 
-import LinkButtonRounded from "@/components/ui/link-button-rounded";
+import IconButton from "@/components/ui/button/icon-button";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { fetchUserData } from "@/lib/store/user-slice";
 import { useEffect } from "react";
 
 export default function AuthenticatedUser({
-    userId,
-    onClick,
+	userId,
+	onClick,
 }: {
-    userId: string;
-    onClick: () => void;
+	userId: string;
+	onClick: () => void;
 }) {
-    const { user } = useAppSelector((state) => state.user);
-    const dispatch = useAppDispatch();
+	const { user } = useAppSelector((state) => state.user);
+	const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        dispatch(fetchUserData(userId));
-    }, []);
+	useEffect(() => {
+		dispatch(fetchUserData(userId));
+	}, [dispatch, userId]);
 
-    return (
-        <LinkButtonRounded
-            href="/my/orders"
-            src="/icons/person.svg"
-            alt="Person"
-            text={`Hi! ${user.username}`}
-            onClick={onClick}
-        />
-    );
+	return (
+		<IconButton src="/icons/person.svg" alt="Person" onClick={onClick}>
+			Hi! {user.username}
+		</IconButton>
+	);
 }
