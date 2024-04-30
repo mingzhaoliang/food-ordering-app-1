@@ -8,7 +8,7 @@ export default function NavigationBar() {
 	const dispatch = useAppDispatch();
 
 	const clickHandler = (course: "antipasti" | "primi" | "secondi" | "dolci") => {
-		dispatch(homeActions.setActiveCourse(course)); // "primi" // "secondi" // "dolci");
+		dispatch(homeActions.setActiveCourse(course));
 	};
 
 	return (

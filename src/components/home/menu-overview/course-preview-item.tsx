@@ -8,7 +8,7 @@ import { shortPriceFormatter } from "@/utils/formatter";
 import FilledButton from "@/components/ui/button/filled-button";
 import Link from "next/link";
 
-export default function MenuItemPreview({
+export default function CoursePreviewItem({
 	public_id,
 	course,
 	name,
