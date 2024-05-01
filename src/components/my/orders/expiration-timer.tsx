@@ -1,7 +1,7 @@
 "use client";
 
 import { durationFormatter } from "@/utils/formatter";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 export default function ExpirationTimer({
@@ -11,10 +11,10 @@ export default function ExpirationTimer({
 	orderStatus: string;
 	expiresAt: Date;
 }) {
-	const [timeExpired, setTimeExpired] = useState<boolean>(false);
 	const [timeLeft, setTimeLeft] = useState<number>(0);
 	const timer = useRef<NodeJS.Timeout | undefined>();
 	const pathname = usePathname();
+	const router = useRouter();
 
 	useEffect(() => {
 		const timeDifference = expiresAt.getTime() - new Date().getTime();
@@ -24,7 +24,7 @@ export default function ExpirationTimer({
 			timer.current = setInterval(() => {
 				setTimeLeft((prev) => {
 					if (prev <= 0) {
-						setTimeExpired(true);
+						router.refresh();
 						clearInterval(timer.current!);
 						return 0;
 					}
@@ -34,11 +34,7 @@ export default function ExpirationTimer({
 		}
 
 		return () => clearInterval(timer.current!);
-	}, [expiresAt, orderStatus, pathname]);
-
-	useEffect(() => {
-		if (timeExpired) window.location.reload();
-	}, [timeExpired]);
+	}, [expiresAt, orderStatus, pathname, router]);
 
 	return (
 		<>

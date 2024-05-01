@@ -23,7 +23,7 @@ const initialState: InitialState = {
 		state: "",
 		postcode: "",
 	},
-	activePage: "",
+	activePage: "home",
 	toast: null,
 };
 

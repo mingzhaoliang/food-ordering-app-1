@@ -37,10 +37,10 @@ export default function OrderDetails({ order }: { order: DBOrder }) {
 			statusNote = (
 				<>
 					Your order will expire in{" "}
-					<ExpirationTimer orderStatus={status} expiresAt={expiresAt!} />.
+					<ExpirationTimer orderStatus={status} expiresAt={expiresAt!} />
 				</>
 			);
-			furtherActions = <PlacedOrderActions />;
+			furtherActions = <PlacedOrderActions expiresAt={expiresAt} />;
 			furtherActionPage = <PlacedOrderCheckout order={order} />;
 			break;
 		case "paid":
@@ -62,9 +62,9 @@ export default function OrderDetails({ order }: { order: DBOrder }) {
 	}
 
 	return (
-		<>
+		<div className="bg-white w-full rounded-md flex flex-col font-lato text-slate-800">
 			{!furtherAction && (
-				<div className="bg-white w-full rounded-md p-4 sm:p-6 flex flex-col font-lato text-slate-800">
+				<div className="p-4 sm:p-6">
 					<div
 						className="pb-1 xs:pb-2 border-b border-slate-800/20 flex justify-between items-start cursor-pointer"
 						onClick={closeHandler}
@@ -101,6 +101,6 @@ export default function OrderDetails({ order }: { order: DBOrder }) {
 				</div>
 			)}
 			{furtherAction && furtherActionPage}
-		</>
+		</div>
 	);
 }

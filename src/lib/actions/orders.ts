@@ -11,12 +11,11 @@ const checkout = async (data: {
 	const headersList = headers();
 	const cookie = headersList.get("cookie");
 
-	const isInvalidDeliveryDetails = Object.values(data.deliveryDetails).some((value) => {
-		console.log(data.deliveryDetails);
-		console.log("value", !!!value, value);
-		return !value;
-	});
-	if (isInvalidDeliveryDetails) {
+	const isInvalidDeliveryDetails = Object.values(data.deliveryDetails).some((value) => !value);
+	if (
+		isInvalidDeliveryDetails ||
+		!["NSW", "VIC", "QLD", "SA", "WA", "TAS", "NT"].includes(data.deliveryDetails.state)
+	) {
 		return { message: "Please provide valid delivery details.", url: "" };
 	}
 

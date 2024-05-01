@@ -4,14 +4,13 @@ import Modal from "@/components/ui/modal";
 import { updateOrderExpiration } from "@/lib/crud/orders";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { myActions } from "@/lib/store/my-slice";
-import { usePathname } from "next/navigation";
 
-export default function PlacedOrderActions() {
+export default function PlacedOrderActions({ expiresAt }: { expiresAt: Date }) {
 	const { activeOrder, cancelOrder } = useAppSelector((state) => state.my);
 	const dispatch = useAppDispatch();
-	const pathname = usePathname();
 
 	const cancelHandler = () => {
+		if (expiresAt <= new Date()) return;
 		dispatch(myActions.setCancelOrder(true));
 	};
 
@@ -27,7 +26,8 @@ export default function PlacedOrderActions() {
 		dispatch(myActions.setCancelOrder(false));
 		dispatch(myActions.setActiveOrder(null));
 
-		if (activeOrder) updateOrderExpiration(activeOrder!, new Date(new Date().getTime() - 1));
+		if (activeOrder && expiresAt > new Date())
+			updateOrderExpiration(activeOrder!, new Date(new Date().getTime() - 1));
 	};
 
 	return (

@@ -21,7 +21,6 @@ export default function Sidebar({
 	children: React.ReactNode;
 }) {
 	const pathname = usePathname();
-	// const activeSection = pathname.split("/")[2];
 
 	return (
 		<Link href={href} draggable={false}>

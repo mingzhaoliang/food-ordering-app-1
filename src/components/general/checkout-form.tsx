@@ -125,8 +125,11 @@ export default function CheckoutForm({
 							name="state"
 							className="block w-full px-2 py-1 border border-gray-300 rounded-md outline-none"
 							required
-							defaultValue={state || "NSW"}
+							defaultValue={state || "Select a state"}
 						>
+							<option value="Select a state" disabled hidden>
+								Select a state
+							</option>
 							<option value="NSW">NSW</option>
 							<option value="VIC">VIC</option>
 							<option value="QLD">QLD</option>
