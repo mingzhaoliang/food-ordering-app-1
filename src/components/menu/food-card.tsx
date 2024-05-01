@@ -3,11 +3,11 @@ import DisplayImage from "../ui/display-image";
 import { priceFormatter } from "@/utils/formatter";
 import Link from "next/link";
 import { getCloudinaryUrl } from "@/utils/cloudinary-configs";
-import { MenuItem } from "@/lib/crud/model-type";
 import AddToCartButton from "./add-to-cart-button";
 import FoodCardDescription from "./food-card-description";
+import { DBMenuItem } from "@/types/menu";
 
-export default function FoodCard({ menuItem }: { menuItem: MenuItem }) {
+export default function FoodCard({ menuItem }: { menuItem: DBMenuItem }) {
 	const imageSrc = getCloudinaryUrl(`menu/${menuItem.course}/${menuItem.public_id}`);
 	const imageRef = (
 		<>

@@ -1,16 +1,12 @@
 "use client";
 
 import ReservationSummary from "@/components/home/reservation/reservation-summary";
-import { ReservationDetails } from "@/lib/crud/model-type";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { myActions } from "@/lib/store/my-slice";
 import StatusTag from "../../ui/status-tag";
+import { DBReservation } from "@/types/reservations";
 
-export default function ReservationItemBrief({
-	reservation,
-}: {
-	reservation: ReservationDetails & { _id: string };
-}) {
+export default function ReservationItemBrief({ reservation }: { reservation: DBReservation }) {
 	const dispatch = useAppDispatch();
 
 	const clickHandler = () => {

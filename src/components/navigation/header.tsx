@@ -5,8 +5,11 @@ import { navigationActions } from "@/lib/store/navigation-slice";
 import { useEffect, useRef } from "react";
 import MainNavigation from "./main-navigation";
 import MobileNavigation from "./mobile-navigation";
+import { usePathname } from "next/navigation";
+import { globalActions } from "@/lib/store/global-slice";
 
 export default function Header() {
+	const pathname = usePathname();
 	const headerRef = useRef<HTMLHeadElement>(null);
 	const dispatch = useAppDispatch();
 
@@ -32,6 +35,11 @@ export default function Header() {
 			window.removeEventListener("resize", styleHeader);
 		};
 	}, [dispatch, headerRef]);
+
+	useEffect(() => {
+		const newActivePage = pathname.split("/")[1] || "home";
+		dispatch(globalActions.setActivePage(newActivePage));
+	}, [dispatch, pathname]);
 
 	return (
 		<header ref={headerRef} className="fixed top-0 left-0 z-50 w-screen select-none">

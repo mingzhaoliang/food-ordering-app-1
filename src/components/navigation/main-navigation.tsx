@@ -8,21 +8,15 @@ import IconButton from "../ui/button/icon-button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { menuActions } from "@/lib/store/menu-slice";
-import { useEffect, useState } from "react";
 
 export default function MainNavigation() {
 	const { showHeaderBackground } = useAppSelector((state) => state.navigation);
+	const { activePage } = useAppSelector((state) => state.global);
 	const { changed, addedItems } = useAppSelector((state) => state.cart);
 	const pathname = usePathname();
 
-	const [activePage, setActivePage] = useState(pathname.split("/")[1] || "home");
 	const activeCourse = pathname.includes("/menu") ? pathname.split("/")[2] : "antipasti";
 	const dispatch = useAppDispatch();
-
-	useEffect(() => {
-		const newActivePage = pathname.split("/")[1] || "home";
-		setActivePage(newActivePage);
-	}, [dispatch, pathname]);
 
 	return (
 		<div

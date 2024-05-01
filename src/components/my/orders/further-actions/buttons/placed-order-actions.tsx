@@ -1,7 +1,6 @@
 "use client";
 
 import Modal from "@/components/ui/modal";
-import { refreshPage } from "@/lib/actions";
 import { updateOrderExpiration } from "@/lib/crud/orders";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { myActions } from "@/lib/store/my-slice";
@@ -25,14 +24,10 @@ export default function PlacedOrderActions() {
 	};
 
 	const confirmHandler = () => {
-		async function cancelOrder() {
-			await updateOrderExpiration(activeOrder!, new Date(new Date().getTime() - 1));
-			refreshPage(pathname, "page");
-		}
 		dispatch(myActions.setCancelOrder(false));
 		dispatch(myActions.setActiveOrder(null));
 
-		if (activeOrder) cancelOrder();
+		if (activeOrder) updateOrderExpiration(activeOrder!, new Date(new Date().getTime() - 1));
 	};
 
 	return (

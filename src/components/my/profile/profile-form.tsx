@@ -2,13 +2,11 @@
 
 import ProfileFormSubmit from "@/components/my/profile/profile-form-submit";
 import Spinner from "@/components/ui/spinner";
-import { updateProfile } from "@/lib/actions";
-import { getUser } from "@/lib/crud/read/user";
+import { updateProfile } from "@/lib/actions/users";
 import { globalActions } from "@/lib/store/global-slice";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 
 function FormInput({

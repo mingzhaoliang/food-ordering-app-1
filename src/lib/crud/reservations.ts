@@ -1,13 +1,11 @@
 "use server";
 
+import { Reservation } from "@/types/reservations";
 import clientPromise from "../clientPromise";
-import { ReservationDetails, ReservedTimes } from "./model-type";
 
-export const createReservation = async (reservationDetails: ReservationDetails) => {
+export const createReservation = async (reservation: Reservation) => {
 	const client = await clientPromise;
 	const db = client.db("restaurant");
-
-	await db.collection("reservations").insertOne({
-		...reservationDetails,
-	});
+	
+	await db.collection("reservations").insertOne(reservation);
 };

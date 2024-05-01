@@ -1,6 +1,5 @@
 "use client";
 
-import { cartCheckout } from "@/lib/actions";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { cartActions } from "@/lib/store/cart-slice";
 import { useFormState } from "react-dom";
@@ -9,6 +8,7 @@ import { usePathname } from "next/navigation";
 import CheckoutForm from "../general/checkout-form";
 import { cartClear } from "@/lib/actions/cart";
 import { globalActions } from "@/lib/store/global-slice";
+import { cartCheckout } from "@/lib/actions/orders";
 
 export default function CartCheckout() {
 	const pathname = usePathname();

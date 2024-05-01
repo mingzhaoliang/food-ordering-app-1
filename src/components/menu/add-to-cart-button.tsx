@@ -2,14 +2,14 @@
 
 import { useAppDispatch } from "@/lib/store/hooks";
 import { cartActions } from "@/lib/store/cart-slice";
-import { MenuItem } from "@/lib/crud/model-type";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { BsCartPlus } from "react-icons/bs";
 import { cartAddItem } from "@/lib/actions/cart";
 import { globalActions } from "@/lib/store/global-slice";
+import { DBMenuItem } from "@/types/menu";
 
-export default function AddToCartButton({ item }: { item: MenuItem }) {
+export default function AddToCartButton({ item }: { item: DBMenuItem }) {
 	const { data: session, status } = useSession();
 
 	const dispatch = useAppDispatch();

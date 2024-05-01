@@ -7,7 +7,7 @@ import CoursePreviewItem from "./course-preview-item";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { globalActions } from "@/lib/store/global-slice";
-import { MenuItem } from "@/lib/crud/model-type";
+import { DBMenuItem } from "@/types/menu";
 
 export default function CoursePreview() {
 	const { activeCourse, previewMenuItems, previewScrollable } = useAppSelector(
@@ -31,7 +31,7 @@ export default function CoursePreview() {
 		async function fetchMenu() {
 			try {
 				const response = await fetch(`/api/restaurant/menu?course=${activeCourse}&limit=4`);
-				const menuItems: MenuItem[] = await response.json();
+				const menuItems: DBMenuItem[] = await response.json();
 				dispatch(homeActions.setPreviewMenuItems(menuItems));
 			} catch (error: any) {
 				dispatch(globalActions.setToast({ status: "error", message: error.message }));

@@ -11,11 +11,11 @@ import CancelledOrderActions from "../further-actions/buttons/cancelled-order-ac
 import OrderDetailsItem from "./order-details-item";
 import PlacedOrderCheckout from "../further-actions/actions/placed-order-checkout";
 import { myActions } from "@/lib/store/my-slice";
-import { Order } from "@/lib/crud/model-type";
 import { GoChevronUp } from "react-icons/go";
 import OrderDetailsDeliveryInfo from "./order-details-delivery-info";
+import { DBOrder } from "@/types/orders";
 
-export default function OrderDetails({ order }: { order: Order }) {
+export default function OrderDetails({ order }: { order: DBOrder }) {
 	const { furtherAction } = useAppSelector((state) => state.my);
 	const dispatch = useAppDispatch();
 

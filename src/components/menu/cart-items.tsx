@@ -1,6 +1,5 @@
 "use client";
 
-import { CartItem } from "@/lib/crud/model-type";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { menuActions } from "@/lib/store/menu-slice";
 import { priceFormatter } from "@/utils/formatter";
@@ -25,7 +24,7 @@ export default function CartItems({ cartItems }: { cartItems?: DBCartItem[] | nu
 			});
 	};
 
-	const removeItemHandler = (item: CartItem) => {
+	const removeItemHandler = (item: DBCartItem) => {
 		cartRemoveItem(item.menu_id)
 			.then(() => dispatch(cartActions.removeItem(item.menu_id)))
 			.catch((error) => {

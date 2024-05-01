@@ -2,18 +2,9 @@
 
 import { ObjectId } from "mongodb";
 import clientPromise from "../clientPromise";
-import { User } from "./model-type";
+import { DeliveryDetails } from "@/types/users";
 
-// export const getUser = async (id: string) => {
-//     const client = await clientPromise;
-//     const db = client.db("authentication");
-
-//     const user = await db.collection("users").findOne({ _id: new ObjectId(id) });
-
-//     return JSON.parse(JSON.stringify(user));
-// }
-
-export const updateUser = async (user: User) => {
+export const updateUser = async (user: DeliveryDetails & { _id: string }): Promise<void> => {
 	const client = await clientPromise;
 	const db = client.db("authentication");
 
@@ -22,7 +13,7 @@ export const updateUser = async (user: User) => {
 		{
 			$set: {
 				username: user.username,
-				phoneNumber: user.phoneNumber,
+				mobileNumber: user.mobileNumber,
 				street: user.street,
 				city: user.city,
 				state: user.state,

@@ -1,6 +1,7 @@
-export interface DBReservation {
-	_id: string;
-	userId: string;
+export type ValuePiece = Date | null;
+export type Value = ValuePiece | [ValuePiece, ValuePiece];
+
+export interface ReservationDetails {
 	selectedDate: Date;
 	guests: number;
 	selectedTime: string;
@@ -8,7 +9,15 @@ export interface DBReservation {
 	email: string;
 	mobileNumber: string;
 	specialRequests: string;
-	status?: string;
+}
+
+export interface Reservation extends ReservationDetails {
+	userId: string;
+	status: string;
+}
+
+export interface DBReservation extends Reservation {
+	_id: string;
 }
 
 export interface ReservedTimes {

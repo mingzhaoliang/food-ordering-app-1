@@ -1,6 +1,5 @@
 "use client";
 
-import { Order } from "@/lib/crud/model-type";
 import { getCloudinaryUrl } from "@/utils/cloudinary-configs";
 import { datetimeFormatter, priceFormatter } from "@/utils/formatter";
 import ExpirationTimer from "../expiration-timer";
@@ -9,8 +8,9 @@ import OrderBriefImages from "./order-brief-images";
 import StatusTag from "../../../ui/status-tag";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { myActions } from "@/lib/store/my-slice";
+import { DBOrder } from "@/types/orders";
 
-export default function OrderBrief({ order }: { order: Order }) {
+export default function OrderBrief({ order }: { order: DBOrder }) {
 	const dispatch = useAppDispatch();
 
 	const createdAt = new Date(order.created_at);

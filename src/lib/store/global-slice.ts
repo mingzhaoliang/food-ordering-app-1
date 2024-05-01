@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { DBUser } from "@/types/users";
-import { getUser } from "../crud/read/user";
 
 type InitialState = {
 	user: DBUser;
+	activePage: string;
 	toast: {
 		status: "success" | "error" | "";
 		message: string;
@@ -23,6 +23,7 @@ const initialState: InitialState = {
 		state: "",
 		postcode: "",
 	},
+	activePage: "",
 	toast: null,
 };
 
@@ -41,6 +42,9 @@ const globalSlice = createSlice({
 		},
 		clearToast(state) {
 			state.toast = null;
+		},
+		setActivePage(state, action) {
+			state.activePage = action.payload;
 		},
 	},
 });

@@ -2,9 +2,10 @@
 
 import { ObjectId } from "mongodb";
 import clientPromise from "../clientPromise";
-import { Order } from "./model-type";
+import { DBOrder } from "@/types/orders";
+import { revalidatePath } from "next/cache";
 
-export const createOrder = async (orderDetails: Order) => {
+export const createOrder = async (orderDetails: DBOrder) => {
 	const client = await clientPromise;
 	const db = client.db("restaurant");
 
@@ -18,8 +19,6 @@ export const createOrder = async (orderDetails: Order) => {
 		})),
 	});
 };
-
-// TODO: add user id to the query to prevent unauthorized access
 
 export const updateOrderStatus = async (orderId: string, newStatus: string) => {
 	const client = await clientPromise;
@@ -58,4 +57,6 @@ export const updateOrderExpiration = async (orderId: string, newExpiration: Date
 			{ $set: { expires_at: newExpiration } },
 			{ upsert: false }
 		);
+
+	revalidatePath("/my/orders", "page");
 };
