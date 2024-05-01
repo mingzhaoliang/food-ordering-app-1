@@ -8,7 +8,7 @@ export default function CheckoutForm({
 	formAction,
 	backHandler,
 	username,
-	phoneNumber,
+	mobileNumber,
 	street,
 	city,
 	state,
@@ -18,7 +18,7 @@ export default function CheckoutForm({
 	formAction: (payload: FormData) => void;
 	backHandler: () => void;
 	username: string;
-	phoneNumber: string;
+	mobileNumber: string;
 	street: string;
 	city: string;
 	state: string;
@@ -64,18 +64,18 @@ export default function CheckoutForm({
 					</div>
 					<div className="space-y-1">
 						<label
-							htmlFor="phoneNumber"
+							htmlFor="mobileNumber"
 							className="after:content-['*'] after:ml-0.5 after:text-red-500"
 						>
-							Phone Number
+							Mobile Number
 						</label>
 						<input
 							type="text"
-							id="phoneNumber"
-							name="phoneNumber"
+							id="mobileNumber"
+							name="mobileNumber"
 							className="block w-full px-2 py-1 border border-gray-300 rounded-md outline-none"
 							required
-							defaultValue={phoneNumber}
+							defaultValue={mobileNumber}
 						/>
 					</div>
 				</div>

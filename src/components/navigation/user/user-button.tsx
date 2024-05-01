@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import AuthenticatedUser from "./authenticated-user";
 import IconButton from "@/components/ui/button/icon-button";
+import Link from "next/link";
 
 export default function UserButton({ onClick }: { onClick?: () => void }) {
 	const { data: session, status } = useSession();
@@ -19,12 +20,14 @@ export default function UserButton({ onClick }: { onClick?: () => void }) {
 				</IconButton>
 			)}
 			{status === "authenticated" && session?.user && (
-				<AuthenticatedUser userId={session.user.id} onClick={onClick!} />
+				<AuthenticatedUser onClick={onClick!} />
 			)}
 			{status === "unauthenticated" && (
-				<IconButton src="/icons/box-arrow-in-right.svg" alt="Sign in" onClick={onClick}>
-					Sign in
-				</IconButton>
+				<Link href="/api/auth/signin">
+					<IconButton src="/icons/box-arrow-in-right.svg" alt="Sign in" onClick={onClick}>
+						Sign in
+					</IconButton>
+				</Link>
 			)}
 		</>
 	);

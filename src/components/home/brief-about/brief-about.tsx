@@ -1,9 +1,45 @@
 "use client";
 
-import { images, briefAbout } from "@/utils/data";
+import { briefAbout } from "@/utils/data";
 import DisplayImage from "../../ui/display-image";
 import Card from "./card";
 import { motion } from "framer-motion";
+import Link from "next/link";
+
+const images = [
+	{
+		src: "/images/white-table-cloth-on-table.jpg",
+		alt: "White table cloth on table",
+		ref: (
+			<>
+				Photo by{" "}
+				<Link href="https://unsplash.com/@novosonce?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
+					Danilo
+				</Link>{" "}
+				on{" "}
+				<Link href="https://unsplash.com/photos/white-table-cloth-on-table-2NKAxzGPxOc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
+					Unsplash
+				</Link>
+			</>
+		),
+	},
+	{
+		src: "/images/city-buildings-near-body-of-water-during-daytime.jpg",
+		alt: "City buildings near body of water during daytime",
+		ref: (
+			<>
+				Photo by{" "}
+				<Link href="https://unsplash.com/@julie_soul?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
+					Julia Solonina
+				</Link>{" "}
+				on{" "}
+				<Link href="https://unsplash.com/photos/city-buildings-near-body-of-water-during-daytime-IilYfjhavow?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
+					Unsplash
+				</Link>
+			</>
+		),
+	},
+];
 
 export default function BriefAbout({
 	picLeftX,
@@ -24,9 +60,9 @@ export default function BriefAbout({
 			<div className="relative flex w-full justify-end overflow-hidden">
 				<div className="absolute top-0 bottom-0 left-0 right-[calc(min(100vw,_80rem)_*_1/4)] -z-10 overflow-hidden transition-all duration-300">
 					<DisplayImage
-						src={images.background3.src}
-						alt={images.background3.alt}
-						imageRef={images.background3.ref}
+						src={images[0].src}
+						alt={images[0].alt}
+						imageRef={images[0].ref}
 					/>
 				</div>
 				<motion.div
@@ -57,9 +93,9 @@ export default function BriefAbout({
 				</motion.div>
 				<div className="absolute top-0 bottom-0 right-0 left-[calc(min(100vw,_80rem)_*_1/4)] -z-10 overflow-hidden transition-all duration-300">
 					<DisplayImage
-						src={images.background4.src}
-						alt={images.background4.alt}
-						imageRef={images.background4.ref}
+						src={images[1].src}
+						alt={images[1].alt}
+						imageRef={images[1].ref}
 					/>
 				</div>
 			</div>

@@ -9,7 +9,7 @@ import { useEffect } from "react";
 
 export default function ReservationContactDetails() {
 	const { data: session, status } = useSession();
-	const { user } = useAppSelector((state) => state.user);
+	const { user } = useAppSelector((state) => state.global);
 	const { contactDetails, invalidFields, availableTimes, selectedTime } = useAppSelector(
 		(state) => state.reservation
 	);
@@ -99,7 +99,7 @@ export default function ReservationContactDetails() {
 			reservationActions.setContactDetails({
 				name: user.name,
 				email: user.email,
-				mobileNumber: user.phoneNumber,
+				mobileNumber: user.mobileNumber,
 			})
 		);
 	}, [dispatch, user]);

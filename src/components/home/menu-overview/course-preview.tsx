@@ -1,12 +1,13 @@
 "use client";
 
-import { getMenuItemsByField } from "@/lib/crud/menu";
 import { homeActions } from "@/lib/store/home-slice";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { useEffect, useRef } from "react";
 import CoursePreviewItem from "./course-preview-item";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { globalActions } from "@/lib/store/global-slice";
+import { MenuItem } from "@/lib/crud/model-type";
 
 export default function CoursePreview() {
 	const { activeCourse, previewMenuItems, previewScrollable } = useAppSelector(
@@ -28,8 +29,13 @@ export default function CoursePreview() {
 	useEffect(() => {
 		previewRef.current?.scrollTo({ left: 0, behavior: "smooth" });
 		async function fetchMenu() {
-			const menuItems = await getMenuItemsByField({ course: activeCourse }, 4);
-			dispatch(homeActions.setPreviewMenuItems(menuItems));
+			try {
+				const response = await fetch(`/api/restaurant/menu?course=${activeCourse}&limit=4`);
+				const menuItems: MenuItem[] = await response.json();
+				dispatch(homeActions.setPreviewMenuItems(menuItems));
+			} catch (error: any) {
+				dispatch(globalActions.setToast({ status: "error", message: error.message }));
+			}
 		}
 
 		fetchMenu();

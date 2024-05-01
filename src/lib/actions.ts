@@ -4,11 +4,9 @@ import { revalidatePath } from "next/cache";
 import { updateUser } from "./crud/user";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
-import { addItemToCart, clearCart, getCartItems, removeItemFromCart } from "./crud/cart";
-import { getMenuItemById, getMenuItemByPublicId } from "./crud/menu";
 import { DeliveryDetails, ReservationDetails } from "./crud/model-type";
 import { headers } from "next/headers";
-import { createReservation, getReservedTimes } from "./crud/reservations";
+import { createReservation } from "./crud/reservations";
 import {
 	availableReservationTimes,
 	availableTableNumber,
@@ -17,23 +15,7 @@ import {
 } from "@/utils/data";
 import { dateFormatter } from "@/utils/formatter";
 import { smtpTransport } from "@/utils/smtp-transport";
-
-export const getHeroImages = async (publicIds: string[]) => {
-	const heroImages = await Promise.all(
-		publicIds.map(async (publicId) => {
-			const menuItem = await getMenuItemByPublicId(publicId);
-
-			return {
-				publicId: menuItem!.public_id,
-				course: menuItem!.course,
-				name: menuItem!.name,
-				reference: menuItem!.reference,
-			};
-		})
-	);
-
-	return heroImages;
-};
+import { getReservedTimes } from "./crud/read/reservations";
 
 export const updateProfile = async (
 	prevState: { message: string; status: string } | undefined,
@@ -47,7 +29,7 @@ export const updateProfile = async (
 	const updatedUser = {
 		_id: session.user.id,
 		username: formData.get("username") as string,
-		phoneNumber: formData.get("phoneNumber") as string,
+		mobileNumber: formData.get("mobileNumber") as string,
 		street: formData.get("street") as string,
 		city: formData.get("city") as string,
 		state: formData.get("state") as string,
@@ -58,7 +40,7 @@ export const updateProfile = async (
 		return { message: "Username must be at least 3 characters long.", status: "error" };
 	}
 
-	if (updatedUser.phoneNumber && !String(updatedUser.phoneNumber).match(/^[0]\d{9,9}$/)) {
+	if (updatedUser.mobileNumber && !String(updatedUser.mobileNumber).match(/^[0]\d{9,9}$/)) {
 		return {
 			message: "Invalid phone number. Must start with 0 and be 10 digits long.",
 			status: "error",
@@ -80,7 +62,7 @@ export const updateProfile = async (
 	revalidatePath("/", "layout");
 
 	if (
-		!updatedUser.phoneNumber ||
+		!updatedUser.mobileNumber ||
 		!updatedUser.street ||
 		!updatedUser.city ||
 		!updatedUser.state ||
@@ -95,40 +77,6 @@ export const updateProfile = async (
 	return { message: "Profile updated successfully!", status: "success" };
 };
 
-export const accessCart = async (type: string, itemId?: string) => {
-	const session = await getServerSession(authOptions);
-
-	if (!session) {
-		return { message: "Unauthorized!" };
-	}
-
-	let existingMenuItem;
-
-	if (itemId) {
-		if (!itemId.match(/^[0-9a-fA-F]{24}$/)) {
-			return { message: "Invalid item id" };
-		} else {
-			existingMenuItem = await getMenuItemById(itemId);
-			if (!existingMenuItem) {
-				return { message: "Item not found" };
-			}
-		}
-	}
-
-	switch (type) {
-		case "get":
-			return getCartItems(session.user.id);
-		case "add":
-			return addItemToCart(session.user.id, existingMenuItem!);
-		case "remove":
-			return removeItemFromCart(session.user.id, itemId!);
-		case "clear":
-			return clearCart(session.user.id);
-		default:
-			return { message: "Invalid request" };
-	}
-};
-
 const checkout = async (data: {
 	deliveryDetails: DeliveryDetails;
 	callbackUrl: string;
@@ -137,7 +85,11 @@ const checkout = async (data: {
 	const headersList = headers();
 	const cookie = headersList.get("cookie");
 
-	const isInvalidDeliveryDetails = Object.values(data.deliveryDetails).some((value) => !value);
+	const isInvalidDeliveryDetails = Object.values(data.deliveryDetails).some((value) => {
+		console.log(data.deliveryDetails);
+		console.log("value", !!!value, value);
+		return !value;
+	});
 	if (isInvalidDeliveryDetails) {
 		return { message: "Please provide valid delivery details.", url: "" };
 	}
@@ -184,7 +136,7 @@ export const cartCheckout = async (
 	const response = await checkout({
 		deliveryDetails: {
 			username: data.username as string,
-			phoneNumber: data.phoneNumber as string,
+			mobileNumber: data.mobileNumber as string,
 			street: data.street as string,
 			city: data.city as string,
 			state: data.state as string,
@@ -207,7 +159,7 @@ export const placedOrderCheckout = async (
 	const response = await checkout({
 		deliveryDetails: {
 			username: data.username as string,
-			phoneNumber: data.phoneNumber as string,
+			mobileNumber: data.mobileNumber as string,
 			street: data.street as string,
 			city: data.city as string,
 			state: data.state as string,

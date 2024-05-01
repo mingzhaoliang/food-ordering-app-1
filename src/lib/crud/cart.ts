@@ -2,80 +2,46 @@
 
 import clientPromise from "../clientPromise";
 import { ObjectId } from "mongodb";
-import { MenuItem } from "./model-type";
+import { DBMenuItem } from "@/types/menu";
 
-export const getCartItems = async (userId: string) => {
-	const client = await clientPromise;
-	const db = client.db("restaurant");
-	const cart = await db.collection("cart").findOne({ user_id: new ObjectId(userId) });
-
-	return JSON.parse(JSON.stringify(cart?.items || {}));
-};
-
-export const addItemToCart = async (userId: string, existingMenuItem: MenuItem) => {
+export const addItem = async (userId: string, item: DBMenuItem): Promise<void> => {
 	const client = await clientPromise;
 	const db = client.db("restaurant");
 
-	const itemId = existingMenuItem._id;
-	const cart = await db.collection("cart").findOne({ user_id: new ObjectId(userId) });
-
-	if (cart && cart.items.hasOwnProperty(itemId)) {
-		db.collection("cart").updateOne(
-			{ user_id: new ObjectId(userId) },
-			{ $inc: { [`items.${itemId}.quantity`]: 1 } }
-		);
-	} else {
-		db.collection("cart").updateOne(
-			{ user_id: new ObjectId(userId) },
-			{
-				$set: {
-					[`items.${itemId}`]: {
-						menu_id: new ObjectId(itemId),
-						public_id: existingMenuItem.public_id,
-						course: existingMenuItem.course,
-						name: existingMenuItem.name,
-						quantity: 1,
-						price: existingMenuItem.price,
-					},
-				},
+	const itemId = item._id;
+	db.collection("cart").updateOne(
+		{ user_id: new ObjectId(userId) },
+		{
+			$set: {
+				[`items.${itemId}.menu_id`]: new ObjectId(itemId),
+				[`items.${itemId}.public_id`]: item.public_id,
+				[`items.${itemId}.course`]: item.course,
+				[`items.${itemId}.name`]: item.name,
+				[`items.${itemId}.price`]: item.price,
 			},
-			{ upsert: true }
-		);
-	}
-
-	return null;
+			$inc: { [`items.${itemId}.quantity`]: 1 },
+		},
+		{ upsert: true }
+	);
 };
 
-export const removeItemFromCart = async (userId: string, itemId: string) => {
+export const removeItem = async (userId: string, itemId: string, isDelete: boolean) => {
 	const client = await clientPromise;
 	const db = client.db("restaurant");
+	const updateQuery = isDelete
+		? { $unset: { [`items.${itemId}`]: "" } }
+		: { $inc: { [`items.${itemId}.quantity`]: -1 } };
 
-	const cart = await db.collection("cart").findOne({ user_id: new ObjectId(userId) });
-
-	if (cart && cart.items.hasOwnProperty(itemId)) {
-		if (cart.items[itemId].quantity > 1) {
-			db.collection("cart").updateOne(
-				{ user_id: new ObjectId(userId) },
-				{ $inc: { [`items.${itemId}.quantity`]: -1 } }
-			);
-		} else {
-			db.collection("cart").updateOne(
-				{ user_id: new ObjectId(userId) },
-				{ $unset: { [`items.${itemId}`]: "" } }
-			);
-		}
-	}
+	db.collection("cart").updateOne({ user_id: new ObjectId(userId) }, updateQuery);
 
 	return null;
 };
 
-export const clearCart = async (userId: string) => {
+export const clearCart = async (userId: string): Promise<void> => {
 	const client = await clientPromise;
 	const db = client.db("restaurant");
 
 	await db
 		.collection("cart")
 		.updateOne({ user_id: new ObjectId(userId) }, { $set: { items: {} } });
-
-	return null;
 };

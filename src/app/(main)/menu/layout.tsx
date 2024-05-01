@@ -2,7 +2,7 @@ import Sidebar from "@/components/ui/sidebar";
 import CartModal from "@/components/menu/cart-modal";
 import Cart from "@/components/menu/cart";
 
-export default function MenuPageLayout({ children }: { children: React.ReactNode }) {
+export default async function MenuPageLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<>
 			<div className="relative min-h-screen z-40 pt-16 xs:pt-20 md:pt-24 lg:pt-28 pb-16 px-4 xs:px-8 lg:px-12 space-y-2 md:space-y-4 transition-all bg-teal-600/5">
