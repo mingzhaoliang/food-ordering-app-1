@@ -1,13 +1,15 @@
 "use client";
 
-import Calendar from "./calendar";
-import ReservationContactDetails from "./reservation-contact-details";
 import ReservationSummary from "./reservation-summary";
 import ReservationOptions from "./reservation-options";
+import Calendar from "./calendar";
+import ReservationContactDetails from "./reservation-contact-details";
 import { useState } from "react";
-import ConfirmDetails from "./confirm-details";
 import { useAppSelector } from "@/lib/store/hooks";
 import { Value } from "@/types/reservations";
+import dynamic from "next/dynamic";
+
+const ConfirmDetails = dynamic(() => import("./confirm-details"));
 
 export default function Reservation() {
 	const defaultDate = new Date();
@@ -52,7 +54,7 @@ export default function Reservation() {
 					<ReservationContactDetails />
 				</div>
 			</div>
-			<ConfirmDetails key={`${readyToSubmit}`} selectedDate={selectedDate as Date} />
+			{readyToSubmit && <ConfirmDetails selectedDate={selectedDate as Date} />}
 		</div>
 	);
 }

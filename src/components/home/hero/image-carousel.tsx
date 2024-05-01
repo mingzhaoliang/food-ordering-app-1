@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
+import shimmerPlaceholder from "@/utils/image-shimmer-placeholder";
 
 const getTranslation1 = (index: number, currentIndex: number, imagesNumber: number) => {
 	let x = (index - currentIndex) * 100;
@@ -78,6 +79,7 @@ export default function ImageCarousel({
 						priority
 						onMouseOver={mouseOverHandler}
 						onMouseOut={mouseOutHandler}
+						placeholder={shimmerPlaceholder(700, 475)}
 					/>
 				);
 			})}

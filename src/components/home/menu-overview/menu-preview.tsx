@@ -1,5 +1,8 @@
-import CoursePreview from "./course-preview";
+// import CoursePreview from "./course-preview";
+import dynamic from "next/dynamic";
 import NavigationBar from "./navigation-bar";
+
+const CoursePreview = dynamic(() => import("./course-preview"), { ssr: false });
 
 export default async function MenuOverview() {
 	return (

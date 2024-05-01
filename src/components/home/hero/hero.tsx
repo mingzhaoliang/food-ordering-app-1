@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const heroImages = [
 	{
-		src: "/images/bruschetta.jpg",
+		src: "/images/bruschetta.webp",
 		alt: "Bruschetta",
 		reference: (
 			<>
@@ -23,7 +23,7 @@ const heroImages = [
 		),
 	},
 	{
-		src: "/images/frittata.jpg",
+		src: "/images/frittata.webp",
 		alt: "Frittata",
 		reference: (
 			<>
@@ -42,7 +42,7 @@ const heroImages = [
 		),
 	},
 	{
-		src: "/images/spaghetti-bolognese.jpg",
+		src: "/images/spaghetti-bolognese.webp",
 		alt: "Spaghetti Bolognese",
 		reference: (
 			<>
@@ -64,7 +64,7 @@ const heroImages = [
 		),
 	},
 	{
-		src: "/images/risotto-ai-funghi.jpg",
+		src: "/images/risotto-ai-funghi.webp",
 		alt: "Risotto ai Funghi",
 		reference: (
 			<>
@@ -83,7 +83,7 @@ const heroImages = [
 		),
 	},
 	{
-		src: "/images/cannoli.jpg",
+		src: "/images/cannoli.webp",
 		alt: "Cannoli",
 		reference: (
 			<>

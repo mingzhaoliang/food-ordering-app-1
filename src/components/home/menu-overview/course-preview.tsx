@@ -4,10 +4,12 @@ import { homeActions } from "@/lib/store/home-slice";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { useEffect, useRef } from "react";
 import CoursePreviewItem from "./course-preview-item";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { useScroll, useTransform } from "framer-motion";
 import { globalActions } from "@/lib/store/global-slice";
 import { DBMenuItem } from "@/types/menu";
+import dynamic from "next/dynamic";
+
+const CoursePreviewMask = dynamic(() => import("./course-preview-mask"));
 
 export default function CoursePreview() {
 	const { activeCourse, previewMenuItems, previewScrollable } = useAppSelector(
@@ -59,52 +61,11 @@ export default function CoursePreview() {
 	return (
 		<div className={"relative w-full transition-all flex justify-center"}>
 			{previewScrollable && (
-				<>
-					<motion.div
-						className={`absolute inset-0 pointer-events-none z-20 bg-gradient-to-r from-white from-1% via-transparent via-30%`}
-						style={{ opacity: startOpacityIndex }}
-					/>
-					<motion.div
-						className={`absolute inset-0 pointer-events-none z-20 bg-gradient-to-l from-white from-1% via-transparent via-30%`}
-						style={{ opacity: endOpacityIndex }}
-					/>
-					<motion.div
-						initial={{ x: 10 }}
-						animate={{ x: 0 }}
-						exit={{ x: 10 }}
-						transition={{
-							duration: 1.5,
-							ease: "easeInOut",
-							repeat: Infinity,
-							repeatType: "reverse",
-						}}
-						className="absolute p-2 z-30 top-1/2 left-0 rounded-full bg-teal-600/[.2] shadow-xl"
-						style={{
-							opacity: startOpacityIndex,
-						}}
-						onClick={scrollHandler}
-					>
-						<FaArrowLeft />
-					</motion.div>
-					<motion.div
-						initial={{ x: -10 }}
-						animate={{ x: 0 }}
-						exit={{ x: -10 }}
-						transition={{
-							duration: 1.5,
-							ease: "easeInOut",
-							repeat: Infinity,
-							repeatType: "reverse",
-						}}
-						className="absolute p-2 z-30 top-1/2 right-0 rounded-full bg-teal-600/[.2] shadow-xl"
-						style={{
-							opacity: endOpacityIndex,
-						}}
-						onClick={scrollHandler}
-					>
-						<FaArrowRight />
-					</motion.div>
-				</>
+				<CoursePreviewMask
+					startOpacityIndex={startOpacityIndex}
+					endOpacityIndex={endOpacityIndex}
+					scrollHandler={scrollHandler}
+				/>
 			)}
 			<div
 				ref={previewRef}

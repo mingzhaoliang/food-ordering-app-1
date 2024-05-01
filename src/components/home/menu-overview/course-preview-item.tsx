@@ -3,10 +3,11 @@
 import { getCloudinaryUrl } from "@/utils/cloudinary-configs";
 import Image from "next/image";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence, LazyMotion, domAnimation } from "framer-motion";
 import { shortPriceFormatter } from "@/utils/formatter";
 import FilledButton from "@/components/ui/button/filled-button";
 import Link from "next/link";
+import shimmerPlaceholder from "@/utils/image-shimmer-placeholder";
 
 export default function CoursePreviewItem({
 	public_id,
@@ -57,8 +58,9 @@ export default function CoursePreviewItem({
 									alt="tag"
 									draggable={false}
 									fill
-									sizes="100% 100%"
+									sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33.33vw"
 									className="p-1 object-cover"
+									placeholder={shimmerPlaceholder(28, 28)}
 								/>
 							</div>
 						))}
@@ -70,42 +72,45 @@ export default function CoursePreviewItem({
 					src={getCloudinaryUrl(`menu/${course}/${public_id}`)}
 					alt={name}
 					fill
-					sizes="100% 100%"
+					sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33.33vw"
 					className="p-2 aspect-square object-cover rounded-full"
+					placeholder={shimmerPlaceholder(400, 400)}
 				/>
 			</div>
 			<h1 className="xs:text-lg lg:text-xl 3xl:text-2xl text-slate-800 leading-tight text-center w-10/12">
 				{name}
 			</h1>
-			<AnimatePresence mode="wait">
-				{isHovered ? (
-					<motion.div
-						key={`button-${name}`}
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						exit={{ opacity: 0, y: 20 }}
-						transition={{ duration: 0.15 }}
-						className="flex-1 flex items-start md:text-lg lg:text-xl"
-					>
-						<FilledButton type="button" colour="slate">
-							<Link href={`menu/${course}`} className="block px-1 font-medium">
-								{online_available ? "Order Now" : "Book a Table"}
-							</Link>
-						</FilledButton>
-					</motion.div>
-				) : (
-					<motion.p
-						key={`description-${name}`}
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						exit={{ opacity: 0 }}
-						transition={{ duration: 0.15 }}
-						className="flex-1 text-balance text-center text-sm sm:text-base"
-					>
-						{description}
-					</motion.p>
-				)}
-			</AnimatePresence>
+			<LazyMotion features={domAnimation}>
+				<AnimatePresence mode="wait">
+					{isHovered ? (
+						<m.div
+							key={`button-${name}`}
+							initial={{ opacity: 0, y: 20 }}
+							animate={{ opacity: 1, y: 0 }}
+							exit={{ opacity: 0, y: 20 }}
+							transition={{ duration: 0.15 }}
+							className="flex-1 flex items-start md:text-lg lg:text-xl"
+						>
+							<FilledButton type="button" colour="slate">
+								<Link href={`menu/${course}`} className="block px-1 font-medium">
+									{online_available ? "Order Now" : "Book a Table"}
+								</Link>
+							</FilledButton>
+						</m.div>
+					) : (
+						<m.p
+							key={`description-${name}`}
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							transition={{ duration: 0.15 }}
+							className="flex-1 text-balance text-center text-sm sm:text-base"
+						>
+							{description}
+						</m.p>
+					)}
+				</AnimatePresence>
+			</LazyMotion>
 		</div>
 	);
 }

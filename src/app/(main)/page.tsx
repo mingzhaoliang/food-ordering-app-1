@@ -1,9 +1,11 @@
 import Hero from "@/components/home/hero/hero";
 import MenuOverview from "@/components/home/menu-overview/menu-preview";
-import MainBriefAbout from "@/components/home/brief-about/main-brief-about";
-import MobileBriefAbout from "@/components/home/brief-about/mobile-brief-about";
-import BriefContact from "@/components/home/brief-contact/brief-contact";
 import Reservation from "@/components/home/reservation/reservation";
+import dynamic from "next/dynamic";
+
+const MainBriefAbout = dynamic(() => import("@/components/home/brief-about/main-brief-about"));
+const MobileBriefAbout = dynamic(() => import("@/components/home/brief-about/mobile-brief-about"));
+const BriefContact = dynamic(() => import("@/components/home/brief-contact/brief-contact"));
 
 export default async function Home() {
 	return (

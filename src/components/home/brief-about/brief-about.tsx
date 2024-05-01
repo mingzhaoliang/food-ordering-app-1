@@ -3,12 +3,12 @@
 import { briefAbout } from "@/utils/data";
 import DisplayImage from "../../ui/display-image";
 import Card from "./card";
-import { motion } from "framer-motion";
+import { LazyMotion, domAnimation, m } from "framer-motion";
 import Link from "next/link";
 
 const images = [
 	{
-		src: "/images/white-table-cloth-on-table.jpg",
+		src: "/images/white-table-cloth-on-table.webp",
 		alt: "White table cloth on table",
 		ref: (
 			<>
@@ -24,7 +24,7 @@ const images = [
 		),
 	},
 	{
-		src: "/images/city-buildings-near-body-of-water-during-daytime.jpg",
+		src: "/images/city-buildings-near-body-of-water-during-daytime.webp",
 		alt: "City buildings near body of water during daytime",
 		ref: (
 			<>
@@ -65,32 +65,36 @@ export default function BriefAbout({
 						imageRef={images[0].ref}
 					/>
 				</div>
-				<motion.div
-					style={{
-						x: picRightX,
-						opacity: picRightOpacity,
-					}}
-					className="w-1/2 md:w-[calc(min(100vw,_80rem)_*_11/24)] max-w-[60rem] px-4 lg:px-6 xl:pr-0 bg-white"
-				>
-					<Card
-						title={briefAbout.story.title}
-						description={briefAbout.story.description}
-					/>
-				</motion.div>
+				<LazyMotion features={domAnimation}>
+					<m.div
+						style={{
+							x: picRightX,
+							opacity: picRightOpacity,
+						}}
+						className="w-1/2 md:w-[calc(min(100vw,_80rem)_*_11/24)] max-w-[60rem] px-4 lg:px-6 xl:pr-0 bg-white"
+					>
+						<Card
+							title={briefAbout.story.title}
+							description={briefAbout.story.description}
+						/>
+					</m.div>
+				</LazyMotion>
 			</div>
 			<div className="relative flex w-full justify-start overflow-hidden">
-				<motion.div
-					style={{
-						x: picLeftX,
-						opacity: picLeftOpacity,
-					}}
-					className="w-1/2 md:w-[calc(min(100vw,_80rem)_*_11/24)] max-w-[60rem] px-4 lg:px-6 xl:pl-0 bg-white"
-				>
-					<Card
-						title={briefAbout.services.title}
-						description={briefAbout.services.description}
-					/>
-				</motion.div>
+				<LazyMotion features={domAnimation}>
+					<m.div
+						style={{
+							x: picLeftX,
+							opacity: picLeftOpacity,
+						}}
+						className="w-1/2 md:w-[calc(min(100vw,_80rem)_*_11/24)] max-w-[60rem] px-4 lg:px-6 xl:pl-0 bg-white"
+					>
+						<Card
+							title={briefAbout.services.title}
+							description={briefAbout.services.description}
+						/>
+					</m.div>
+				</LazyMotion>
 				<div className="absolute top-0 bottom-0 right-0 left-[calc(min(100vw,_80rem)_*_1/4)] -z-10 overflow-hidden transition-all duration-300">
 					<DisplayImage
 						src={images[1].src}
