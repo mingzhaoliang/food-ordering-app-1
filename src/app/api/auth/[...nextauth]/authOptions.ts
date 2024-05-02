@@ -1,7 +1,7 @@
 import clientPromise from "@/lib/clientPromise";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import { NextAuthOptions, Session } from "next-auth";
-import { Adapter, AdapterUser } from "next-auth/adapters";
+import { Adapter } from "next-auth/adapters";
 import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 
 export const authOptions: NextAuthOptions = {

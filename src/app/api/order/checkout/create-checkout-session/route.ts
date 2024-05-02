@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
-import { DeliveryDetails, Order } from "@/lib/crud/model-type";
 import {
 	defaultDeliveryFee,
 	freeDeliveryThreshold,
@@ -13,6 +12,8 @@ import { getToken } from "next-auth/jwt";
 import { getCartItems } from "@/lib/crud/read/cart";
 import { DBCartItem } from "@/types/cart";
 import { getOrder } from "@/lib/crud/read/orders";
+import { DeliveryDetails } from "@/types/users";
+import { DBOrder } from "@/types/orders";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 	typescript: true,
@@ -68,7 +69,7 @@ export async function POST(req: NextRequest) {
 		} else {
 			const dateNow = Date.now();
 
-			const newOrder: Order = {
+			const newOrder: DBOrder = {
 				_id: orderId,
 				user_id: userId,
 				status: "placed",

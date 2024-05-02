@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-// import userReducer from "./user-slice";
 import homeReducer from "./home-slice";
 import menuReducer from "./menu-slice";
 import navigationReducer from "./navigation-slice";
@@ -11,7 +10,6 @@ import reservationReducer from "./reservation-slice";
 export const makeStore = () => {
 	return configureStore({
 		reducer: {
-			// user: userReducer,
 			navigation: navigationReducer,
 			home: homeReducer,
 			menu: menuReducer,
