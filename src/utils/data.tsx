@@ -1,8 +1,4 @@
 import Link from "next/link";
-import authBackground from "@/assets/images/auth-background.jpg";
-import background0 from "@/assets/images/background-0.jpg";
-import background1 from "@/assets/images/background-1.jpg";
-import background2 from "@/assets/images/background-2.jpg";
 
 export const defaultDeliveryFee = 10;
 export const freeDeliveryThreshold = 50;
@@ -20,69 +16,6 @@ export const logos: any = {
 	google: {
 		src: "/icons/google-g.svg",
 		alt: "Google Logo",
-	},
-};
-
-export const images = {
-	authBackground: {
-		src: authBackground,
-		alt: "Vegetable Salad in Bowls",
-		ref: (
-			<>
-				Photo by{" "}
-				<Link href="https://www.pexels.com/photo/photo-of-vegetable-salad-in-bowls-1640770">
-					Ella Olsson
-				</Link>
-			</>
-		),
-	},
-	background0: {
-		src: background0,
-		alt: "Flat lay shot of a delicious apricot cake with a sour cream frosting on a dark marble floor.",
-		ref: (
-			<>
-				Photo by{" "}
-				<Link href="https://unsplash.com/@nordwood?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
-					NordWood Themes
-				</Link>{" "}
-				on{" "}
-				<Link href="https://unsplash.com/photos/a-slice-of-pizza-on-a-plate-next-to-a-bowl-of-nuts-mue4Jwr-N5M?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
-					Unsplash
-				</Link>
-			</>
-		),
-	},
-	background1: {
-		src: background1,
-		alt: "Restaurant-surrounded-by-trees",
-		ref: (
-			<>
-				Photo by{" "}
-				<Link href="https://unsplash.com/@fallontravels?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
-					Fallon Travels
-				</Link>{" "}
-				on{" "}
-				<Link href="https://unsplash.com/photos/restaurant-surrounded-by-trees-q03ZLncun2Y?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
-					Unsplash
-				</Link>
-			</>
-		),
-	},
-	background2: {
-		src: background2,
-		alt: "Round white ceramic plate and bowl",
-		ref: (
-			<>
-				Photo by{" "}
-				<Link href="https://unsplash.com/@heftiba?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
-					Toa Heftiba
-				</Link>{" "}
-				on{" "}
-				<Link href="https://unsplash.com/photos/round-white-ceramic-plate-and-bowl-loS68zG8P38?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
-					Unsplash
-				</Link>
-			</>
-		),
 	},
 };
 
