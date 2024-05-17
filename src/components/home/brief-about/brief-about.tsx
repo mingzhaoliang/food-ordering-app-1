@@ -57,7 +57,7 @@ export default function BriefAbout({
 			id="brief-about"
 			className="relative w-screen max-w-[80rem] mx-auto pb-20 pt-10 xs:pt-12 sm:pt-16 md:py-24 lg:pt-28 lg:pb-24 xl:pt-32 xl:pb-28 2xl:pt-36 2xl:pb-32 space-y-16 md:space-y-20 lg:space-y-28 2xl:space-y-36"
 		>
-			<div className="relative flex w-full justify-end overflow-hidden">
+			<div className="relative flex w-full justify-end">
 				<div className="absolute top-0 bottom-0 left-0 right-[calc(min(100vw,_80rem)_*_1/4)] -z-10 overflow-hidden transition-all duration-300">
 					<DisplayImage
 						src={images[0].src}
@@ -80,7 +80,7 @@ export default function BriefAbout({
 					</m.div>
 				</LazyMotion>
 			</div>
-			<div className="relative flex w-full justify-start overflow-hidden">
+			<div className="relative flex w-full justify-start">
 				<LazyMotion features={domAnimation}>
 					<m.div
 						style={{

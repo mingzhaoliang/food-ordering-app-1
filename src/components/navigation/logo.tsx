@@ -7,14 +7,12 @@ export default function Logo() {
 	const { showHeaderBackground, showMenu } = useAppSelector((state) => state.navigation);
 	const { activePage } = useAppSelector((state) => state.global);
 
-	const borderClasses =
-		activePage === "home"
-			? `lg:border-slate-400 ${showHeaderBackground || showMenu ? "border-slate-400" : "border-white"}`
-			: "border-slate-400";
-	const titleClasses =
-		activePage === "home"
-			? `lg:text-slate-800 ${showHeaderBackground || showMenu ? "text-slate-800" : "text-white"}`
-			: "text-slate-800";
+	const borderClasses = ["home", "about"].includes(activePage)
+		? `${activePage === "home" ? "lg:border-slate-400" : "lg:border-white"} ${showHeaderBackground || showMenu ? "border-slate-400" : "border-white"}`
+		: "border-slate-400";
+	const titleClasses = ["home", "about"].includes(activePage)
+		? `${activePage === "home" ? "lg:text-slate-800" : "lg:text-white"} ${showHeaderBackground || showMenu ? "text-slate-800" : "text-white"}`
+		: "text-slate-800";
 
 	return (
 		<Link

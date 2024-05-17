@@ -139,7 +139,7 @@ export default function ReservationContactDetails() {
 						// readOnly
 						name="email"
 						id="email"
-						className="block w-full rounded-md border border-slate-400 p-2 text-slate-500 outline-none"
+						className="block w-full rounded-md border border-slate-400 p-2 outline-none"
 						value={contactDetails.email}
 						onChange={(e) => changeHandler("email", e.target.value)}
 					/>
@@ -191,12 +191,6 @@ export default function ReservationContactDetails() {
 				<p className="text-rose-500 text-sm">{invalidFields.selectedTime}</p>
 			)}
 			{status === "authenticated" && (
-				// <button
-				//     className="block w-full rounded-md border border-slate-400 px-2 py-1 mt-2 bg-teal-600 text-white"
-				//     onClick={clickHandler}
-				// >
-				//     Reserve
-				// </button>
 				<FilledButton colour="teal" type="button" onClick={clickHandler}>
 					Reserve
 				</FilledButton>

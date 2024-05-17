@@ -1,8 +1,16 @@
+import FilledButton from "@/components/ui/button/filled-button";
+import Link from "next/link";
+
 export default function PaidOrderActions() {
-    return (
-        <button className="text-sm xxs:text-base md:text-lg w-full text-center p-2 rounded font-lato text-white border border-teal-700 bg-teal-700 hover:text-white hover:border-teal-900 hover:bg-teal-900 transition-all duration-300">
-            Track
-            <span className="hidden xs:inline"> Order</span>
-        </button>
-    );
+	return (
+		// <FilledButton colour="teal" type="button">
+		// 	Track
+		// 	<span className="hidden xs:inline"> Order</span>
+		// </FilledButton>
+		<Link href="/menu" className="block" draggable={false}>
+			<FilledButton colour="teal" type="button">
+				Place another order
+			</FilledButton>
+		</Link>
+	);
 }

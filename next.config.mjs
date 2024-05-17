@@ -10,6 +10,20 @@ const nextConfig = {
             },
         ],
     },
+    async redirects() {
+        return [
+            {
+                source: "/menu",
+                destination: "/menu/antipasti",
+                permanent: true
+            },
+            {
+                source: "/my",
+                destination: "/my/orders",
+                permanent: true
+            }
+        ]
+    }
 };
 
 export default nextConfig;

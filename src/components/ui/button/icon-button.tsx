@@ -27,7 +27,7 @@ export default function IconButton({
 				/>
 			</div>
 			{children && (
-				<div className="max-md:hidden text-slate-800 text-md px-1 max-w-28 text-ellipsis overflow-hidden">
+				<div className="max-lg:hidden text-slate-800 text-md px-1 max-w-28 text-ellipsis overflow-hidden">
 					{children}
 				</div>
 			)}

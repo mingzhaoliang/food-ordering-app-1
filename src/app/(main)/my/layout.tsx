@@ -4,7 +4,7 @@ import HeaderTitle from "@/components/my/header-title";
 export default function AccountPageLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<div className="relative min-h-screen z-40 pt-16 xs:pt-20 md:pt-24 lg:pt-28 pb-16 px-4 xs:px-8 lg:px-12 space-y-2 md:space-y-4 transition-all bg-teal-600/10">
-			<div className="mx-auto flex flex-col gap-4 max-xxs:mx-2 max-xs:mx-4 md:gap-3 md:grid md:grid-rows-[auto_1fr] md:grid-cols-[minmax(max(calc(100vw_*_1/7),_11rem),_auto)_repeat(6,_1fr)] items-center md:items-start">
+			<div className="mx-auto flex flex-col gap-4 max-xxs:mx-2 max-xs:mx-4 md:gap-3 md:grid md:grid-rows-[auto_1fr] md:grid-cols-[minmax(max(calc(100vw_*_1/7),_11.5rem),_auto)_repeat(6,_1fr)] items-center md:items-start">
 				<div className="md:row-start-1 md:col-start-2 md:col-end-[-2] pt-2 pb-4 md:pb-8 flex flex-col gap-4 text-slate-800">
 					<HeaderTitle />
 				</div>

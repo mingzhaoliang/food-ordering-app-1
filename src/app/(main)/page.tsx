@@ -10,10 +10,12 @@ const BriefContact = dynamic(() => import("@/components/home/brief-contact/brief
 export default async function Home() {
 	return (
 		<main>
-			<div className="relative z-10 bg-white">
+			<div className="relative z-10 bg-white overflow-hidden">
 				<Hero />
 				<MenuOverview />
-				<Reservation />
+				<div className="w-11/12 lg:w-10/12 max-w-[80rem] mx-auto mt-10 sm:mt-10 md:mt-14 lg:mt-20">
+					<Reservation />
+				</div>
 				<MainBriefAbout />
 				<MobileBriefAbout />
 			</div>
