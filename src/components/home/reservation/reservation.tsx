@@ -29,7 +29,7 @@ export default function Reservation() {
 	return (
 		<div
 			id="reservation"
-			className="relative w-11/12 lg:w-10/12 max-w-[80rem] mx-auto mt-10 sm:mt-10 md:mt-14 lg:mt-20 font-lato grid grid-rows-[auto_1fr] justify-items-center items-center gap-y-10 text-slate-800"
+			className="relative font-lato grid grid-rows-[auto_1fr] justify-items-center items-center gap-y-10 text-slate-800"
 		>
 			<div className="max-w-[40rem]">
 				<h2 className="p-2 xs:p-4 text-4xl font-portLligatSans text-center">Reservation</h2>

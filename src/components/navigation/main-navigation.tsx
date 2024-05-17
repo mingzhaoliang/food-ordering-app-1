@@ -20,7 +20,7 @@ export default function MainNavigation() {
 
 	return (
 		<div
-			className={`max-md:hidden flex justify-between items-center transition-all duration-300 ${showHeaderBackground || activePage !== "home" ? "bg-white/80 backdrop-blur-sm shadow-md text-slate-800" : "bg-transparent text-white"}`}
+			className={`max-md:hidden flex justify-between items-center transition-all duration-300 ${showHeaderBackground || !["home", "about"].includes(activePage) ? "bg-white/80 backdrop-blur-sm shadow-md text-slate-800" : "bg-transparent text-white"}`}
 		>
 			<Logo />
 			<div className="pr-6 lg:pr-8 xl:pr-10 font-lato text-nowrap text-ellipsis flex gap-3 justify-around items-center text-[1.06rem] lg:text-lg lg:gap-5 xl:gap-8">

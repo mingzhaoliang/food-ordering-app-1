@@ -1,5 +1,6 @@
 "use client";
 
+import FilledButton from "@/components/ui/button/filled-button";
 import Modal from "@/components/ui/modal";
 import { updateOrderExpiration } from "@/lib/crud/orders";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
@@ -33,20 +34,12 @@ export default function PlacedOrderActions({ expiresAt }: { expiresAt: Date }) {
 	return (
 		<>
 			<div className="flex gap-2 text-sm xxs:text-base md:text-lg">
-				<button
-					className="w-full text-center p-2 rounded font-lato text-slate-800 border border-slate-800 hover:text-white hover:bg-slate-800 transition-all duration-300"
-					onClick={cancelHandler}
-				>
-					Cancel
-					<span className="hidden xs:inline"> Order</span>
-				</button>
-				<button
-					className="w-full text-center p-2 rounded font-lato text-white border border-teal-700 bg-teal-700 hover:text-white hover:border-teal-900 hover:bg-teal-900 transition-all duration-300"
-					onClick={payHandler}
-				>
-					Pay
-					<span className="hidden xs:inline"> Now</span>
-				</button>
+				<FilledButton colour="slate" type="button" onClick={cancelHandler}>
+					Cancel <span className="hidden xs:inline">order</span>
+				</FilledButton>
+				<FilledButton colour="teal" type="button" onClick={payHandler}>
+					Pay <span className="hidden xs:inline">now</span>
+				</FilledButton>
 			</div>
 			<Modal open={cancelOrder} onClose={closeModalHandler}>
 				<div className="max-w-80 bg-white w-full rounded-md p-6 flex flex-col items-center gap-8 font-lato">
@@ -56,7 +49,7 @@ export default function PlacedOrderActions({ expiresAt }: { expiresAt: Date }) {
 					<div className="grid grid-cols-2 gap-4">
 						<button
 							onClick={closeModalHandler}
-							className="w-full px-2 py-1 rounded bg-slate-800 text-white hover:bg-slate-950 transition-all"
+							className="w-full px-2 py-1 rounded bg-slate-700 text-white hover:bg-slate-900 transition-all"
 						>
 							No
 						</button>

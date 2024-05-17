@@ -59,7 +59,7 @@ export default function CoursePreviewItem({
 									draggable={false}
 									fill
 									sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33.33vw"
-									className="p-1 object-cover"
+									className="p-1 object-cover rounded-full"
 									placeholder={shimmerPlaceholder(28, 28)}
 								/>
 							</div>
@@ -81,7 +81,7 @@ export default function CoursePreviewItem({
 				{name}
 			</h1>
 			<LazyMotion features={domAnimation}>
-				<AnimatePresence mode="wait">
+				<AnimatePresence initial={false} mode="wait">
 					{isHovered ? (
 						<m.div
 							key={`button-${name}`}

@@ -29,7 +29,7 @@ export default function DisplayImage({
 	const mouseOutHandler = () => {
 		setIsHovered(false);
 	};
-	
+
 	return (
 		<div className="relative w-full h-full overflow-hidden">
 			<Image
@@ -38,7 +38,6 @@ export default function DisplayImage({
 				width={width}
 				height={height}
 				fill={!width || !height}
-				sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33.33vw"
 				draggable={false}
 				className="w-full h-full object-cover object-center"
 				onMouseOver={mouseOverHandler}

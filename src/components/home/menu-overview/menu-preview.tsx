@@ -1,10 +1,15 @@
-// import CoursePreview from "./course-preview";
-import dynamic from "next/dynamic";
+import CoursePreview from "./course-preview";
 import NavigationBar from "./navigation-bar";
+import { getMenuItems } from "@/lib/crud/read/menu";
 
-const CoursePreview = dynamic(() => import("./course-preview"), { ssr: false });
+const courses = ["antipasti", "primi", "secondi", "dolci"];
 
 export default async function MenuOverview() {
+	const data = await Promise.all(courses.map((course) => getMenuItems({ course }, 4)));
+	const previewMenuItems = Object.fromEntries(
+		courses.map((course, index) => [course, data[index]])
+	);
+
 	return (
 		<div
 			id="menu-preview"
@@ -21,7 +26,7 @@ export default async function MenuOverview() {
 				</p>
 			</div>
 			<NavigationBar />
-			<CoursePreview />
+			<CoursePreview previewMenuItems={previewMenuItems} />
 		</div>
 	);
 }
