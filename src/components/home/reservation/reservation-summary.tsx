@@ -1,7 +1,8 @@
-import { dateFormatter } from "@/utils/formatter";
 import { MdCalendarMonth } from "react-icons/md";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { WiTime2 } from "react-icons/wi";
+import ShowDate from "@/components/general/show-date";
+import { dateFormatter } from "@/utils/formatter";
 
 export default function ReservationSummary({
 	selectedDate,
@@ -16,7 +17,9 @@ export default function ReservationSummary({
 		<div className="w-full flex flex-wrap justify-between gap-4 text-sm sm:text-md lg:text-base xl:text-lg 2xl:text-xl">
 			<div className="flex items-center gap-2">
 				<MdCalendarMonth className="text-xl sm:text-2xl flex-none" />
-				<p className="text-nowrap">{dateFormatter(selectedDate)}</p>
+				<p className="text-nowrap">
+					<ShowDate date={selectedDate} formatter={dateFormatter} />
+				</p>
 			</div>
 			<div className="flex items-center gap-2">
 				<BsFillPeopleFill className="text-xl sm:text-2xl flex-none" />

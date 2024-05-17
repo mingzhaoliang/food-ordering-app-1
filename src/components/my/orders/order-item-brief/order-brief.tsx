@@ -9,6 +9,7 @@ import StatusTag from "../../../ui/status-tag";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { myActions } from "@/lib/store/my-slice";
 import { DBOrder } from "@/types/orders";
+import ShowDate from "@/components/general/show-date";
 
 export default function OrderBrief({ order }: { order: DBOrder }) {
 	const dispatch = useAppDispatch();
@@ -44,7 +45,7 @@ export default function OrderBrief({ order }: { order: DBOrder }) {
 						</div>
 					)}
 					<p className="text-sm text-slate-800/60 xs:col-span-2 row-start-2">
-						{datetimeFormatter(createdAt)}
+						<ShowDate date={createdAt} formatter={datetimeFormatter} />
 					</p>
 				</div>
 				<p>{priceFormatter(order.total_amount)}</p>
