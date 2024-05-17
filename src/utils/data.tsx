@@ -80,12 +80,13 @@ const longReservationTimes: { [key: number]: string } = {
 	17: "9:00 pm",
 };
 
+// Due to system timezone, the reservation times are in UTC, in which case getDay() will return the day of the week in UTC
 export const availableReservationTimes: { [key: number]: { [key: number]: string } } = {
+	1: shortReservationTimes,
 	2: shortReservationTimes,
 	3: shortReservationTimes,
-	4: shortReservationTimes,
+	4: longReservationTimes,
 	5: longReservationTimes,
-	6: longReservationTimes,
 };
 
 export const availableTableNumber = {
