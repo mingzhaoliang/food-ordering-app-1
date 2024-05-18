@@ -14,23 +14,29 @@ export default function CartItems({ cartItems }: { cartItems?: DBCartItem[] | nu
 	const dispatch = useAppDispatch();
 
 	const addItemHandler = (item: DBCartItem) => {
-		cartAddItem(item.menu_id)
-			.then(() => {
-				dispatch(cartActions.addItem(item));
-			})
-			.catch((error) => {
-				dispatch(globalActions.setToast({ status: "error", message: error.message }));
-				dispatch(menuActions.setShowCartModal(false));
-			});
+		dispatch(cartActions.addItem(item));
+
+		cartAddItem(item.menu_id).catch((error) => {
+			// roll back cart changes
+			dispatch(cartActions.removeItem(item.menu_id));
+
+			// display error message
+			dispatch(globalActions.setToast({ status: "error", message: error.message }));
+			dispatch(menuActions.setShowCartModal(false));
+		});
 	};
 
 	const removeItemHandler = (item: DBCartItem) => {
-		cartRemoveItem(item.menu_id)
-			.then(() => dispatch(cartActions.removeItem(item.menu_id)))
-			.catch((error) => {
-				dispatch(globalActions.setToast({ status: "error", message: error.message }));
-				dispatch(menuActions.setShowCartModal(false));
-			});
+		dispatch(cartActions.removeItem(item.menu_id));
+
+		cartRemoveItem(item.menu_id).catch((error) => {
+			// roll back cart changes
+			dispatch(cartActions.addItem(item));
+
+			// display error message
+			dispatch(globalActions.setToast({ status: "error", message: error.message }));
+			dispatch(menuActions.setShowCartModal(false));
+		});
 	};
 
 	return (

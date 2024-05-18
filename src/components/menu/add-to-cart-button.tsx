@@ -17,35 +17,31 @@ export default function AddToCartButton({ item }: { item: DBMenuItem }) {
 	const clickHandler = () => {
 		dispatch(cartActions.clearTimers());
 
-		cartAddItem(item._id)
-			.then(() => {
-				dispatch(
-					cartActions.addItem({
-						menu_id: item._id,
-						name: item.name,
-						public_id: item.public_id,
-						course: item.course,
-						price: item.price,
-						quantity: 1,
-					})
-				);
-				dispatch(cartActions.setAddedItems());
-				dispatch(cartActions.setChanged(true));
-
-				const timer1 = setTimeout(
-					() => dispatch(cartActions.setChanged(false)),
-					1000 * 1.25
-				);
-				const timer2 = setTimeout(
-					() => dispatch(cartActions.resetAddedItems()),
-					1000 * 1.25 + 500
-				);
-				dispatch(cartActions.setTimer1(timer1));
-				dispatch(cartActions.setTimer2(timer2));
+		dispatch(
+			cartActions.addItem({
+				menu_id: item._id,
+				name: item.name,
+				public_id: item.public_id,
+				course: item.course,
+				price: item.price,
+				quantity: 1,
 			})
-			.catch((error) =>
-				dispatch(globalActions.setToast({ status: "error", message: error.message }))
-			);
+		);
+		dispatch(cartActions.setAddedItems());
+		dispatch(cartActions.setChanged(true));
+
+		const timer1 = setTimeout(() => dispatch(cartActions.setChanged(false)), 1000 * 1.25);
+		const timer2 = setTimeout(() => dispatch(cartActions.resetAddedItems()), 1000 * 1.25 + 500);
+		dispatch(cartActions.setTimer1(timer1));
+		dispatch(cartActions.setTimer2(timer2));
+
+		cartAddItem(item._id).catch((error) => {
+			// roll back cart changes
+			dispatch(cartActions.removeItem(item._id));
+
+			// display error message
+			dispatch(globalActions.setToast({ status: "error", message: error.message }));
+		});
 	};
 
 	let content;
