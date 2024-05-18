@@ -62,7 +62,6 @@ export default function ProfileForm({ resetForm }: { resetForm: () => void }) {
 
 	const [formUser, setFormUser] = useState({
 		username: user.username,
-		email: user.email,
 		mobileNumber: user.mobileNumber,
 		street: user.street,
 		city: user.city,
@@ -125,6 +124,7 @@ export default function ProfileForm({ resetForm }: { resetForm: () => void }) {
 					type="tel"
 					pattern="^[0]\d{9,9}$"
 					defaultValue={user.mobileNumber || ""}
+					onChange={inputChangeHandler}
 				/>
 			</div>
 			<div className="grid grid-cols-[repeat(auto-fit,_minmax(12rem,_1fr))] gap-4">
@@ -133,8 +133,15 @@ export default function ProfileForm({ resetForm }: { resetForm: () => void }) {
 					id="street"
 					type="text"
 					defaultValue={user.street || ""}
+					onChange={inputChangeHandler}
 				/>
-				<FormInput label="City" id="city" type="text" defaultValue={user.city || ""} />
+				<FormInput
+					label="City"
+					id="city"
+					type="text"
+					defaultValue={user.city || ""}
+					onChange={inputChangeHandler}
+				/>
 			</div>
 			<div className="grid grid-cols-[repeat(auto-fit,_minmax(8rem,_1fr))] gap-4">
 				<div className="space-y-2">
@@ -147,6 +154,7 @@ export default function ProfileForm({ resetForm }: { resetForm: () => void }) {
 						name="state"
 						className="block w-full p-2 border border-gray-300 rounded-md outline-none"
 						defaultValue={user.state || "Select a state"}
+						onChange={(e) => inputChangeHandler("state", e.target.value)}
 					>
 						<option value="Select a state" disabled hidden>
 							Select a state
@@ -166,6 +174,7 @@ export default function ProfileForm({ resetForm }: { resetForm: () => void }) {
 					type="text"
 					pattern="\d{4,4}"
 					defaultValue={user.postcode || ""}
+					onChange={inputChangeHandler}
 				/>
 			</div>
 			{state.status && state.status === "error" && (
